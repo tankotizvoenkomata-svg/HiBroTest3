@@ -2,7 +2,8 @@
     "name": "milana/feedback-form",
     "description": "Feedback form for Her Majesty",
     "require": {
-        "php": "^8.2"
+        "php": "^8.2",
+        "phpmailer/phpmailer": "^6.9"
     },
     "license": "MIT"
 }
