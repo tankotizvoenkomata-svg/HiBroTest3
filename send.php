@@ -1,12 +1,4 @@
 <?php
-// Подключаем файлы PHPMailer вручную
-require 'phpmailer/Exception.php';
-require 'phpmailer/PHPMailer.php';
-require 'phpmailer/SMTP.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
 $data = json_decode(file_get_contents('php://input'), true);
 
 if ($data) {
@@ -14,38 +6,33 @@ if ($data) {
     $phone = strip_tags($data['phone']);
     $link = strip_tags($data['link']);
 
-    // --- 1. TELEGRAM (уже работает) ---
+    // --- 1. TELEGRAM (Оставляем, раз работает) ---
     $token = getenv('TG_TOKEN');
     $chat_id = getenv('TG_CHAT_ID');
-    $tg_message = "🔔 Нова заявка!\n👤 Ім'я: $name\n📞 Телефон: $phone\n🔗 Посилання: $link";
-    $url = "https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chat_id}&text=" . urlencode($tg_message);
-    @file_get_contents($url);
+    $tg_msg = "🔔 Нова заявка!\n👤 Ім'я: $name\n📞 Телефон: $phone\n🔗 Посилання: $link";
+    @file_get_contents("https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chat_id}&text=" . urlencode($tg_msg));
 
-    // --- 2. ПОЧТА ЧЕРЕЗ SMTP ---
-    $mail = new PHPMailer(true);
-
-    try {
-        $mail->isSMTP();
-        $mail->Host       = getenv('SMTP_HOST'); 
-        $mail->SMTPAuth   = true;
-        $mail->Username   = getenv('SMTP_USER'); 
-        $mail->Password   = getenv('SMTP_PASS'); 
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 465;
-        $mail->CharSet    = 'UTF-8';
-
-        $mail->setFrom(getenv('SMTP_USER'), 'Ваш Сайт');
-        $mail->addAddress(getenv('CONTACT_EMAIL')); 
-
-        $mail->isHTML(false);
-        $mail->Subject = "Нова заявка: $name";
-        $mail->Body    = "Ім'я: $name\nТелефон: $phone\nПосилання: $link";
-
-        $mail->send();
-    } catch (Exception $e) {
-        // Ошибка почты не должна ломать успех для пользователя, 
-        // но мы можем записать её для логов, если нужно
-    }
+    // --- 2. ПОЧТА ЧЕРЕЗ API (Resend) ---
+    $resend_key = getenv('RESEND_API_KEY');
+    
+    $ch = curl_init('https://api.resend.com/emails');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        "Authorization: Bearer $resend_key",
+        "Content-Type: application/json"
+    ]);
+    
+    $email_data = [
+        "from" => "onboarding@resend.dev", // Пока не подтвердите свой домен, используйте этот адрес
+        "to" => getenv('CONTACT_EMAIL'),
+        "subject" => "Нова заявка: $name",
+        "html" => "<strong>Ім'я:</strong> $name<br><strong>Телефон:</strong> $phone<br><strong>Посилання:</strong> $link"
+    ];
+    
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($email_data));
+    curl_exec($ch);
+    curl_close($ch);
 
     echo json_encode(["status" => "success"]);
 }
