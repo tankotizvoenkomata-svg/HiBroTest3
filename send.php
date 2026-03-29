@@ -31,7 +31,7 @@ if ($data) {
         $mail->Username   = getenv('SMTP_USER'); 
         $mail->Password   = getenv('SMTP_PASS'); 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = 465;
         $mail->CharSet    = 'UTF-8';
 
         $mail->setFrom(getenv('SMTP_USER'), 'Ваш Сайт');
