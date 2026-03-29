@@ -2,6 +2,6 @@
     "name": "her-majesty/my-site",
     "description": "Project for Her Majesty",
         "require": {
-        "php": ">=7.4"
+        "php": "^8.2"
     }
 }
