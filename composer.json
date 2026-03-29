@@ -1,7 +1,8 @@
 {
-    "name": "her-majesty/my-site",
-    "description": "Project for Her Majesty",
-        "require": {
+    "name": "milana/feedback-form",
+    "description": "Feedback form for Her Majesty",
+    "require": {
         "php": "^8.2"
-    }
+    },
+    "license": "MIT"
 }
