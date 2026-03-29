@@ -1,8 +1,11 @@
 [phases.setup]
-nixPkgs = ["php82", "php82Extensions.gd", "php82Extensions.mbstring"]
+nixPkgs = ["php82", "php82Extensions.gd", "php82Extensions.mbstring", "composer"]
+
+[phases.install]
+cmds = ["composer install --no-interaction --no-dev"]
 
 [phases.build]
-cmds = ["echo 'Build complete'"]
+cmds = ["mkdir -p vendor"] # Подстраховка для создания директории
 
 [start]
 cmd = "php -S 0.0.0.0:$PORT"
