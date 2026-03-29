@@ -1,5 +1,5 @@
 <?php
-// Подключаем автозагрузку библиотек (если используем composer)
+// Подключаем файлы PHPMailer вручную
 require 'phpmailer/Exception.php';
 require 'phpmailer/PHPMailer.php';
 require 'phpmailer/SMTP.php';
@@ -26,16 +26,16 @@ if ($data) {
 
     try {
         $mail->isSMTP();
-        $mail->Host       = getenv('SMTP_HOST'); // Например, smtp.gmail.com
+        $mail->Host       = getenv('SMTP_HOST'); 
         $mail->SMTPAuth   = true;
-        $mail->Username   = getenv('SMTP_USER'); // Ваша почта
-        $mail->Password   = getenv('SMTP_PASS'); // Пароль приложения (не обычный пароль!)
+        $mail->Username   = getenv('SMTP_USER'); 
+        $mail->Password   = getenv('SMTP_PASS'); 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
         $mail->CharSet    = 'UTF-8';
 
-        $mail->setFrom(getenv('SMTP_USER'), 'Сайт-Візитка');
-        $mail->addAddress(getenv('CONTACT_EMAIL')); // Куда прислать письмо
+        $mail->setFrom(getenv('SMTP_USER'), 'Ваш Сайт');
+        $mail->addAddress(getenv('CONTACT_EMAIL')); 
 
         $mail->isHTML(false);
         $mail->Subject = "Нова заявка: $name";
@@ -43,7 +43,8 @@ if ($data) {
 
         $mail->send();
     } catch (Exception $e) {
-        // Ошибка отправки почты не должна прерывать ответ пользователю
+        // Ошибка почты не должна ломать успех для пользователя, 
+        // но мы можем записать её для логов, если нужно
     }
 
     echo json_encode(["status" => "success"]);
