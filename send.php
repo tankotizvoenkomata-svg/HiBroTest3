@@ -1,6 +1,8 @@
 <?php
 // Подключаем автозагрузку библиотек (если используем composer)
-require 'vendor/autoload.php';
+require 'phpmailer/Exception.php';
+require 'phpmailer/PHPMailer.php';
+require 'phpmailer/SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
