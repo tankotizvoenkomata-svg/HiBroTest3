@@ -1360,53 +1360,73 @@ body {
 }
 
 .steps-main-title {
-    font-size: 4rem;
-    font-weight: 900;
-    text-transform: uppercase;
+    font-size: 72px;
+    font-weight: 700;
+    text-transform: none;
     line-height: 1;
 }
 
 .steps-main-title span {
-    color: #e84c1a;
+    color: #1f8600;
+    font-size: 72px;
+    font-weight: 700;
 }
 
 /* Таблиця етапів */
 .steps-table {
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #000000;
 }
 
-.step-row {
+.step-row1 {
     display: grid;
     grid-template-columns: 150px 1fr 1fr;
-    padding: 40px 0;
-    border-bottom: 1px solid #ddd;
+    padding: 20px 0;
+    border-bottom: 1px solid #000000;
+    align-items: center;
+}
+
+.step-row2 {
+    display: grid;
+    grid-template-columns: 150px 1fr 1fr;
+    padding: 20px 0;
+    border-bottom: 1px solid #000000;
+    align-items: center;
+}
+
+.step-row3 {
+    display: grid;
+    grid-template-columns: 150px 1fr 1fr;
+    padding: 20px 0;
+    border-bottom: 1px solid #000000;
     align-items: center;
 }
 
 .step-number {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: #e84c1a;
-    text-transform: uppercase;
+    font-family: "Stolzl", Sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #009213;
+    text-transform: none;
+    padding-bottom: 50px;
 }
 
 .step-title {
-    font-size: 1.8rem;
-    font-weight: 900;
-    text-transform: uppercase;
+    font-family: "Stolzl", Sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: none;
+    padding-bottom: 50px;
+    padding-left: 100px;
 }
 
-.step-details ol {
-    list-style: none;
-    padding: 0;
-}
-
-.step-details li {
-    font-size: 1rem;
+.step-details p {
+    font-family: "Stolzl Book", Sans-serif;
+    font-size: 18px;
+    font-weight: 400;
     margin-bottom: 10px;
-    color: #444;
+    color: #343434;
     position: relative;
-    padding-left: 25px;
+    padding-left: 100px;
 }
 
 /* Нумерація всередині етапів */
@@ -1416,7 +1436,7 @@ body {
     position: absolute;
     left: 0;
     font-weight: bold;
-    color: #888;
+    color: #000000;
 }
 
 .step-details ol {
@@ -1446,7 +1466,7 @@ body {
 }
 
 :root {
-    --orange: #e84c1a;
+    --orange: #047700;
     --green: #22c55e;
     --black: #000000;
     --white: #ffffff;
