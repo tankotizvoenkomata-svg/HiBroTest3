@@ -1,6 +1,6 @@
 /* ПІДКЛЮЧЕННЯ ШРИФТІВ */
 @font-face {
-    font-family: 'Stolzl';
+    font-family: 'Stolzl Book';
     src: url('fonts/Stolzl-Book.woff2') format('woff2'),
          url('fonts/Stolzl-Book.woff') format('woff'),
          url('fonts/Stolzl-Book.otf') format('opentype');
@@ -621,7 +621,7 @@ body {
 .about-title {
     text-align: center;
     font-size: 72px; /* Размер подгони под свой макет */
-    text-transform: uppercase;
+    text-transform: none;
     font-weight: 900;
     margin-bottom: 40px;
 }
@@ -670,6 +670,7 @@ body {
 .about-item {
     max-width: 280px; /* Ограничиваем ширину, чтобы текст шел в столбик */
     position: relative;
+    text-align: left;
 }
 
 .item-num {
@@ -677,6 +678,7 @@ body {
     color: #B0B0B0;
     font-weight: 100;
     font-size: 1.2rem;
+    text-align: left;
     margin-bottom: 8px;
     font-family: "Stolzl", Sans-serif;
 }
@@ -687,6 +689,7 @@ body {
     font-weight: 700;
     color: #fff;
     margin: 0;
+    text-align: left;
     font-family: "Stolzl", Sans-serif;
 }
 
@@ -787,14 +790,16 @@ body {
 }
 
 .achievements-title {
-    font-size: 3.5rem;
-    font-weight: 900;
+    font-family: "Stolzl", Sans-serif;
+    font-size: 72px;
+    font-weight: 700;
     margin-bottom: 70px;
-    text-transform: uppercase;
+    text-transform: none;
 }
 
 .achievements-title span {
-    color: #e84c1a; /* Помаранчевий колір */
+    font-family: "Stolzl", Sans-serif;
+    color: #03830e; /* Помаранчевий колір */
 }
 
 .stats-grid {
@@ -809,18 +814,20 @@ body {
 }
 
 .stat-value {
-    font-size: 4rem;
+    font-size: 72px;
     font-weight: 900;
-    color: #e84c1a;
+    color: #008807;
     line-height: 1;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    font-family: "Stolzl", Sans-serif;
 }
 
 .stat-label {
-    font-size: 1.1rem;
-    font-weight: 600;
-    max-width: 250px;
-    line-height: 1.3;
+    font-size: 15;
+    font-weight: 400;
+    max-width: 300px;
+    line-height: 1;;
+    font-family: "Stolzl Book", Sans-serif;
 }
 
 /* Адаптивність */
@@ -851,14 +858,16 @@ body {
 }
 
 .cases-title {
-    font-size: 3.5rem;
+    font-size: 72px;
     font-weight: 900;
     margin-bottom: 60px;
-    text-transform: uppercase;
+    text-transform: none;
+    font-family: "Stolzl", Sans-serif;
 }
 
 .cases-title span {
-    color: #e84c1a;
+    color: #00a128;
+    font-family: "Stolzl", Sans-serif;
 }
 
 .case-card {
@@ -1150,16 +1159,19 @@ body {
 }
 
 .benefits-title {
-    font-size: 4rem;
+    font-size: 72px;
     font-weight: 900;
-    text-align: right;
+    text-align: center;
     margin-bottom: 80px;
-    line-height: 1;
-    text-transform: uppercase;
+    line-height: 1,5;
+    text-transform: none;
+    font-family: "Stolzl", Sans-serif;
 }
 
 .benefits-title span {
-    color: #e84c1a; /* Помаранчевий акцент як на макеті */
+    color: #008327; /* Помаранчевий акцент як на макеті */
+    font-family: "Stolzl", Sans-serif;
+    padding-left: 650px;
 }
 
 .benefits-grid {
@@ -1185,17 +1197,18 @@ body {
 .benefit-line {
     width: 100%;
     height: 3px;
-    background-color: #e84c1a;
+    background-color: #008817;
     position: absolute;
     top: 0;
     left: 0;
 }
 
 .benefit-card p {
-    font-size: 1.5rem;
+    font-family: "Stolzl", Sans-serif;
+    font-size: 28px;
     font-weight: 800;
-    line-height: 1.2;
-    max-width: 300px;
+    line-height: 1;
+    max-width: 345px;
 }
 
 /* Адаптивність */
