@@ -20,25 +20,46 @@
         <a href="#contacts">Консультація</a>
     </nav>
 
-<button class="btn-contact" id="mainCallBtn">Зв'язатись з нами</button>
+<button class="btn-contact" onclick="document.getElementById('fixedModal').style.display='flex'; document.body.style.overflow='hidden'; return false;">
+    Зв'язатись з нами
+</button>
 
-<!-- Модальне вікно (залишається тим самим) -->
-<div id="contactModal" class="modal-overlay" style="display:none;">
-    <div class="modal-content">
-        <button class="modal-close" id="closeX">&times;</button>
-        <h2 class="modal-title">Зворотній зв'язок</h2>
-        <form action="send.php" method="POST" class="modal-form">
-            <input type="hidden" name="form_type" value="callback_modal">
-            <input type="text" name="name" placeholder="Ім'я" required>
-            <input type="tel" name="phone" placeholder="Номер телефону*" required>
-            <input type="text" name="link" placeholder="Посилання на сайт/Instagram">
-            <div class="form-footer">
-                <button type="submit" class="btn-submit">ЗВ'ЯЗАТИСЬ З НАМИ</button>
-                <img src="https://i.ibb.co/v44Yfyc/parrot.png" alt="Parrot" class="modal-parrot">
+<!-- Модальне вікно з inline-стилями (щоб CSS з хостингу не заважав) -->
+<div id="fixedModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:999999; justify-content:center; align-items:center; font-family:Arial, sans-serif;">
+    
+    <div style="background:#000; padding:40px; width:90%; max-width:450px; position:relative; border:1px solid #333; color:#fff;">
+        
+        <!-- Кнопка закриття -->
+        <button onclick="document.getElementById('fixedModal').style.display='none'; document.body.style.overflow='auto';" 
+                style="position:absolute; top:10px; right:15px; background:none; border:none; color:#fff; font-size:35px; cursor:pointer; line-height:1;">
+            &times;
+        </button>
+        
+        <h2 style="margin-top:0; font-size:26px; text-transform:uppercase; letter-spacing:1px;">Зворотній зв'язок</h2>
+        
+        <form action="send.php" method="POST">
+            <input type="hidden" name="source" value="modal_form_v2">
+            
+            <input type="text" name="name" placeholder="Ім'я" required 
+                   style="width:100%; background:transparent; border:none; border-bottom:1px solid #444; padding:12px 0; margin-bottom:15px; color:#fff; outline:none;">
+            
+            <input type="tel" name="phone" placeholder="Номер телефону*" required 
+                   style="width:100%; background:transparent; border:none; border-bottom:1px solid #444; padding:12px 0; margin-bottom:15px; color:#fff; outline:none;">
+            
+            <input type="text" name="link" placeholder="Посилання на сайт/Instagram" 
+                   style="width:100%; background:transparent; border:none; border-bottom:1px solid #444; padding:12px 0; margin-bottom:25px; color:#fff; outline:none;">
+            
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <button type="submit" style="background:#fff; color:#000; border:none; padding:15px 30px; font-weight:bold; cursor:pointer; text-transform:uppercase;">
+                    ЗВ'ЯЗАТИСЬ З НАМИ
+                </button>
+                <img src="https://i.ibb.co/v44Yfyc/parrot.png" alt="Parrot" style="width:60px; pointer-events:none;">
             </div>
         </form>
     </div>
 </div>
+
+
 </header>
 
 <main>
