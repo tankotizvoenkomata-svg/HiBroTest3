@@ -81,6 +81,88 @@ body {
     color: #000;
 }
 
+/* Фонова завіса */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Контейнер вікна */
+.modal-content {
+    background: #000;
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    border: 1px solid #333;
+    color: #fff;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px; right: 15px;
+    background: none; border: none;
+    color: #fff; font-size: 30px; cursor: pointer;
+}
+
+.modal-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+/* Поля вводу */
+.input-group { margin-bottom: 20px; }
+
+.modal-form input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #555;
+    padding: 12px 0;
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+}
+
+.modal-form input::placeholder { color: #888; }
+
+/* Кнопка та папуга */
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 30px;
+}
+
+.btn-submit {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 15px 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-submit:hover { background: #ccc; }
+
+.modal-parrot {
+    width: 80px;
+    height: auto;
+}
+
+/* Активний стан */
+.modal-overlay.active { display: flex; }
+
 /* СПЕЙСЕРИ */
 .header-spacer { height: 200px; width: 100%; }
 .header-spacer2 { height: 50px; width: 100%; }
@@ -455,9 +537,8 @@ body {
 }
 
 /* Зелений текст (притиснутий вправо) */
-.title-green.right-align {
-    align-self: flex-end; /* Притискає блок до правого краю */
-    text-align: right;    /* Вирівнює сам текст вправо */
+.cases_title {/* Притискає блок до правого краю */
+    text-align: left;
     color: #0D890D;       /* Твій зелений колір */
     font-family: 'Stolzl', sans-serif;
     font-size: 64px;      /* Розмір під макет */
@@ -849,148 +930,152 @@ body {
     }
 }
 
-/* Секція Кейси */
-.cases {
-    background-color: #000;
-    padding: 120px 0;
-    color: #fff;
-    overflow: hidden;
-}
-
-.cases-title {
-    font-size: 72px;
-    font-weight: 900;
-    margin-bottom: 60px;
-    text-transform: none;
-    font-family: "Stolzl", Sans-serif;
-}
-
-.cases-title span {
-    color: #00a128;
-    font-family: "Stolzl", Sans-serif;
-}
-
-.case-card {
-    display: flex;
-    background: #0a0a0a;
-    border-radius: 20px;
-    padding: 50px;
-    gap: 40px;
-    align-items: center;
+/* Фоновая секция */
+.cases-section {
     position: relative;
-    border: 1px solid #1a1a1a;
+    padding: 80px 0;
+    background: url('img/case-bg.png') center center / cover no-repeat; /* Общий фон секции */
+    background-color: #000;
 }
 
-.case-info {
+.cases-main-title {
+    font-family: 'Stolzl', sans-serif;
+    font-weight: 600;
+    font-size: 50px;
+    text-align: left;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+.cases-title-1 {
+    color: #0D890D;
+    display: inline;
+}
+
+.cases-title-2 {
+    color: #fff;
+    display: inline;
+}
+
+/* Общий контейнер, чтобы всё было по центру */
+.slider-outer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* ОСНОВНОЙ БЛОК: 909px на 407px */
+.cases-viewport {
+    width: 909px;
+    height: 407px;
+    overflow: hidden;
+    background-color: #000; /* Черный фон самого блока */
+    border-radius: 8px;
+    position: relative;
+}
+
+.cases-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Карточка слайда */
+.case-card {
+    flex: 0 0 909px;
+    width: 909px;
+    height: 407px;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.case-card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: 30px;
+}
+
+/* Текстовая часть (слева) */
+.case-text {
     flex: 1;
+    min-width: 200px;
 }
 
 .case-name {
-    font-size: 3rem;
+    font-size: 32px;
+    color: #0D890D;
     font-weight: 900;
-    margin-bottom: 40px;
-    letter-spacing: 2px;
+    margin-bottom: 15px;
 }
 
-.detail-group {
-    margin-bottom: 25px;
-}
-
-.detail-label {
-    color: #e84c1a;
-    font-size: 0.8rem;
-    font-weight: bold;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-}
-
-.detail-text {
-    font-size: 1.1rem;
+.case-desc {
+    font-size: 15px;
     line-height: 1.5;
-    font-weight: 500;
-    max-width: 400px;
+    color: #ddd;
+    margin-bottom: 20px;
 }
 
-.highlight-orange {
-    color: #e84c1a;
-    font-weight: 700;
-}
-
-/* Візуальна частина (праві картинки) */
-.case-visuals {
-    flex: 1.2;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.visual-mockup.phone {
-    width: 280px;
-    height: 550px;
-    background: #111;
-    border: 8px solid #1a1a1a;
-    border-radius: 40px;
-    overflow: hidden;
-    z-index: 2;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-}
-
-.visual-mockup img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.visual-previews {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.preview-item {
-    position: absolute;
-    width: 150px;
-    border: 4px solid #e84c1a;
-    border-radius: 12px;
-    overflow: hidden;
-    z-index: 1;
-}
-
-/* Хаотичне розміщення як на макеті */
-.preview-item:nth-child(1) { top: 10%; left: 0; transform: rotate(-5deg); }
-.preview-item:nth-child(2) { bottom: 15%; left: 10%; transform: rotate(5deg); }
-.preview-item:nth-child(3) { top: 5%; right: 5%; transform: rotate(10deg); }
-
-/* Навігація */
-.cases-navigation {
-    display: flex;
-    gap: 20px;
-    margin-top: 40px;
-    justify-content: flex-start;
-}
-
-.nav-arrow {
-    background: transparent;
-    border: 1px solid #e84c1a;
-    color: #e84c1a;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.5rem;
-    transition: 0.3s;
-}
-
-.nav-arrow:hover {
-    background: #e84c1a;
+.case-result {
+    font-size: 42px;
+    font-weight: 900;
     color: #fff;
 }
 
-/* Адаптивність */
-@media (max-width: 1024px) {
-    .case-card { flex-direction: column; padding: 30px; }
-    .case-visuals { height: 500px; margin-top: 50px; }
+/* Картинка (справа) */
+.case-image-wrapper {
+    flex: 0 0 600px; /* Размер картинки внутри блока 909px */
+    height: 350px;
+}
+
+.case-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* НАВИГАЦИЯ ПО КРАЯМ БЛОКА */
+.slider-navigation {
+    width: 909px; /* Ширина в точности как у блока */
+    display: flex;
+    justify-content: space-between; /* Раскидываем стрелки по краям */
+    margin-top: 25px;
+}
+
+.case-arrow-btn {
+    width: 170px;
+    height: 50px;
+    cursor: pointer;
+    object-fit: contain;
+    transition: 0.3s ease;
+}
+
+.case-arrow-btn:hover {
+    filter: brightness(1.3);
+    transform: scale(1.03);
+}
+
+/* Адаптив для планшетов/телефонов */
+@media (max-width: 950px) {
+    .cases-viewport, .case-card, .slider-navigation {
+        width: 100%;
+        max-width: 600px;
+    }
+    .case-card-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .case-image-wrapper {
+        flex: 0 0 auto;
+        width: 100%;
+        height: 200px;
+    }
+    .case-arrow-btn {
+        width: 140px;
+    }
 }
 
 /* Секція Команди (33 фахівці) */

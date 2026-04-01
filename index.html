@@ -19,7 +19,26 @@
         <a href="#work-steps">Етапи роботи</a>
         <a href="#contacts">Консультація</a>
     </nav>
-    <button class="btn-contact">Зв'язатись з нами</button>
+
+<button class="btn-contact" id="mainCallBtn">Зв'язатись з нами</button>
+
+<!-- Модальне вікно (залишається тим самим) -->
+<div id="contactModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+        <button class="modal-close" id="closeX">&times;</button>
+        <h2 class="modal-title">Зворотній зв'язок</h2>
+        <form action="send.php" method="POST" class="modal-form">
+            <input type="hidden" name="form_type" value="callback_modal">
+            <input type="text" name="name" placeholder="Ім'я" required>
+            <input type="tel" name="phone" placeholder="Номер телефону*" required>
+            <input type="text" name="link" placeholder="Посилання на сайт/Instagram">
+            <div class="form-footer">
+                <button type="submit" class="btn-submit">ЗВ'ЯЗАТИСЬ З НАМИ</button>
+                <img src="https://i.ibb.co/v44Yfyc/parrot.png" alt="Parrot" class="modal-parrot">
+            </div>
+        </form>
+    </div>
+</div>
 </header>
 
 <main>
@@ -303,47 +322,47 @@
     </div>
 </section>
 
-<section id="cases" class="cases">
-    <div class="container">
-        <h2 class="cases-title"><span>Наші</span> кейси</h2>
+<section id="cases" class="cases-section">
+    <div class="container cases-main-container">
+        <div class="cases-main-title"><h3 class="cases-title-1">НАШІ</h3><h3 class="cases-title-2"> КЕЙСИ</h3></div>
 
-        <div class="case-card">
-            <div class="case-info">
-                <h3 class="case-name">OBZOR</h3>
-                
-                <div class="case-details">
-                    <div class="detail-group">
-                        <p class="detail-label">ЩО ЗРОБИЛИ?</p>
-                        <p class="detail-text">Півтора року безперервної співпраці. Запуск рекламних кампаній з ціллю отримання продажів через інстаграм-дірект.</p>
+        <div class="slider-outer-container">
+            <div class="cases-viewport" id="casesSliderViewport">
+                <div class="cases-track" id="casesTrack">
+                    
+                    <div class="case-card">
+                        <div class="case-card-content">
+                            <div class="case-text">
+                                <h3 class="case-name">INWHITE</h3>
+                                <p class="case-desc">бла бла бла</p>
+                                <div class="case-result">бла бла бла</div>
+                            </div>
+                            <div class="case-image-wrapper">
+                                <img src="img/company_bg/Inwhite_bg.png" alt="Кейс" class="case-img">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="detail-group">
-                        <p class="detail-label">ЦІЛЬ</p>
-                        <p class="detail-text">Продажі одягу через інстаграм</p>
+                    <div class="case-card">
+                        <div class="case-card-content">
+                            <div class="case-text">
+                                <h3 class="case-name">GELIUS</h3>
+                                <p class="case-desc">бла бла бла</p>
+                                <div class="case-result">бла бла бла</div>
+                            </div>
+                            <div class="case-image-wrapper">
+                                <img src="img/company_bg/Gelius_bg.png" alt="Кейс" class="case-img">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="detail-group">
-                        <p class="detail-label">РЕЗУЛЬТАТ</p>
-                        <p class="detail-text highlight-orange">До 100 продажів на день. Зріст обсягу замовлень x10 за 2022 рік</p>
-                    </div>
                 </div>
             </div>
 
-            <div class="case-visuals">
-                <div class="visual-mockup phone">
-                    <img src="case-phone.jpg" alt="Instagram View">
-                </div>
-                <div class="visual-previews">
-                    <div class="preview-item"><img src="thumb1.jpg" alt="Ad 1"></div>
-                    <div class="preview-item"><img src="thumb2.jpg" alt="Ad 2"></div>
-                    <div class="preview-item"><img src="thumb3.jpg" alt="Ad 3"></div>
-                </div>
+            <div class="slider-navigation">
+                <img src="img/arrow.png" alt="Назад" class="case-arrow-btn" id="casePrev">
+                <img src="img/arrow.png" style="transform: rotate(180deg)" alt="Вперед" class="case-arrow-btn" id="caseNext">
             </div>
-        </div>
-
-        <div class="cases-navigation">
-            <button class="nav-arrow left">←</button>
-            <button class="nav-arrow right">→</button>
         </div>
     </div>
 

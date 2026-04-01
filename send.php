@@ -36,3 +36,29 @@ if ($data) {
 
     echo json_encode(["status" => "success"]);
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('contactModal');
+    const openBtn = document.querySelector('.btn-contact');
+    const closeBtn = document.querySelector('.modal-close');
+
+    // Відкриття при натисканні на Вашу кнопку
+    openBtn.addEventListener('click', () => {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Заборонити прокрутку фону
+    });
+
+    // Закриття на хрестик
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    // Закриття при кліку поза вікном
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+});

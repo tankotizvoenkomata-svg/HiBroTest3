@@ -59,29 +59,36 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-document.querySelector('.contact-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+    // Шукаємо елементи
+    const modal = document.getElementById('contactModal');
+    const btn = document.getElementById('mainCallBtn');
+    const closeBtn = document.getElementById('closeX');
 
-    const data = {
-        name: document.getElementById('name').value,
-        phone: document.getElementById('phone').value,
-        link: document.getElementById('link').value
-    };
-
-    try {
-        const response = await fetch('send.php', { // Теперь шлем на PHP файл
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
+    // Перевірка: якщо кнопка існує — додаємо подію
+    if (btn && modal) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         });
-
-        if (response.ok) {
-            alert('Дякуємо! Ваша заявка прийнята.');
-            e.target.reset(); // Очистить форму
-        } else {
-            throw new Error();
-        }
-    } catch (error) {
-        alert('Помилка відправки. Спробуйте ще раз.');
+    } else {
+        console.warn("Помилка: Кнопку 'mainCallBtn' або вікно не знайдено в HTML.");
     }
+
+    // Закриття на хрестик
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+    }
+
+    // Закриття при кліку на фон
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
 });
