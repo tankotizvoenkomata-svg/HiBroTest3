@@ -60,56 +60,59 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+    // --- Логика модального окна (оставляем как была) ---
     const modal = document.getElementById('fixedModal');
     const openBtn = document.getElementById('openModalBtn');
     const closeBtn = document.getElementById('closeModalBtn');
-    const form = document.getElementById('modalForm');
 
-    // Відкриття
-    openBtn.onclick = function() {
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    };
-
-    // Закриття
-    closeBtn.onclick = closeModal;
-    window.onclick = function(e) { if (e.target === modal) closeModal(); };
-
-    function closeModal() {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+    if (openBtn) {
+        openBtn.onclick = () => {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        };
     }
 
-    // ВІДПРАВКА НА SEND.PHP
-    form.onsubmit = async function(e) {
-        e.preventDefault();
-
-        // Формуємо об'єкт для JSON
-        const payload = {
-            name: form.elements['name'].value,
-            phone: form.elements['phone'].value,
-            link: form.elements['link'].value
-        };
-
-        try {
-            const response = await fetch('send.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (response.ok) {
-                alert('Успішно відправлено!');
-                form.reset();
-                closeModal();
-            } else {
-                alert('Помилка при відправці.');
-            }
-        } catch (error) {
-            console.error('Fetch error:', error);
-            alert('Зв’язок з сервером розірвано.');
+    const closeModal = () => {
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
     };
+
+    if (closeBtn) closeBtn.onclick = closeModal;
+    window.onclick = (e) => { if (e.target === modal) closeModal(); };
+
+    // --- УНИВЕРСАЛЬНАЯ ОТПРАВКА ДЛЯ ВСЕХ ФОРМ ---
+    const forms = document.querySelectorAll('.js-form-submit');
+
+    forms.forEach(form => {
+        form.onsubmit = async function(e) {
+            e.preventDefault();
+
+            // Автоматически собираем все поля формы
+            const formData = new FormData(form);
+            const payload = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('send.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    alert('Успішно відправлено!');
+                    form.reset();
+                    closeModal(); // Закроет модалку, если отправка была из неё
+                } else {
+                    alert('Помилка при відправці.');
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                alert('Зв’язок з сервером розірвано.');
+            }
+        };
+    });
 });
 
 document.addEventListener('DOMContentLoaded', () => {

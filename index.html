@@ -29,7 +29,7 @@
         <button class="modal-close" id="closeModalBtn">&times;</button>
         <h2 class="modal-title">Зворотній зв’язок</h2>
         
-        <form id="modalForm">
+        <form id="modalForm" class="js-form-submit">
             <input type="text" name="name" placeholder="Ім'я" required class="modal-input">
             <input type="tel" name="phone" placeholder="Номер телефону*" required class="modal-input">
             <input type="text" name="link" placeholder="Посилання на сайт/Instagram" class="modal-input">
@@ -443,21 +443,18 @@
 <section id="order-form" class="footer-contact">
     <div class="container">
         <div class="contact-box">
-            <h2 class="contact-title">Готові стати частиною нашої історії?</h2>
+            <h2 class="contact-title">Готові стати частиною нашої <span>історії?</span></h2>
             
-            <form class="contact-form">
+            <form class="contact-form js-form-submit">
                 <div class="form-inputs">
                     <div class="input-group">
-                        <label for="name">Ім'я</label>
-                        <input type="text" id="name" placeholder="Ваше ім'я">
+                           <input type="text" id="name" placeholder="Ім'я">
                     </div>
                     <div class="input-group">
-                        <label for="phone">Ваш номер*</label>
-                        <input type="tel" id="phone" required placeholder="+380">
+                             <input type="tel" id="phone" required placeholder="Ваш номер*">
                     </div>
                     <div class="input-group">
-                        <label for="link">Посилання на сайт/Instagram*</label>
-                        <input type="url" id="link" required placeholder="https://...">
+                        <input type="url" id="link" required placeholder="Посилання на сайт/Instagram*">
                     </div>
                 </div>
                 <button type="submit" class="btn-submit">ЗВ'ЯЗАТИСЬ З НАМИ</button>
@@ -517,7 +514,7 @@
                     <p>Будемо раді побачити вас у нас в офісі у Києві</p>
                     <p>Пн-Пт 11:00-19:00</p>
                 </div>
-                <form class="contact-form">
+                <form class="contact-form js-form-submit">
                     <input type="text" placeholder="Ім'я*" required>
                     <input type="tel" placeholder="Ваш номер*" required>
                     <input type="url" placeholder="Посилання на сайт*">

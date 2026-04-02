@@ -1104,7 +1104,7 @@ body {
 .team-count {
     font-size: 4.5rem;
     font-weight: 900;
-    color: #e84c1a; /* Помаранчевий акцент */
+    color: #009e15; /* Помаранчевий акцент */
     text-transform: uppercase;
     line-height: 1;
 }
@@ -1143,7 +1143,7 @@ body {
     display: flex;
     align-items: center;
     gap: 20px;
-    color: #e84c1a;
+    color: #059b00;
 }
 
 .line {
@@ -1173,7 +1173,7 @@ body {
 
 /* Секція Лідери ринку */
 .partners-slider {
-    background-color: #e84c1a; /* Той самий помаранчевий */
+    background-color: #009419; /* Той самий помаранчевий */
     padding: 60px 0 100px 0;
     text-align: center;
     color: #fff;
@@ -1324,10 +1324,18 @@ body {
 }
 
 .contact-title {
-    font-size: 3rem;
+    font-size: 72px;
     font-weight: 900;
-    text-transform: uppercase;
+    text-transform: none;
     margin-bottom: 60px;
+    font-family: "Stolzl", Sans-serif;
+}
+
+.contact-title span {
+    font-size: 100px;
+    color: #008327;
+    padding-left: 900px;
+    font-family: "Stolzl", Sans-serif;
 }
 
 .contact-form {
@@ -1366,7 +1374,7 @@ body {
 }
 
 .input-group input:focus {
-    border-bottom-color: #e84c1a;
+    border-bottom-color: #008d07;
 }
 
 .btn-submit {
@@ -1381,7 +1389,7 @@ body {
 }
 
 .btn-submit:hover {
-    background-color: #e84c1a;
+    background-color: rgb(18, 18, 18);
     color: #fff;
     transform: scale(1.05);
 }
@@ -1396,7 +1404,7 @@ body {
 }
 
 .footer-logo { font-weight: 800; font-size: 20px; }
-.footer-logo span { color: #e84c1a; }
+.footer-logo span { color: #009118; }
 
 .footer-socials a {
     color: #fff;
@@ -1569,34 +1577,11 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-/* Navbar */
-.navbar { display: flex; justify-content: space-between; align-items: center; padding: 30px 50px; }
-.logo { font-size: 24px; font-weight: 900; }
-.logo span { color: var(--orange); }
-.nav-links { display: flex; list-style: none; gap: 30px; }
-.nav-links a { color: #fff; text-decoration: none; font-size: 14px; text-transform: uppercase; }
-.btn-outline { border: 1px solid #333; padding: 10px 20px; color: #fff; text-decoration: none; border-radius: 5px; }
-
-/* Hero Section */
-.hero { height: 100vh; text-align: center; display: flex; flex-direction: column; }
-.hero h1 { font-size: 80px; text-transform: uppercase; margin-top: 50px; line-height: 1; }
-.highlight-green { color: var(--green); }
-.team-photo img { width: 100%; max-width: 1000px; margin-top: -50px; }
-
-/* Steps Section */
-.steps { background-color: var(--white); color: #000; padding: 100px 0; }
-.steps-header { display: flex; align-items: center; gap: 30px; margin-bottom: 50px; }
-.parrot { width: 150px; }
-.step-row { display: grid; grid-template-columns: 150px 1fr 1fr; padding: 30px 0; border-bottom: 1px solid #ddd; }
-.step-num { color: var(--orange); font-weight: 900; }
-.step-name { font-weight: 900; text-transform: uppercase; font-size: 1.5rem; }
-
-/* Contact Section */
-.contacts { background-color: var(--black); padding: 100px 0; }
-.contact-flex { display: flex; justify-content: space-between; gap: 100px; }
-.contact-form { flex: 1; display: grid; gap: 20px; }
-.contact-form input, .contact-form textarea { background: transparent; border: none; border-bottom: 1px solid #333; color: #fff; padding: 10px; }
-.btn-white { background: #fff; border: none; padding: 20px; font-weight: 900; cursor: pointer; }
 
 /* Footer */
-.footer { margin-top: 100px; display: flex; justify-content: space-between; font-size: 12px; opacity: 0.5; }
+.footer {
+    margin-top: 100px; 
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 12px; 
+    opacity: 0.5; }
