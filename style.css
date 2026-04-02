@@ -938,9 +938,12 @@ body {
 /* Фоновая секция */
 .cases-section {
     position: relative;
-    padding: 80px 0;
-    background: url('img/case-bg.png') center center / cover no-repeat; /* Общий фон секции */
+    padding: 80px 0;   
     background-color: #000;
+}
+
+.cases-main-container {
+    background: url('img/case-bg.png') center center / cover no-repeat; /* Общий фон секции */
 }
 
 .cases-main-title {
@@ -971,75 +974,116 @@ body {
 }
 
 /* ОСНОВНОЙ БЛОК: 909px на 407px */
+/* ВЕСЬ БЛОК КЕЙСІВ (909x407) */
 .cases-viewport {
     width: 909px;
-    height: 407px;
-    overflow: hidden;
-    background-color: #000; /* Черный фон самого блока */
-    border-radius: 8px;
-    position: relative;
+    height: auto;
+    min-height: 407px;
+    overflow: hidden; /* Ховаємо те, що виходить за межі */
+    background-color: transparent; /* Робимо прозорим, щоб бачити фон секції в пропусках */
+    border-radius: 0; /* Прибираємо закруглення тут, воно буде на самих картках */
+    user-select: none;           /* Стандарт */
+    -webkit-user-select: none;   /* Safari */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* IE/Edge */
+    
+    /* Убираем возможность перетаскивать картинки как файлы */
+    -webkit-user-drag: none;
 }
 
+/* ТРЕК СЛАЙДЕРА */
 .cases-track {
     display: flex;
-    height: 100%;
+    align-items: stretch; /* Важливо: щоб всі слайди мали однакову висоту в межах одного ряду */
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Карточка слайда */
+/* КАРТКА */
 .case-card {
-    flex: 0 0 909px;
+    flex: 0 0 909px; /* Фіксована ширина картки */
     width: 909px;
-    height: 407px;
-    padding: 30px;
+    margin-right: 40px; /* ОСЬ ВІН — ПРОПУСК МІЖ СЛАЙДАМИ */
+    background-color: #050505; /* Чорний фон тепер на самій картці */
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
     box-sizing: border-box;
+    user-select: none;
 }
 
 .case-card-content {
     display: flex;
-    align-items: center;
+    width: 100%;
     justify-content: space-between;
-    height: 100%;
-    gap: 30px;
+    align-items: stretch; /* Щоб ліва і права частини були однієї висоти */
 }
 
-/* Текстовая часть (слева) */
+/* ============================ */
+/* ТЕКСТОВА ЧАСТИНА (ЗЛІВА)     */
+/* ============================ */
 .case-text {
-    flex: 1;
-    min-width: 200px;
+    flex: 0 0 380px; /* Трохи розширив для тексту */
+    display: flex;
+    flex-direction: column;
+    /* Додаємо паддінги ТУТ, щоб текст мав відступи від країв чорного блоку */
+    padding: 40px 0 40px 40px; 
+    box-sizing: border-box;  
+    font-family: "Stolzl Book", Sans-serif;
 }
 
 .case-name {
-    font-size: 32px;
+    font-size: 34px;
     color: #0D890D;
     font-weight: 900;
-    margin-bottom: 15px;
-}
-
-.case-desc {
-    font-size: 15px;
-    line-height: 1.5;
-    color: #ddd;
     margin-bottom: 20px;
+    line-height: 1;
+    text-transform: uppercase;  
+    font-family: "Stolzl Book", Sans-serif;
 }
 
-.case-result {
-    font-size: 42px;
-    font-weight: 900;
+/* Блоки з інформацією */
+/* Збільшуємо пробіл між інфо-блоками */
+.case-info-block {
+    margin-bottom: 24px; /* Було 12px, тепер простір більший */
+}
+
+.case-label {
+    font-family: 'Stolzl Book', sans-serif; /* Примусово ставимо твій тонкий шрифт */
+    font-weight: 700;
+    font-size: 14px;
+    color: #0D890D;
+    margin-bottom: 6px; /* Трохи більше повітря між лейблом і текстом */
+}
+
+.case-value {
+    font-family: 'Stolzl Book', sans-serif; /* Робимо основний текст також тонким */
+    font-weight: 700;
+    font-size: 16px;
     color: #fff;
+    line-height: 1.5;
 }
 
-/* Картинка (справа) */
+/* ============================ */
+/* КАРТИНКА (СПРАВА)            */
+/* ============================ */
 .case-image-wrapper {
-    flex: 0 0 600px; /* Размер картинки внутри блока 909px */
-    height: 350px;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    /* Обмежуємо контейнер, щоб він не «видавлював» текст */
+    max-width: 550px; 
 }
 
 .case-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
+    /* Картинка тепер завжди підлаштовується під висоту картки */
+    width: 150%;
+    height: auto;
+    max-height: 150%; 
+    object-fit: contain; /* Зберігає пропорції без обрізання */
+    object-position: bottom right;
+    pointer-events: none; 
+    -webkit-user-drag: none;
 }
 
 /* НАВИГАЦИЯ ПО КРАЯМ БЛОКА */

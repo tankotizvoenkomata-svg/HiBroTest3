@@ -34,6 +34,160 @@ const onMove = (e) => {
     canvas.style.left = newLeft + 'px';
 };
 
+document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('casesTrack');
+    const viewport = document.getElementById('casesSliderViewport');
+    const btnNext = document.getElementById('caseNext');
+    const btnPrev = document.getElementById('casePrev');
+    
+    // Получаем начальные слайды
+    let initialSlides = Array.from(track.querySelectorAll('.case-card'));
+    const slideWidth = 909; 
+    const gap = 40; 
+    const totalStep = slideWidth + gap;
+
+    // 1. КЛОНИРОВАНИЕ для бесконечного эффекта
+    const firstClone = initialSlides[0].cloneNode(true);
+    const lastClone = initialSlides[initialSlides.length - 1].cloneNode(true);
+
+    track.appendChild(firstClone); // Клон первого в конец
+    track.insertBefore(lastClone, track.firstChild); // Клон последнего в начало
+
+    const allSlides = track.querySelectorAll('.case-card');
+    let currentIndex = 1; // Начинаем с 1 (настоящий первый слайд)
+    
+    let isDragging = false;
+    let startPos = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let isTransitioning = false;
+    let autoPlayTimer = null;
+
+    // Инициализация позиции без анимации
+    function updatePositionInstantly() {
+        isTransitioning = false;
+        track.style.transition = 'none';
+        currentTranslate = currentIndex * -totalStep;
+        track.style.transform = `translateX(${currentTranslate}px)`;
+        prevTranslate = currentTranslate;
+    }
+
+    updatePositionInstantly();
+
+    // --- ФУНКЦИИ АВТОПЛЕЯ ---
+    function startAutoPlay() {
+        stopAutoPlay(); // Очищаем старый таймер перед созданием нового
+        autoPlayTimer = setInterval(() => {
+            if (!isDragging && !isTransitioning) {
+                currentIndex++;
+                updatePosition();
+            }
+        }, 5000); 
+    }
+
+    function stopAutoPlay() {
+        if (autoPlayTimer) {
+            clearInterval(autoPlayTimer);
+            autoPlayTimer = null;
+        }
+    }
+
+    // Запускаем сразу при загрузке
+    startAutoPlay();
+
+    function updatePosition() {
+        isTransitioning = true;
+        track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        currentTranslate = currentIndex * -totalStep;
+        track.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    // Следим за завершением анимации для бесшовного перехода
+    track.addEventListener('transitionend', () => {
+        isTransitioning = false;
+        
+        if (currentIndex === allSlides.length - 1) {
+            currentIndex = 1;
+            updatePositionInstantly();
+        }
+        if (currentIndex === 0) {
+            currentIndex = allSlides.length - 2;
+            updatePositionInstantly();
+        }
+        prevTranslate = currentTranslate;
+    });
+
+    // КНОПКИ
+    btnNext.addEventListener('click', () => {
+        if (isTransitioning) return;
+        stopAutoPlay(); // Останавливаем текущий цикл
+        currentIndex++;
+        updatePosition();
+        startAutoPlay(); // Запускаем заново, чтобы отсчет пошел с нуля
+    });
+
+    btnPrev.addEventListener('click', () => {
+        if (isTransitioning) return;
+        stopAutoPlay();
+        currentIndex--;
+        updatePosition();
+        startAutoPlay();
+    });
+
+    // DRAG-AND-DROP
+    viewport.addEventListener('mousedown', dragStart);
+    viewport.addEventListener('touchstart', dragStart, {passive: true});
+    window.addEventListener('mousemove', dragAction);
+    window.addEventListener('touchmove', dragAction, {passive: false});
+    window.addEventListener('mouseup', dragEnd);
+    window.addEventListener('touchend', dragEnd);
+
+    function dragStart(e) {
+        if (isTransitioning) return;
+        stopAutoPlay(); // Выключаем автоплей, когда пользователь трогает слайдер
+        
+        if (window.getSelection) { window.getSelection().removeAllRanges(); }
+        
+        isDragging = true;
+        startPos = getPositionX(e);
+        track.style.transition = 'none';
+        viewport.classList.add('grabbing');
+    }
+
+    function dragAction(e) {
+        if (!isDragging) return;
+        const currentPosition = getPositionX(e);
+        const diff = currentPosition - startPos;
+        currentTranslate = prevTranslate + diff;
+        track.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    function dragEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        viewport.classList.remove('grabbing');
+
+        const movedBy = currentTranslate - prevTranslate;
+
+        if (movedBy < -150) {
+            currentIndex++;
+        } else if (movedBy > 150) {
+            currentIndex--;
+        }
+
+        updatePosition();
+        startAutoPlay(); // Возвращаем автоплей после того, как пользователь закончил
+    }
+
+    function getPositionX(e) {
+        return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+    }
+
+    // Пауза при наведении мышки
+    viewport.addEventListener('mouseenter', stopAutoPlay);
+    viewport.addEventListener('mouseleave', startAutoPlay);
+});
+
 // Привязываем события
 viewport.addEventListener('mousedown', onStart);
 window.addEventListener('mousemove', onMove);
