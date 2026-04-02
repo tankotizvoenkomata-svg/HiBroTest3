@@ -60,36 +60,37 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    // --- Логика модального окна (оставляем как была) ---
+    // 1. Логика открытия/закрытия модалки (оставляем без изменений)
     const modal = document.getElementById('fixedModal');
     const openBtn = document.getElementById('openModalBtn');
     const closeBtn = document.getElementById('closeModalBtn');
 
     if (openBtn) {
-        openBtn.onclick = () => {
+        openBtn.onclick = function() {
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         };
     }
 
-    const closeModal = () => {
+    function closeModal() {
         if (modal) {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
-    };
+    }
 
     if (closeBtn) closeBtn.onclick = closeModal;
-    window.onclick = (e) => { if (e.target === modal) closeModal(); };
+    window.onclick = function(e) { if (e.target === modal) closeModal(); };
 
-    // --- УНИВЕРСАЛЬНАЯ ОТПРАВКА ДЛЯ ВСЕХ ФОРМ ---
-    const forms = document.querySelectorAll('.js-form-submit');
+    // 2. УНИВЕРСАЛЬНАЯ ОТПРАВКА ДЛЯ ВСЕХ ФОРМ
+    // Ищем все формы с классом .js-form
+    const allForms = document.querySelectorAll('.js-form');
 
-    forms.forEach(form => {
+    allForms.forEach(form => {
         form.onsubmit = async function(e) {
-            e.preventDefault();
+            e.preventDefault(); // Это ПРЕДОТВРАЩАЕТ перезагрузку страницы (тот самый "?")
 
-            // Автоматически собираем все поля формы
+            // Собираем данные конкретно из той формы, которую нажали
             const formData = new FormData(form);
             const payload = Object.fromEntries(formData.entries());
 
@@ -102,14 +103,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (response.ok) {
                     alert('Успішно відправлено!');
-                    form.reset();
-                    closeModal(); // Закроет модалку, если отправка была из неё
+                    form.reset(); // Очищаем поля
+                    closeModal(); // Закрываем модалку, если это была она
                 } else {
-                    alert('Помилка при відправці.');
+                    alert('Помилка сервера. Статус: ' + response.status);
                 }
             } catch (error) {
                 console.error('Fetch error:', error);
-                alert('Зв’язок з сервером розірвано.');
+                alert('Помилка зв’язку з сервером.');
             }
         };
     });
