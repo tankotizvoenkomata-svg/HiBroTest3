@@ -60,17 +60,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. Логика открытия/закрытия модалки (оставляем без изменений)
+    // Логика модального окна
     const modal = document.getElementById('fixedModal');
     const openBtn = document.getElementById('openModalBtn');
     const closeBtn = document.getElementById('closeModalBtn');
-
-    if (openBtn) {
-        openBtn.onclick = function() {
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        };
-    }
 
     function closeModal() {
         if (modal) {
@@ -79,20 +72,33 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    if (openBtn) {
+        openBtn.onclick = () => {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        };
+    }
     if (closeBtn) closeBtn.onclick = closeModal;
-    window.onclick = function(e) { if (e.target === modal) closeModal(); };
+    
+    // Закрытие по клику вне модалки
+    window.onclick = (e) => { if (e.target === modal) closeModal(); };
 
-    // 2. УНИВЕРСАЛЬНАЯ ОТПРАВКА ДЛЯ ВСЕХ ФОРМ
-    // Ищем все формы с классом .js-form
+    // --- ГЛАВНЫЙ ОБРАБОТЧИК ДЛЯ ВСЕХ ФОРМ ---
     const allForms = document.querySelectorAll('.js-form');
 
     allForms.forEach(form => {
-        form.onsubmit = async function(e) {
-            e.preventDefault(); // Это ПРЕДОТВРАЩАЕТ перезагрузку страницы (тот самый "?")
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault(); // ОСТАНАВЛИВАЕМ ПЕРЕЗАГРУЗКУ (убираем "?")
 
-            // Собираем данные конкретно из той формы, которую нажали
+            // Собираем данные из текущей формы
             const formData = new FormData(form);
             const payload = Object.fromEntries(formData.entries());
+
+            // Визуальная индикация (опционально)
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = 'Відправка...';
+            submitBtn.disabled = true;
 
             try {
                 const response = await fetch('send.php', {
@@ -103,16 +109,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (response.ok) {
                     alert('Успішно відправлено!');
-                    form.reset(); // Очищаем поля
-                    closeModal(); // Закрываем модалку, если это была она
+                    form.reset();
+                    closeModal(); // Закроет модалку, если отправка была из неё
                 } else {
-                    alert('Помилка сервера. Статус: ' + response.status);
+                    alert('Помилка сервера. Спробуйте пізніше.');
                 }
             } catch (error) {
-                console.error('Fetch error:', error);
-                alert('Помилка зв’язку з сервером.');
+                console.error('Ошибка:', error);
+                alert('Сталася помилка при відправці.');
+            } finally {
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
             }
-        };
+        });
     });
 });
 
