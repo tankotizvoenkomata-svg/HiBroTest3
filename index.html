@@ -8,21 +8,25 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-
+ 
 <header class="header">
     <div class="logo">
         <img src="img/Ludi_Digital_logo.png" alt="Logo" width="110" height="73">
     </div>
-    <nav class="nav">
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Меню">
+        <span></span><span></span><span></span>
+    </button>
+ 
+    <nav class="nav" id="mainNav">
         <a href="#about">Про ЛЮДИ.digital</a>
         <a href="#cases">Кейси</a>
         <a href="#work-steps">Етапи роботи</a>
         <a href="#contacts">Консультація</a>
     </nav>
-
+ 
 <!-- Кнопка -->
 <button class="btn-contact" id="openModalBtn">Зв'язатись з нами</button>
-
+ 
 <!-- Модальне вікно -->
 <div id="fixedModal" class="modal-overlay">
     <div class="modal-content">
@@ -35,14 +39,14 @@
             <input type="text" name="link" placeholder="Посилання на сайт/Instagram" class="modal-input">
             
             <div class="modal-footer">
-                <button type="submit" class="btn-submit">ЗВ’ЯЗАТИСЬ З НАМИ</button>
+                <button type="submit" class="btn-submit-modal">ЗВ’ЯЗАТИСЬ З НАМИ</button>
                 <img src="https://i.ibb.co/v44Yfyc/parrot.png" alt="Parrot" class="modal-parrot">
             </div>
         </form>
     </div>
 </div>
-
-
+ 
+ 
 </header>
 
 <main>
@@ -814,7 +818,7 @@
 </section>
 
 <section class="partners-slider">
-    <div class="container">
+    <div class="container-slider">
         <div class="partners-title-wrapper">
             <h2 class="title-line top"><span class="text-white">Люди</span> співпрацюють</h2>
             <h2 class="title-line bottom">з лідерами ринку</h2>
@@ -871,21 +875,17 @@
 <section id="order-form" class="footer-contact">
     <div class="container">
         <div class="contact-box">
-            <h2 class="contact-title">Готові стати частиною нашої історії?</h2>
             
-            <form class="contact-form">
+            <form class="contact-form-order">
                 <div class="form-inputs">
                     <div class="input-group">
-                        <label for="name">Ім'я</label>
-                        <input type="text" id="name" placeholder="Ваше ім'я">
+                        <input type="text" id="name" placeholder="Ім'я">
                     </div>
                     <div class="input-group">
-                        <label for="phone">Ваш номер*</label>
-                        <input type="tel" id="phone" required placeholder="+380">
+                        <input type="tel" id="phone" required placeholder="Ваш номер*">
                     </div>
                     <div class="input-group">
-                        <label for="link">Посилання на сайт/Instagram*</label>
-                        <input type="url" id="link" required placeholder="https://...">
+                        <input type="url" id="link" required placeholder="Посилання на сайт/Instagram*">
                     </div>
                 </div>
                 <button type="submit" class="btn-submit">ЗВ'ЯЗАТИСЬ З НАМИ</button>

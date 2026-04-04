@@ -18,6 +18,110 @@
     scroll-behavior: smooth;
 }
 
+/* ==========================================
+   --- АДАПТИВНА ВЕРСТКА (RESPONSIVE) ---
+   ========================================== */
+
+/* 1. Планшети та невеликі ноутбуки (до 1024px) */
+@media (max-width: 1024px) {
+    .container, .container-contacts {
+        max-width: 90%;
+        padding: 0 15px;
+    }
+
+    .hero h1 {
+        font-size: 50px; /* Трохи зменшуємо головний заголовок */
+    }
+
+    .cases-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки замість 3 */
+    }
+}
+
+/* 2. Планшети вертикальні (до 768px) */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column; /* Лого, меню і кнопка стають один під одним */
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .nav {
+        display: flex;
+        flex-wrap: wrap; /* Меню в два ряди, якщо не влізе */
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero-stats {
+        flex-direction: column; /* Статистика в стовпчик */
+        align-items: center;
+        gap: 30px;
+    }
+
+    .cases-grid {
+        grid-template-columns: 1fr; /* Кейси в одну колонку */
+    }
+
+    .work-grid {
+        grid-template-columns: 1fr; /* Етапи роботи в одну колонку */
+    }
+
+    .contact-flex {
+        flex-direction: column; /* Форма під текстом */
+        gap: 40px;
+    }
+
+    .contact-info {
+        text-align: center;
+    }
+}
+
+/* 3. Мобільні телефони (до 480px) */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 32px; /* Компактний шрифт для мобілок */
+        line-height: 1.2;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .nav a {
+        font-size: 12px; /* Дрібніше меню */
+    }
+
+    .btn-contact {
+        width: 100%; /* Кнопка на всю ширину */
+        text-align: center;
+    }
+
+    .case-card img {
+        height: auto; /* Щоб картинки не сплющувались */
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+
+/* Додаткове виправлення для слайдера на мобільних */
+.slider-container {
+    overflow: hidden; /* Щоб нічого не вилазило за межі екрана */
+}
+
 /* ЗАГАЛЬНІ НАЛАШТУВАННЯ */
 * {
     margin: 0;
@@ -208,7 +312,7 @@ body {
     margin-top: 10px;
 }
 
-.btn-submit {
+.btn-submit-modal {
     font-family: 'Stolzl', sans-serif;
     background: #fff;
     color: #000;
@@ -295,7 +399,7 @@ body {
     right: 0;
     height: 100px; /* Глибокий градієнт */
     /* Плавний перехід у чорний */
-    background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0) 100%);
     z-index: 5;
     pointer-events: none;
 }
@@ -355,9 +459,10 @@ body {
 }
 
 .bottom-description {
-    font-family: "Stolzl", sans-serif;
-    font-size: 18px;
-    line-height: 1.4;
+    font-family: "Stolzl Book", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5em;
     max-width: 1000px;
     opacity: 0.9;
     padding-right: 250px;
@@ -568,11 +673,12 @@ body {
 /* ============================================================ */
 
 .services-section {
-  background-color: #fff; /* Белый фон */
-  padding: 60px 20px; /* Отступы сверху и снизу */
-  color: #000; /* Глобальный цвет текста */
-  font-family: 'Montserrat', sans-serif; /* Подключи этот шрифт для максимальной похожести */
-  text-align: right; /* Глобальное выравнивание по правому краю для заголовка */
+    background-image: url("img/image-18-Traced.svg");
+    background-color: #fff; /* Белый фон */
+    padding: 60px 20px; /* Отступы сверху и снизу */
+    color: #000; /* Глобальный цвет текста */
+    font-family: 'Montserrat', sans-serif; /* Подключи этот шрифт для максимальной похожести */
+    text-align: right; /* Глобальное выравнивание по правому краю для заголовка */
 }
 
 .services-section .container {
@@ -700,8 +806,8 @@ body {
 
 /* Описание услуги */
 .service-description {
-  font-family: "Stolzl", Sans-serif;
-  font-size: 18px;
+  font-family: "Stolzl Book", Sans-serif;
+  font-size: 14px;
   color: #000; /* Серый цвет описания */
   margin-bottom: 25px;
   line-height: 1.5;
@@ -995,7 +1101,7 @@ body {
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 колонки */
-    gap: 60px 40px;
+    gap: 60px 100px;
 }
 
 .stat-item {
@@ -1010,13 +1116,19 @@ body {
     line-height: 1;
     margin-bottom: 20px;
     font-family: "Stolzl", Sans-serif;
+
+    /* ДОДАЄМО ЦЕ: */
+    display: flex;            /* Робимо внутрішній флекс */
+    align-items: baseline;    /* Вирівнюємо слово по нижній лінії цифр */
+    gap: 10px;                /* Відступ між цифрою та словом */
+    white-space: nowrap;      /* ЗАБОРОНЯЄМО перенос на новий рядок */
 }
 
 .stat-label {
-    font-size: 15;
+    font-size: 15px;         /* Додав "px", без нього шрифт не зміниться */
     font-weight: 400;
     max-width: 300px;
-    line-height: 1;;
+    line-height: 1.2;        /* Трохи збільшив, щоб текст не злипався (було 1) */
     font-family: "Stolzl Book", Sans-serif;
 }
 
@@ -1026,7 +1138,7 @@ body {
         grid-template-columns: repeat(2, 1fr);
     }
     .stat-value {
-        font-size: 3rem;
+        font-size: 48px; /* Зменшуємо на середніх екранах */
     }
 }
 
@@ -1083,7 +1195,7 @@ body {
 /* ОСНОВНОЙ БЛОК: 909px на 407px */
 /* ВЕСЬ БЛОК КЕЙСІВ (909x407) */
 .cases-viewport {
-    width: 1109px;
+    width: 909px;
     height: auto;
     height: 547px;
     overflow: hidden; /* Ховаємо те, що виходить за межі */
@@ -1107,8 +1219,8 @@ body {
 
 /* КАРТКА */
 .case-card {
-    flex: 0 0 1109px;
-    width: 1109px;
+    flex: 0 0 909px;
+    width: 909px;
     /* Висота залежить від контенту */
     height: auto; 
     /* Мінімальна висота, щоб порожні блоки не схлопувалися */
@@ -1138,42 +1250,42 @@ body {
 .case-text {
     flex: 0 0 40%; /* Не растет, не сжимается, строго 40% */
     width: 40%;
-    padding: 40px;
-    display: flex;
+    padding: 60px;
+    display: block;
     flex-direction: column;
     justify-content: center;
     box-sizing: border-box;
 }
 
 .case-name {
-    font-size: 34px;
+    font-size: 42px;
     color: #0D890D;
-    font-weight: 900;
+    font-weight: 700;
     margin-bottom: 20px;
     line-height: 1; 
-    font-family: "Stolzl Book", Sans-serif;
+    font-family: "Stolzl", Sans-serif;
+    white-space: nowrap;
 }
 
 /* Блоки з інформацією */
 /* Збільшуємо пробіл між інфо-блоками */
 .case-info-block {
-    margin-bottom: 24px; /* Було 12px, тепер простір більший */
+    margin-bottom: 34px; /* Було 12px, тепер простір більший */
 }
 
 .case-label {
     font-family: 'Stolzl Book', sans-serif; /* Примусово ставимо твій тонкий шрифт */
-    font-weight: 700;
-    font-size: 16px;
+    font-weight: 400;
+    font-size: 18px;
     color: #0D890D;
     margin-bottom: 6px; /* Трохи більше повітря між лейблом і текстом */
 }
 
 .case-value {
-    font-family: 'Stolzl Book', sans-serif; /* Робимо основний текст також тонким */
-    font-weight: 700;
-    font-size: 18px;
+    font-family: 'Stolzl', sans-serif; /* Робимо основний текст також тонким */
+    font-size: 14px;
     color: #fff;
-    line-height: 1.5;
+    line-height: 1.2;
 }
 
 /* ============================ */
@@ -1187,6 +1299,7 @@ body {
     justify-content: flex-end; /* Прижимает фото к правому краю */
     position: relative;
     overflow: hidden; /* Чтобы части фото не вылетали за скругление */
+    padding-top: 60px;
 }
 
 /* САМА КАРТИНКА */
@@ -1469,8 +1582,8 @@ body {
 }
 
 .logo-item img {
-    max-height: 127px; 
-    width: 220px;
+    max-height: 150px; 
+    width: 260px;
     object-fit: contain;
     filter: none;
     pointer-events: none; 
@@ -1532,11 +1645,9 @@ body {
 
 /* Секція Переваг */
 .benefits {
+    background-image: url("img/image-18-Traced.svg");
     background-color: #ffffff;
-    background-image: radial-gradient(#f0f0f0 2px, transparent 2px);
-    background-size: 40px 40px;
     padding: 100px 0;
-    color: #000;
 }
 
 .benefits-title {
@@ -1547,6 +1658,7 @@ body {
     line-height: 1,5;
     text-transform: none;
     font-family: "Stolzl", Sans-serif;
+    color: #000;
 }
 
 .benefits-title span {
@@ -1568,7 +1680,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.03);
     transition: 0.3s ease;
-
+    color: #000;
 }
 
 .benefit-card:hover {
@@ -1623,7 +1735,7 @@ body {
     font-family: "Stolzl", Sans-serif;
 }
 
-.contact-form {
+.contact-form-order {
     max-width: 900px;
     margin: 0 auto;
 }
@@ -1640,12 +1752,6 @@ body {
     display: flex;
     flex-direction: column;
     font-family: "Stolzl Book", Sans-serif;
-}
-
-.input-group label {
-    font-size: 0.8rem;
-    color: #888;
-    margin-bottom: 10px;
 }
 
 .input-group input {
@@ -1666,17 +1772,17 @@ body {
 .btn-submit {
     display: block;       /* Делаем кнопку блочной */
     margin: 0 auto;      /* Центрируем её горизонтально */
-    
     background-color: #fff;
     color: #000;
     border: none;
     padding: 20px 60px;
-    font-weight: 900;
+    font-weight: 400;
     font-size: 1rem;
     cursor: pointer;
     transition: 0.3s;
     width: 300px;
     position: relative;
+    font-family: "Stolzl", Sans-serif;
 }
 
 .btn-submit:hover {
@@ -1684,6 +1790,7 @@ body {
     color: #fff;
     transform: scale(1.05);
 }
+
 
 /* Футер */
 .footer-bottom {
@@ -1733,30 +1840,35 @@ body {
     position: relative;
     display: flex;
     justify-content: flex-end; 
-    align-items: center;
-    min-height: 150px; 
+    align-items: flex-end; /* Выровняли заголовок по низу */
+    min-height: 180px; /* Увеличил высоту, чтобы влезла большая птица */
     margin-bottom: 0; 
 }
 
 .bird-decor {
     position: absolute;
-    left: 0; /* Прижимаем к левому краю контейнера */
-    bottom: -18px; /* Уменьшил с -25px, чтобы меньшая птичка сидела аккуратно на линии */
-    width: 280px; /* Уменьшил размер с 350px, теперь она аккуратная и компактная */
-    z-index: 10; /* По-прежнему поверх всех линий */
-    pointer-events: none; /* Не мешает кликам на текст */
+    left: 0; /* Прижимаем к левому краю */
+    bottom: 0; /* Сажаем на линию */
+    width: 320px; /* Увеличили ширину */
+    z-index: 10;
+    pointer-events: none;
     
-    /* Добавил небольшой переход, чтобы при изменении размеров в медиа-запросах было плавно */
+    /* transform: translateY сдвигает птичку вертикально. 
+       Если она "висит" над линией — увеличивай % (например, 5%). 
+       Если она "провалилась" под линию — делай минус (например, -2%). */
+    transform: translateX(-50%); 
     transition: all 0.3s ease; 
 }
 
 .bird-decor img {
     width: 100%;
-    height: auto;
+    height: auto; /* Высота подстроится пропорционально */
     display: block;
+    transform: translateY(5%);
 }
 
 .steps-main-title {
+    padding-bottom: 30px;
     font-size: 64px; /* Чуть увеличил для веса */
     font-weight: 700;
     text-align: right;
@@ -1822,8 +1934,8 @@ body {
 /* Адаптивність */
 @media (max-width: 1024px) {
     .bird-decor {
-        width: 160px; /* Размер для планшетов */
-        bottom: -12px;
+        width: 200px; 
+        transform: translateY(3%);
     }
     .steps-main-title { font-size: 40px; }
     .step-row {
@@ -1840,8 +1952,11 @@ body {
         gap: 15px;
     }
     .bird-decor {
-        width: 120px; /* Размер для мобильных */
-        bottom: -8px;
+        width: 150px;
+        transform: translateY(4%);
+    }
+    .steps-header {
+        min-height: 120px;
     }
 }
 
@@ -1962,6 +2077,7 @@ body {
     gap: 30px;
 }
 
+
 /* Стиль полів */
 .contact-form input, 
 .contact-form textarea {
@@ -2059,3 +2175,387 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
 .step-num { color: var(--orange); font-weight: 900; }
 .step-name { font-weight: 900;  font-size: 1.5rem; }
 
+
+/* ============================================================
+   === COMPREHENSIVE MOBILE RESPONSIVE OVERRIDES ===
+   ============================================================ */
+
+/* ─── HAMBURGER BUTTON ─────────────────────────────────── */
+.hamburger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 22px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 200;
+    flex-shrink: 0;
+}
+.hamburger-btn span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.hamburger-btn.is-open span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+.hamburger-btn.is-open span:nth-child(2) { opacity: 0; }
+.hamburger-btn.is-open span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+
+/* ─── TABLETS & SMALL LAPTOPS (≤ 1024px) ──────────────── */
+@media (max-width: 1024px) {
+    .line-1 { font-size: 70px; }
+    .highlight { font-size: 110px; margin-left: 200px; }
+    .bottom-title { font-size: 52px; padding-left: 60px; }
+    .bottom-description { padding-right: 60px; }
+    .cases-main-title { padding-left: 40px; }
+    .benefits-title span { padding-left: 200px; }
+    .footer-contact { background-size: cover; height: auto; min-height: 480px; }
+}
+
+/* ─── TABLETS PORTRAIT (≤ 768px) ──────────────────────── */
+@media (max-width: 768px) {
+
+    /* Header: fixed + hamburger */
+    .header {
+        position: fixed;
+        top: 0;
+        flex-wrap: wrap;
+        padding: 14px 20px;
+        background: rgba(0, 0, 0, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        gap: 0;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .logo { flex: 1; }
+    .hamburger-btn { display: flex; }
+
+    .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        background: rgba(0, 0, 0, 0.96);
+        padding: 20px 0 30px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .nav.nav-open { display: flex; }
+    .nav a {
+        margin: 0;
+        padding: 14px 20px;
+        font-size: 16px;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .btn-contact {
+        display: none;
+        width: calc(100% - 40px);
+        margin: 16px 20px 0;
+    }
+    .btn-contact.nav-open { display: inline-flex; }
+
+    /* Spacer — header is now ~70px tall */
+    .header-spacer { height: 120px; }
+    .header-spacer2 { height: 20px; }
+
+    /* Hero titles */
+    .line-1 { font-size: 44px; }
+    .highlight { font-size: 72px; margin-left: 0; margin-top: -20px; text-align: right; }
+    .hero-content { padding: 0 20px; }
+
+    /* Hero bottom info */
+    .container-wide {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 0 20px;
+        width: 100%;
+    }
+    .bottom-title { font-size: 40px; padding-left: 0; letter-spacing: -1px; }
+    .bottom-description { padding-right: 0; font-size: 15px; }
+
+    /* Cases section */
+    .cases-main-title { padding-left: 20px; font-size: 36px; }
+    .cases-viewport {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+    .case-card {
+        flex: 0 0 calc(100vw - 40px);
+        width: calc(100vw - 40px);
+        margin-right: 20px;
+        min-height: auto;
+    }
+    .case-card-content { flex-direction: column; }
+    .case-text {
+        flex: none;
+        width: 100%;
+        padding: 30px 25px 20px;
+    }
+    .case-image-wrapper {
+        flex: none;
+        width: 100%;
+        height: 220px;
+        padding-top: 0;
+        justify-content: center;
+        align-items: center;
+    }
+    .case-img { width: 100%; height: 100%; object-fit: cover; transform: none; }
+    .case-name { font-size: 32px; }
+    .slider-navigation { gap: 200px; }
+    .case-arrow-btn { width: 100px; }
+
+    /* Benefits */
+    .benefits-title { font-size: 44px; }
+    .benefits-title span { padding-left: 0; display: block; text-align: center; }
+    .benefits-title { text-align: center; }
+
+    /* Footer contact form */
+    .footer-contact { height: auto; padding: 60px 20px; background-size: cover; }
+    .form-inputs { flex-direction: column; gap: 30px; }
+    .btn-submit { width: 100%; }
+
+    /* Team section */
+    .team-count, .team-subtitle { font-size: 48px; }
+
+    /* Achievements */
+    .achievements-title { font-size: 48px; }
+
+    /* Work steps bird (hides to prevent overflow) */
+    .bird-decor { display: none; }
+    .steps-header {
+        justify-content: center;
+        min-height: auto;
+        padding: 30px 20px 20px;
+    }
+    .steps-main-title { text-align: center; font-size: 40px; }
+
+    /* Contacts section */
+    .contact-flex { display: flex; flex-direction: column; gap: 40px; }
+    .contact-info { display: block; }
+    .contact-info h2 { font-size: 48px; margin-bottom: 30px; }
+    .contact-info h2 span { margin-left: 0; }
+    .office, .settings, .left { grid-column: unset; padding-left: 0; }
+    .Mon, .insta { grid-column: unset; }
+    .contact-form { grid-template-columns: 1fr; }
+    .footer { margin-top: 50px; flex-direction: column; gap: 12px; }
+}
+
+/* ─── PHONES (≤ 480px) ─────────────────────────────────── */
+@media (max-width: 480px) {
+
+    /* Hero titles */
+    .line-1 { font-size: 32px; }
+    .highlight { font-size: 54px; margin-left: 0; }
+    .header-spacer { height: 90px; }
+
+    /* Bottom info */
+    .bottom-title { font-size: 30px; }
+
+    /* Modal */
+    .modal-content {
+        height: auto;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 30px 20px;
+        width: 96%;
+    }
+    .modal-title { font-size: 30px; }
+    .modal-footer { flex-direction: column; align-items: flex-start; gap: 16px; }
+
+    /* Cases slider — full width cards */
+    .case-card {
+        flex: 0 0 calc(100vw - 30px);
+        width: calc(100vw - 30px);
+        margin-right: 15px;
+    }
+    .slider-navigation { gap: 100px; }
+    .case-arrow-btn { width: 80px; }
+
+    /* Steps */
+    .steps-main-title { font-size: 30px; }
+    .step-title { font-size: 18px; }
+    .step-details p { font-size: 15px; padding-left: 0; }
+
+    /* Stats */
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 20px; }
+    .stat-value { font-size: 40px; white-space: normal; }
+    .achievements-title { font-size: 36px; }
+
+    /* Benefits */
+    .benefit-card p { font-size: 20px; }
+    .benefits-title { font-size: 34px; }
+
+    /* Experience grid */
+    .experience-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 10px; }
+
+    /* Team */
+    .team-count, .team-subtitle { font-size: 36px; }
+
+    /* Partners */
+    .title-line { font-size: 28px; white-space: normal; }
+
+    /* Contacts */
+    .contact-info h2 { font-size: 36px; }
+    .settings { font-size: 22px; }
+    .office { font-size: 20px; }
+}
+
+/* ============================================================
+   === TARGETED FIXES v2 — based on screenshot review ===
+   ============================================================ */
+
+/* ─── GLOBAL OVERFLOW GUARD ─────────────────────────────── */
+@media (max-width: 768px) {
+    html, body { overflow-x: hidden; max-width: 100vw; }
+
+    /* ─── HERO TITLES — use clamp so they NEVER overflow ─── */
+    .line-1 {
+        font-size: clamp(22px, 7.5vw, 44px) !important;
+        white-space: normal !important;
+        word-break: break-word;
+        text-align: center;
+    }
+    .highlight {
+        font-size: clamp(36px, 12vw, 72px) !important;
+        margin-left: 0 !important;
+        margin-top: -10px !important;
+        text-align: right;
+    }
+    .hero-content {
+        padding: 0 16px !important;
+        max-width: 100vw;
+        overflow: hidden;
+    }
+
+    /* ─── ABOUT TITLE — prevent cut-off ─────────────────── */
+    .about-title {
+        font-size: clamp(28px, 9vw, 52px) !important;
+        word-break: break-word;
+        padding: 0 16px;
+    }
+    .about { overflow: hidden; }
+
+    /* ─── CASES SLIDER — force full width with !important ── */
+    .cases-viewport {
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow: hidden !important;
+    }
+    .case-card {
+        flex: 0 0 calc(100vw - 32px) !important;
+        width: calc(100vw - 32px) !important;
+        margin-right: 16px !important;
+        min-height: auto !important;
+    }
+    .cases-track { align-items: flex-start !important; }
+    .case-card-content {
+        flex-direction: column !important;
+        height: auto !important;
+    }
+    .case-text {
+        width: 100% !important;
+        flex: none !important;
+        padding: 24px 20px 16px !important;
+    }
+    .case-image-wrapper {
+        width: 100% !important;
+        flex: none !important;
+        height: 200px !important;
+        padding-top: 0 !important;
+    }
+    .case-img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        transform: none !important;
+    }
+    .cases-main-title {
+        padding-left: 16px !important;
+        font-size: clamp(26px, 8vw, 36px) !important;
+    }
+
+    /* ─── SLIDER ARROWS — bring them closer together ─────── */
+    .slider-navigation { gap: clamp(60px, 40vw, 200px) !important; }
+    .case-arrow-btn { width: clamp(60px, 18vw, 110px) !important; }
+
+    /* ─── BOTTOM HERO INFO — stack and remove padding ────── */
+    .container-wide {
+        flex-direction: column !important;
+        padding: 0 16px !important;
+        gap: 16px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    .bottom-title {
+        font-size: clamp(26px, 8vw, 40px) !important;
+        padding-left: 0 !important;
+        letter-spacing: -1px !important;
+    }
+    .bottom-description {
+        padding-right: 0 !important;
+        font-size: 14px !important;
+        max-width: 100% !important;
+    }
+
+    /* ─── BENEFITS — fix the span padding ───────────────── */
+    .benefits-title span {
+        padding-left: 0 !important;
+        display: block !important;
+        text-align: center;
+    }
+    .benefits-title { text-align: center !important; }
+
+    /* ─── FOOTER CONTACT — no fixed height ──────────────── */
+    .footer-contact {
+        height: auto !important;
+        min-height: unset !important;
+        padding: 50px 16px !important;
+        background-size: cover !important;
+    }
+    .form-inputs { flex-direction: column !important; gap: 24px !important; }
+    .btn-submit { width: 100% !important; }
+    .contact-title {
+        font-size: clamp(20px, 6vw, 2rem) !important;
+        margin-bottom: 36px !important;
+    }
+
+    /* ─── MODAL — scrollable on small screens ────────────── */
+    .modal-content {
+        width: 96% !important;
+        height: auto !important;
+        max-height: 88vh !important;
+        overflow-y: auto !important;
+        padding: 28px 18px !important;
+    }
+    .modal-title { font-size: clamp(22px, 7vw, 36px) !important; }
+    .modal-footer { flex-direction: column !important; align-items: flex-start !important; gap: 14px !important; }
+}
+
+@media (max-width: 480px) {
+    .line-1 { font-size: clamp(20px, 6.5vw, 30px) !important; }
+    .highlight { font-size: clamp(32px, 11vw, 54px) !important; }
+
+    /* Stats grid stays 2-col on phone */
+    .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 24px 12px !important; }
+    .stat-value { font-size: clamp(28px, 8vw, 40px) !important; white-space: normal !important; }
+    .achievements-title { font-size: clamp(26px, 8vw, 36px) !important; }
+
+    .about-title { font-size: clamp(24px, 8vw, 36px) !important; }
+
+    /* Team section */
+    .team-count, .team-subtitle { font-size: clamp(28px, 8.5vw, 40px) !important; }
+}

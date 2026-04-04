@@ -1,0 +1,129 @@
+/* Обнуление и базовые стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Stolzl Book';
+    src: url('fonts/Stolzl-Book.woff2') format('woff2'),
+         url('fonts/Stolzl-Book.woff') format('woff'),
+         url('fonts/Stolzl-Book.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Stolzl';
+    src: url('fonts/Stolzl-Bold.woff2') format('woff2'),
+         url('fonts/Stolzl-Bold.woff') format('woff'),
+         url('fonts/Stolzl-Bold.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+    scroll-behavior: smooth;
+}
+
+body {
+    /* Ваша новая строка: */
+    background-image: url('img/case-bg.jpg'); 
+    
+    /* Дополнительные настройки, чтобы фото стояло красиво: */
+    background-size: cover;        /* Растягивает фото на весь экран */
+    background-position: center;   /* Центрирует изображение */
+    background-attachment: fixed;  /* Фото не будет прокручиваться */
+    background-repeat: no-repeat;  /* Чтобы картинка не дублировалась плиткой */
+    
+    /* Остальное оставляем как было */
+    background-color: #000; 
+    color: #fff;
+    font-family: 'Inter', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1500px;
+    padding: 20px;
+}
+
+/* Заголовки */
+.main-title {
+    font-family: 'Stolzl';
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 40px;
+    text-transform: none;
+}
+
+.main-title span {
+    display: block;
+}
+
+.orange-text {
+    color: #007e0a; /* Яркий оранжевый как на скрине */
+    padding-left: 150px;
+    padding-bottom: 10px;
+}
+
+.white-text {
+    color: #FFFFFF;
+    font-family: 'Stolzl';
+    font-size: 54px;
+}
+
+/* Кнопка */
+.btn-home {
+    display: inline-block;
+    
+    /* Увеличиваем ширину и высоту за счет внутренних отступов */
+    padding: 18px 45px; 
+    
+    /* Минимальная ширина, чтобы кнопка не схлопывалась, если текст короткий */
+    min-width: 200px; 
+    
+    border: 2px solid #0c9600; /* Сделал рамку чуть толще (2px), чтобы она не терялась */
+    background: transparent;
+    
+    color: #FFFFFF;
+    text-decoration: none;
+    text-transform: uppercase; /* Капс дает ощущение «эпичности» */
+    
+    font-weight: 500;          /* Максимально жирный шрифт */
+    font-size: 18px;           /* Крупный, читабельный размер */
+    line-height: 1;
+    letter-spacing: 2px;       /* Растянем буквы для стиля */
+    text-align: center;
+    
+    transition: all 0.3s ease;
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+.btn-home:hover {
+    background-color: #0c9600;
+    color: #000;
+}
+
+.btn-home:hover {
+    background-color: #129c00;
+}
+
+/* Текст соцсетей */
+.social-text {
+    font-family: 'Stolzl Book';
+    font-size: 18px;
+    font-weight: 400;
+    padding-left: 20px;
+    color: #FFFFFF;
+    opacity: 0.9;
+}
+
+/* Адаптивность для мобилок */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 32px;
+    }
+}

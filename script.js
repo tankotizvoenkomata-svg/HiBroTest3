@@ -34,6 +34,30 @@ const onMove = (e) => {
     canvas.style.left = newLeft + 'px';
 };
 
+// ─── HAMBURGER MENU ─────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mainNav = document.getElementById('mainNav');
+    const btnContact = document.getElementById('openModalBtn');
+
+    if (hamburgerBtn && mainNav) {
+        hamburgerBtn.addEventListener('click', () => {
+            const isOpen = mainNav.classList.toggle('nav-open');
+            hamburgerBtn.classList.toggle('is-open', isOpen);
+            if (btnContact) btnContact.classList.toggle('nav-open', isOpen);
+        });
+
+        // Close nav when a nav link is clicked
+        mainNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('nav-open');
+                hamburgerBtn.classList.remove('is-open');
+                if (btnContact) btnContact.classList.remove('nav-open');
+            });
+        });
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const track = document.getElementById('casesTrack');
     const viewport = document.getElementById('casesSliderViewport');
@@ -41,11 +65,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPrev = document.getElementById('casePrev');
     
     let slides = Array.from(document.querySelectorAll('.case-card'));
-    const slideWidth = 1109; 
-    const gap = 40; 
-    const totalStep = slideWidth + gap;
+    const getSlideWidth = () => {
+        // On mobile the card is calc(100vw - 32px), on desktop it's the viewport width
+        const vp = viewport ? viewport.offsetWidth : 909;
+        return window.innerWidth <= 768 ? window.innerWidth - 32 : vp;
+    };
+    const getGap = () => window.innerWidth <= 768 ? 16 : 40;
+    let gap = getGap();
+    let slideWidth = getSlideWidth();
+    let totalStep = slideWidth + gap;
 
-    // 1. КЛОНИРОВАНИЕ
+    // 1. КЛОНИРОВАНИЕ для зацикливания
     const firstClone = slides[0].cloneNode(true);
     const lastClone = slides[slides.length - 1].cloneNode(true);
     track.appendChild(firstClone);
@@ -55,19 +85,22 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 1; 
     
     let isDragging = false;
+    // Оставил твои переменные для свайпа, если планируешь дописывать тач-события
     let startPos = 0;
     let currentTranslate = 0;
-    let prevTranslate = 0;
+    let prevTranslate = 0; 
+    
     let isTransitioning = false;
-
-    // Переменная для таймера автоплея
     let autoPlayTimer;
 
     updatePositionMinstantly();
-    startAutoPlay(); // Запускаем автопрокрутку при загрузке
+    startAutoPlay();
 
     function updatePosition() {
         isTransitioning = true;
+        slideWidth = getSlideWidth();
+        gap = getGap();
+        totalStep = slideWidth + gap;
         track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
         currentTranslate = currentIndex * -totalStep;
         track.style.transform = `translateX(${currentTranslate}px)`;
@@ -75,6 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updatePositionMinstantly() {
         isTransitioning = false;
+        slideWidth = getSlideWidth();
+        gap = getGap();
+        totalStep = slideWidth + gap;
         track.style.transition = 'none';
         currentTranslate = currentIndex * -totalStep;
         track.style.transform = `translateX(${currentTranslate}px)`;
@@ -83,105 +119,126 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- ЛОГИКА АВТОПЛЕЯ ---
     function startAutoPlay() {
-        stopAutoPlay(); // На всякий случай чистим старый таймер
+        stopAutoPlay();
         autoPlayTimer = setInterval(() => {
-            if (!isDragging) {
+            // Переключаем только если не свайпаем и не в процессе анимации
+            if (!isDragging && !isTransitioning) {
                 currentIndex++;
                 updatePosition();
             }
-        }, 5000); // 7 секунд между слайдами
+        }, 5000); 
     }
 
     function stopAutoPlay() {
         if (autoPlayTimer) clearInterval(autoPlayTimer);
     }
 
+    // --- ИСПРАВЛЕННЫЙ ОБРАБОТЧИК АНИМАЦИИ ---
     track.addEventListener('transitionend', () => {
         isTransitioning = false;
-        if (currentIndex === allSlides.length - 1) {
+        
+        // Используем >= вместо ===
+        if (currentIndex >= allSlides.length - 1) {
             currentIndex = 1;
             updatePositionMinstantly();
         }
-        if (currentIndex === 0) {
+        // Используем <= вместо ===
+        if (currentIndex <= 0) {
             currentIndex = allSlides.length - 2;
             updatePositionMinstantly();
         }
-        prevTranslate = currentTranslate;
     });
 
-    // КНОПКИ (с перезапуском таймера)
-    btnNext.addEventListener('click', () => {
-        if (isTransitioning) return;
-        currentIndex++;
-        updatePosition();
-        startAutoPlay(); // Сбрасываем таймер при ручном клике
+    // --- ОБРАБОТЧИКИ КНОПОК ---
+    if (btnNext) {
+        btnNext.addEventListener('click', () => {
+            if (isTransitioning) return; // Защита от быстрых двойных кликов
+            currentIndex++;
+            updatePosition();
+            startAutoPlay(); // Перезапускаем автоплей, чтобы слайдер не перескочил сразу после клика
+        });
+    }
+
+    if (btnPrev) {
+        btnPrev.addEventListener('click', () => {
+            if (isTransitioning) return;
+            currentIndex--;
+            updatePosition();
+            startAutoPlay();
+        });
+    }
+
+    // Опционально: останавливать автоплей при наведении мыши на слайдер
+    if (viewport) {
+        viewport.addEventListener('mouseenter', stopAutoPlay);
+        viewport.addEventListener('mouseleave', startAutoPlay);
+    }
+    track.addEventListener('dragstart', (e) => e.preventDefault());
+
+    window.addEventListener('resize', () => {
+        updatePositionMinstantly();
     });
 
-    btnPrev.addEventListener('click', () => {
-        if (isTransitioning) return;
-        currentIndex--;
-        updatePosition();
-        startAutoPlay(); // Сбрасываем таймер при ручном клике
-    });
+    // Додаємо слухачі подій
+    track.addEventListener('pointerdown', pointerDown);
+    track.addEventListener('pointermove', pointerMove);
+    track.addEventListener('pointerup', pointerUp);
+    track.addEventListener('pointerleave', pointerLeave);
 
-    // DRAG-AND-DROP (с остановкой таймера)
-    viewport.addEventListener('mousedown', dragStart);
-    viewport.addEventListener('touchstart', dragStart);
-    window.addEventListener('mousemove', dragAction);
-    window.addEventListener('touchmove', dragAction);
-    window.addEventListener('mouseup', dragEnd);
-    window.addEventListener('touchend', dragEnd);
+    function getPositionX(event) {
+        return event.clientX;
+    }
 
-    function dragStart(e) {
-        // Если это мышка, отменяем стандартное поведение (перетаскивание картинки браузером)
-        if (e.type === 'mousedown') {
-            e.preventDefault();
-        }
-        
-        if (isTransitioning) return;
-        stopAutoPlay();
-        
-        // Очистка выделения текста на всякий случай
-        if (window.getSelection) { window.getSelection().removeAllRanges(); }
+    function pointerDown(event) {
+        // Якщо зараз іде анімація переходу, ігноруємо клік
+        if (isTransitioning) return; 
         
         isDragging = true;
-        startPos = getPositionX(e);
+        startPos = getPositionX(event);
+        stopAutoPlay(); // Зупиняємо автоплей, поки користувач тримає слайд
+        
+        // Прибираємо плавність, щоб слайдер миттєво "прилипав" до курсору
         track.style.transition = 'none';
-        viewport.classList.add('grabbing');
+        
+        // Захоплюємо вказівник, щоб не втрачати фокус при швидкому свайпі за межі екрана
+        track.setPointerCapture(event.pointerId);
     }
 
-    function dragAction(e) {
+    function pointerMove(event) {
         if (!isDragging) return;
-        const currentPosition = getPositionX(e);
+        
+        const currentPosition = getPositionX(event);
         const diff = currentPosition - startPos;
-        currentTranslate = prevTranslate + diff;
-        track.style.transform = `translateX(${currentTranslate}px)`;
+        
+        // Рухаємо трек за курсором
+        track.style.transform = `translateX(${currentTranslate + diff}px)`;
     }
 
-    function dragEnd() {
+    function pointerUp(event) {
         if (!isDragging) return;
         isDragging = false;
-        viewport.classList.remove('grabbing');
-
-        const movedBy = currentTranslate - prevTranslate;
-
-        if (movedBy < -150) {
-            currentIndex++;
-        } else if (movedBy > 150) {
-            currentIndex--;
+        
+        const currentPosition = getPositionX(event);
+        const diff = currentPosition - startPos;
+        
+        // Встановлюємо поріг у 100px. Якщо протягнули менше - слайд повернеться на місце
+        if (diff < -100) {
+            currentIndex++; // Свайп вліво (наступний)
+        } else if (diff > 100) {
+            currentIndex--; // Свайп вправо (попередній)
         }
-
+        
+        // Повертаємо плавність і докручуємо до потрібного слайда
         updatePosition();
-        startAutoPlay(); // Снова запускаем после того, как пользователь отпустил
+        startAutoPlay(); // Відновлюємо автоплей
     }
 
-    function getPositionX(e) {
-        return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+    function pointerLeave(event) {
+        // Якщо користувач затиснув мишу і вивів курсор за межі слайдера
+        if (isDragging) {
+            pointerUp(event); 
+        }
     }
-
-    // Останавливаем автоплей, если мышка просто зависла над слайдером
-    viewport.addEventListener('mouseenter', stopAutoPlay);
-    viewport.addEventListener('mouseleave', startAutoPlay);
 });
 
 // Привязываем события
@@ -458,4 +515,18 @@ document.addEventListener("DOMContentLoaded", function() {
     titles.forEach(title => {
         titleObserver.observe(title);
     });
+});
+
+document.getElementById('modalForm').addEventListener('submit', function(event) {
+    // Останавливаем стандартную перезагрузку страницы
+    event.preventDefault();
+
+    // Здесь обычно идет код отправки данных на почту/в базу (fetch или XMLHttpRequest)
+    // Например:
+    // const formData = new FormData(this);
+    // fetch('send.php', { method: 'POST', body: formData });
+
+    // Перенаправляем пользователя на страницу благодарности
+    // Замените 'thanks.html' на реальный путь к вашей новой странице
+    window.location.href = 'thanks.html'; 
 });
