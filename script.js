@@ -40,60 +40,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnNext = document.getElementById('caseNext');
     const btnPrev = document.getElementById('casePrev');
     
-    // Получаем начальные слайды
-    let initialSlides = Array.from(track.querySelectorAll('.case-card'));
-    const slideWidth = 909; 
+    let slides = Array.from(document.querySelectorAll('.case-card'));
+    const slideWidth = 1109; 
     const gap = 40; 
     const totalStep = slideWidth + gap;
 
-    // 1. КЛОНИРОВАНИЕ для бесконечного эффекта
-    const firstClone = initialSlides[0].cloneNode(true);
-    const lastClone = initialSlides[initialSlides.length - 1].cloneNode(true);
+    // 1. КЛОНИРОВАНИЕ
+    const firstClone = slides[0].cloneNode(true);
+    const lastClone = slides[slides.length - 1].cloneNode(true);
+    track.appendChild(firstClone);
+    track.insertBefore(lastClone, slides[0]);
 
-    track.appendChild(firstClone); // Клон первого в конец
-    track.insertBefore(lastClone, track.firstChild); // Клон последнего в начало
-
-    const allSlides = track.querySelectorAll('.case-card');
-    let currentIndex = 1; // Начинаем с 1 (настоящий первый слайд)
+    const allSlides = document.querySelectorAll('.case-card');
+    let currentIndex = 1; 
     
     let isDragging = false;
     let startPos = 0;
     let currentTranslate = 0;
     let prevTranslate = 0;
     let isTransitioning = false;
-    let autoPlayTimer = null;
 
-    // Инициализация позиции без анимации
-    function updatePositionInstantly() {
-        isTransitioning = false;
-        track.style.transition = 'none';
-        currentTranslate = currentIndex * -totalStep;
-        track.style.transform = `translateX(${currentTranslate}px)`;
-        prevTranslate = currentTranslate;
-    }
+    // Переменная для таймера автоплея
+    let autoPlayTimer;
 
-    updatePositionInstantly();
-
-    // --- ФУНКЦИИ АВТОПЛЕЯ ---
-    function startAutoPlay() {
-        stopAutoPlay(); // Очищаем старый таймер перед созданием нового
-        autoPlayTimer = setInterval(() => {
-            if (!isDragging && !isTransitioning) {
-                currentIndex++;
-                updatePosition();
-            }
-        }, 5000); 
-    }
-
-    function stopAutoPlay() {
-        if (autoPlayTimer) {
-            clearInterval(autoPlayTimer);
-            autoPlayTimer = null;
-        }
-    }
-
-    // Запускаем сразу при загрузке
-    startAutoPlay();
+    updatePositionMinstantly();
+    startAutoPlay(); // Запускаем автопрокрутку при загрузке
 
     function updatePosition() {
         isTransitioning = true;
@@ -102,50 +73,75 @@ document.addEventListener('DOMContentLoaded', () => {
         track.style.transform = `translateX(${currentTranslate}px)`;
     }
 
-    // Следим за завершением анимации для бесшовного перехода
+    function updatePositionMinstantly() {
+        isTransitioning = false;
+        track.style.transition = 'none';
+        currentTranslate = currentIndex * -totalStep;
+        track.style.transform = `translateX(${currentTranslate}px)`;
+        prevTranslate = currentTranslate;
+    }
+
+    // --- ЛОГИКА АВТОПЛЕЯ ---
+    function startAutoPlay() {
+        stopAutoPlay(); // На всякий случай чистим старый таймер
+        autoPlayTimer = setInterval(() => {
+            if (!isDragging) {
+                currentIndex++;
+                updatePosition();
+            }
+        }, 5000); // 7 секунд между слайдами
+    }
+
+    function stopAutoPlay() {
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
+    }
+
     track.addEventListener('transitionend', () => {
         isTransitioning = false;
-        
         if (currentIndex === allSlides.length - 1) {
             currentIndex = 1;
-            updatePositionInstantly();
+            updatePositionMinstantly();
         }
         if (currentIndex === 0) {
             currentIndex = allSlides.length - 2;
-            updatePositionInstantly();
+            updatePositionMinstantly();
         }
         prevTranslate = currentTranslate;
     });
 
-    // КНОПКИ
+    // КНОПКИ (с перезапуском таймера)
     btnNext.addEventListener('click', () => {
         if (isTransitioning) return;
-        stopAutoPlay(); // Останавливаем текущий цикл
         currentIndex++;
         updatePosition();
-        startAutoPlay(); // Запускаем заново, чтобы отсчет пошел с нуля
+        startAutoPlay(); // Сбрасываем таймер при ручном клике
     });
 
     btnPrev.addEventListener('click', () => {
         if (isTransitioning) return;
-        stopAutoPlay();
         currentIndex--;
         updatePosition();
-        startAutoPlay();
+        startAutoPlay(); // Сбрасываем таймер при ручном клике
     });
 
-    // DRAG-AND-DROP
+    // DRAG-AND-DROP (с остановкой таймера)
     viewport.addEventListener('mousedown', dragStart);
-    viewport.addEventListener('touchstart', dragStart, {passive: true});
+    viewport.addEventListener('touchstart', dragStart);
     window.addEventListener('mousemove', dragAction);
-    window.addEventListener('touchmove', dragAction, {passive: false});
+    window.addEventListener('touchmove', dragAction);
     window.addEventListener('mouseup', dragEnd);
     window.addEventListener('touchend', dragEnd);
 
     function dragStart(e) {
-        if (isTransitioning) return;
-        stopAutoPlay(); // Выключаем автоплей, когда пользователь трогает слайдер
+        // Если это мышка, отменяем стандартное поведение (перетаскивание картинки браузером)
+        if (e.type === 'mousedown') {
+            e.preventDefault();
+        }
         
+        if (isTransitioning) return;
+        stopAutoPlay();
+        
+        // Очистка выделения текста на всякий случай
         if (window.getSelection) { window.getSelection().removeAllRanges(); }
         
         isDragging = true;
@@ -176,14 +172,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         updatePosition();
-        startAutoPlay(); // Возвращаем автоплей после того, как пользователь закончил
+        startAutoPlay(); // Снова запускаем после того, как пользователь отпустил
     }
 
     function getPositionX(e) {
         return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
     }
 
-    // Пауза при наведении мышки
+    // Останавливаем автоплей, если мышка просто зависла над слайдером
     viewport.addEventListener('mouseenter', stopAutoPlay);
     viewport.addEventListener('mouseleave', startAutoPlay);
 });
@@ -214,69 +210,56 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Логика модального окна
     const modal = document.getElementById('fixedModal');
     const openBtn = document.getElementById('openModalBtn');
     const closeBtn = document.getElementById('closeModalBtn');
+    const form = document.getElementById('modalForm');
+
+    // Відкриття
+    openBtn.onclick = function() {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    };
+
+    // Закриття
+    closeBtn.onclick = closeModal;
+    window.onclick = function(e) { if (e.target === modal) closeModal(); };
 
     function closeModal() {
-        if (modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
     }
 
-    if (openBtn) {
-        openBtn.onclick = () => {
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+    // ВІДПРАВКА НА SEND.PHP
+    form.onsubmit = async function(e) {
+        e.preventDefault();
+
+        // Формуємо об'єкт для JSON
+        const payload = {
+            name: form.elements['name'].value,
+            phone: form.elements['phone'].value,
+            link: form.elements['link'].value
         };
-    }
-    if (closeBtn) closeBtn.onclick = closeModal;
-    
-    // Закрытие по клику вне модалки
-    window.onclick = (e) => { if (e.target === modal) closeModal(); };
 
-    // --- ГЛАВНЫЙ ОБРАБОТЧИК ДЛЯ ВСЕХ ФОРМ ---
-    const allForms = document.querySelectorAll('.js-form');
+        try {
+            const response = await fetch('send.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
 
-    allForms.forEach(form => {
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault(); // ОСТАНАВЛИВАЕМ ПЕРЕЗАГРУЗКУ (убираем "?")
-
-            // Собираем данные из текущей формы
-            const formData = new FormData(form);
-            const payload = Object.fromEntries(formData.entries());
-
-            // Визуальная индикация (опционально)
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const originalBtnText = submitBtn.innerText;
-            submitBtn.innerText = 'Відправка...';
-            submitBtn.disabled = true;
-
-            try {
-                const response = await fetch('send.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (response.ok) {
-                    alert('Успішно відправлено!');
-                    form.reset();
-                    closeModal(); // Закроет модалку, если отправка была из неё
-                } else {
-                    alert('Помилка сервера. Спробуйте пізніше.');
-                }
-            } catch (error) {
-                console.error('Ошибка:', error);
-                alert('Сталася помилка при відправці.');
-            } finally {
-                submitBtn.innerText = originalBtnText;
-                submitBtn.disabled = false;
+            if (response.ok) {
+                alert('Успішно відправлено!');
+                form.reset();
+                closeModal();
+            } else {
+                alert('Помилка при відправці.');
             }
-        });
-    });
+        } catch (error) {
+            console.error('Fetch error:', error);
+            alert('Зв’язок з сервером розірвано.');
+        }
+    };
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -326,5 +309,153 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.stat-value').forEach(stat => {
         counterObserver.observe(stat);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('partnersTrack');
+    const viewport = document.getElementById('partnersViewport');
+    const dotsContainer = document.getElementById('partnersDots');
+    const items = Array.from(track.children);
+    const originalCount = items.length;
+
+    // 1. Правильное клонирование
+    const leftClones = document.createDocumentFragment();
+    const rightClones = document.createDocumentFragment();
+    
+    items.forEach(item => {
+        leftClones.appendChild(item.cloneNode(true));
+        rightClones.appendChild(item.cloneNode(true));
+    });
+    
+    track.insertBefore(leftClones, track.firstChild);
+    track.appendChild(rightClones);
+
+    // 2. Создание точек
+    dotsContainer.innerHTML = '';
+    items.forEach((_, i) => {
+        const dot = document.createElement('span');
+        if (i === 0) dot.classList.add('active');
+        dotsContainer.appendChild(dot);
+    });
+    const dots = dotsContainer.querySelectorAll('span');
+
+    let isDragging = false;
+    let startX = 0;
+    let currentTranslate = 0;
+    let currentIndex = originalCount; // Начинаем с оригиналов
+
+    // Точный расчет ширины шага
+    const getStepWidth = () => viewport.getBoundingClientRect().width / 4;
+
+    const setPosition = (smooth = true) => {
+        const step = getStepWidth();
+        currentTranslate = -currentIndex * step;
+        track.style.transition = smooth ? 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+        track.style.transform = `translateX(${currentTranslate}px)`;
+    };
+
+    const updateDots = () => {
+        const index = ((currentIndex % originalCount) + originalCount) % originalCount;
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+    };
+
+    // Старт
+    setPosition(false);
+    updateDots();
+
+    // 3. Обработка Drag & Swipe
+    const dragStart = (e) => {
+        isDragging = true;
+        startX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+        track.style.transition = 'none'; // Мгновенная остановка
+    };
+
+    const dragMove = (e) => {
+        if (!isDragging) return;
+        if (e.cancelable) e.preventDefault(); 
+        const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+        const diff = currentX - startX;
+        // Двигаем слайдер за курсором в реальном времени
+        track.style.transform = `translateX(${currentTranslate + diff}px)`;
+    };
+
+    const dragEnd = (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        
+        const endX = e.type.includes('mouse') ? e.pageX : (e.changedTouches ? e.changedTouches[0].pageX : startX);
+        const diff = endX - startX; // Разница между стартом и концом
+        const step = getStepWidth();
+
+        // Считаем, на сколько логотипов мы смахнули
+        const movedSteps = Math.round(diff / step);
+
+        // Логика переключения
+        if (movedSteps === 0) {
+            // Если смахнули чуть-чуть, но больше 30px - листаем 1 логотип
+            if (diff < -30) currentIndex++;
+            else if (diff > 30) currentIndex--;
+        } else {
+            // Если смахнули сильно - листаем на пропорциональное количество
+            currentIndex -= movedSteps;
+        }
+
+        // Анимируем к ровному индексу
+        setPosition(true);
+        updateDots();
+
+        // Бесшовный перенос для бесконечности
+        setTimeout(() => {
+            if (currentIndex >= originalCount * 2) {
+                currentIndex -= originalCount;
+                setPosition(false);
+            } else if (currentIndex < originalCount) {
+                currentIndex += originalCount;
+                setPosition(false);
+            }
+        }, 500); // 500ms равно времени CSS transition
+    };
+
+    viewport.addEventListener('mousedown', dragStart);
+    window.addEventListener('mousemove', dragMove);
+    window.addEventListener('mouseup', dragEnd);
+    viewport.addEventListener('mouseleave', dragEnd);
+    
+    viewport.addEventListener('touchstart', dragStart, { passive: false });
+    viewport.addEventListener('touchmove', dragMove, { passive: false });
+    viewport.addEventListener('touchend', dragEnd);
+
+    window.addEventListener('resize', () => {
+        setPosition(false);
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Выбираем все заголовки секций на твоем сайте
+    const titles = document.querySelectorAll('.about-title, .main-title-top, .main-title-bottom, .staggered-title-wrapper, .steps-main-title, .benefits-title, .achievements-title, .contact-title, .title-line.top, .title-line.bottom, .cases-main-title, .contact-info h2');
+
+    // 2. Настраиваем наблюдатель (Observer)
+    const observerOptions = {
+        threshold: 0.1, // Анимация сработает, когда заголовок покажется на 10%
+        rootMargin: "0px 0px -50px 0px" // Срабатывает чуть позже, чтобы не было "ранних" анимаций вне экрана
+    };
+
+    const titleObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            // Если элемент пересек границу экрана
+            if (entry.isIntersecting) {
+                // Добавляем класс, который включает CSS-анимацию
+                entry.target.classList.add('fade-in-visible');
+                
+                // Отключаем наблюдение за этим элементом (чтобы анимация была только 1 раз при первой прокрутке)
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // 3. Вешаем наблюдатель на каждый найденный заголовок
+    titles.forEach(title => {
+        titleObserver.observe(title);
     });
 });
