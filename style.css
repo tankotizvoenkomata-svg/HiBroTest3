@@ -394,13 +394,21 @@ body {
 
 .photo-bottom-fade {
     position: absolute;
-    bottom: 0;
+    bottom: -125px;
     left: 0;
     right: 0;
-    height: 100px; /* Глибокий градієнт */
-    /* Плавний перехід у чорний */
-    background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0) 100%);
-    z-index: 5;
+    /* Збільшуємо висоту до 200px для плавності */
+    height: 200px; 
+    
+    /* Робимо градієнт більш "агресивним" у нижній точці */
+    background: linear-gradient(to top, 
+        rgba(0,0,0,1) 0%, 
+        rgba(0,0,0,0.9) 20%, 
+        rgba(0,0,0,0.5) 60%, 
+        transparent 100%);
+    
+    /* Ставимо найвищий пріоритет */
+    z-index: 99; 
     pointer-events: none;
 }
 
@@ -945,7 +953,7 @@ body {
     font-size: 16px;
     text-align: left;
     margin-bottom: 8px;
-    font-family: "Stolzl", Sans-serif;
+    font-family: "Stolzl Book", Sans-serif;
 }
 
 .about-item p {
@@ -1715,55 +1723,82 @@ body {
 /* Фінальна секція з формою */
 .footer-contact {
     background-image: url('img/Rectangle-1110.jpg');
-    height: 540px; /* Темне графіті як на макеті */
+    
+    /* 1. Уменьшаем общую высоту секции */
+    height: 400px; 
+    
     background-repeat: no-repeat; 
-    background-size: 150%;
+    
+    /* 2. background-size: 150% может сильно увеличивать картинку, 
+       лучше использовать cover, чтобы фото подстраивалось под новую высоту */
+    background-size: cover; 
+    
     background-position: center;
-    padding: 120px 0 80px;
+    
+    /* 3. Уменьшаем внутренние отступы (сверху 60px, снизу 40px) */
+    padding: 60px 0 40px; 
+    
     color: #fff;
+    
+    /* Чтобы контент внутри не вываливался, если текста много */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-
 .contact-box {
     text-align: center;
-    margin-bottom: 100px;
-}
-
-.contact-title {
-    font-size: 3rem;
-    font-weight: 900;
-    margin-bottom: 60px;
-    font-family: "Stolzl", Sans-serif;
+    /* Уменьшаем внешний отступ снизу, чтобы секция стала ниже */
+    margin-bottom: 40px; 
 }
 
 .contact-form-order {
-    max-width: 900px;
+    max-width: 1500px;
     margin: 0 auto;
+    /* Центрируем содержимое внутри контейнера */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
 }
 
 .form-inputs {
     display: flex;
+    justify-content: center; /* Центрируем инпуты по горизонтали */
     gap: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;    /* Уменьшили отступ, чтобы поджать высоту */
+    width: 100%;            /* Растягиваем на всю доступную ширину */
 }
 
 .input-group {
-    flex: 1;
+    flex: 0 1 auto;         /* Позволяем группе подстраиваться под контент */
     text-align: left;
     display: flex;
     flex-direction: column;
-    font-family: "Stolzl Book", Sans-serif;
 }
 
 .input-group input {
     background: transparent;
     border: none;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid rgb(190, 190, 190);
+    
+    /* Вместо жесткого width используем max-width */
+    width: 100%;            
+    max-width: 500px;       /* Теперь инпут не будет больше 500px, но сможет сужаться */
+    min-width: 300px;       /* Чтобы на мобилках не схлопнулся совсем */
+    
     padding: 10px 0;
     color: #fff;
-    font-size: 1rem;
+    font-size: 18px;
     outline: none;
     transition: 0.3s;
+    font-family: "Stolzl Book", Sans-serif;
 }
+
+.input-group ::placeholder {
+    color: rgb(190, 190, 190);
+    font-size: 18px;
+    font-family: "Stolzl Book", Sans-serif;
+}
+
 
 .input-group input:focus {
     border-bottom-color: #0D890D;
@@ -1887,23 +1922,25 @@ body {
     z-index: 1;
 }
 
-.step-row {
+.steps-row {
     display: grid;
     grid-template-columns: 150px 1fr 1fr;
     padding: 40px 0; /* Увеличил отступы для чистоты */
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #000000;
     align-items: start;
 }
 
+
 .step-number {
-    font-size: 24px;
+    padding-left: 30px;
+    font-size: 28px;
     font-weight: 700;
     color: #009213;
     font-family: "Stolzl", Sans-serif;
 }
 
 .step-title {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
     padding-left: 20px;
     font-family: "Stolzl", Sans-serif;
