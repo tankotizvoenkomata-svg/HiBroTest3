@@ -220,7 +220,7 @@ body {
 }
 
 .nav a:hover {
-    color: #22c55e;
+    color: #0D890D;
 }
 
 .btn-contact {
@@ -228,8 +228,8 @@ body {
     padding: 0 25px;
     height: 44px;
     background: transparent;
-    border: 1px solid #008807;
-    border-radius: 6px;
+    border: 1px solid #0D890D;
+    border-radius: 1px;
     color: #fff;
     font-family: 'Stolzl', sans-serif;
     font-size: 16px;
@@ -241,8 +241,8 @@ body {
 }
 
 .btn-contact:hover {
-    background: #4ade80;
-    border-color: #4ade80;
+    background: #0D890D;
+    border-color: #0D890D;
     color: #000;
 }
 
@@ -260,10 +260,10 @@ body {
 }
 
 .modal-content {
-    background: #000000;
+    background-image: url("img/case-bg.jpg");
     padding: 40px;
     width: 90%;
-    height: 546.750px;
+    height: 550px;
     max-width: 600px;
     position: relative;
     color: #fff;
@@ -289,7 +289,8 @@ body {
     text-transform: none;
     letter-spacing: 1px;
     font-family: 'Stolzl', sans-serif;
-    padding-left: 10px;
+    padding-left: 40px;
+    padding-bottom: 40px;
 }
 
 .modal-input {
@@ -297,11 +298,12 @@ body {
     background: transparent;
     border: none;
     border-bottom: 1px solid #444;
-    padding: 12px 0;
+    padding: 20px 0;
     margin-bottom: 15px;
     color: #fff;
     outline: none;
-    font-size: 17px;
+    font-size: 18px;
+    font-weight: 500;
     font-family: 'Stolzl Book', sans-serif;
 }
 
@@ -309,7 +311,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .btn-submit-modal {
@@ -317,13 +319,16 @@ body {
     background: #fff;
     color: #000;
     border: none;
-    padding: 15px 30px;
+    padding: 20px 30px;
     font-weight: bold;
+    font-size: 18px;
     cursor: pointer;
+    font-weight: 700;
 }
 
 .modal-parrot {
-    width: 60px;
+    width: 120px;
+    height: 97.5px;
     pointer-events: none;
 }
 
@@ -364,18 +369,19 @@ body {
 }
 
 /* ФОТО ТА ГРАДІЄНТ */
+.photo-section {
+    position: relative;
+}
+
 .photo-viewport {
     position: relative;
     width: 100%;
     height: 600px;
     background: #000;
     overflow: hidden;
-    
-    /* ОЦЕ ПІДНІМАЄ ФОТО ВИЩЕ */
-    margin-top: -80px; 
-    
-    margin-bottom: -1px; /* Склейка з наступним блоком */
-    z-index: 5; /* Фото нижче тексту */
+    margin-top: -80px;
+    margin-bottom: -1px;
+    z-index: 5;
 }
 
 .photo-canvas {
@@ -394,21 +400,16 @@ body {
 
 .photo-bottom-fade {
     position: absolute;
-    bottom: -125px;
+    bottom: 0;
     left: 0;
     right: 0;
-    /* Збільшуємо висоту до 200px для плавності */
-    height: 200px; 
-    
-    /* Робимо градієнт більш "агресивним" у нижній точці */
-    background: linear-gradient(to top, 
-        rgba(0,0,0,1) 0%, 
-        rgba(0,0,0,0.9) 20%, 
-        rgba(0,0,0,0.5) 60%, 
+    height: 35%;
+    background: linear-gradient(to top,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.85) 35%,
+        rgba(0,0,0,0.4) 70%,
         transparent 100%);
-    
-    /* Ставимо найвищий пріоритет */
-    z-index: 99; 
+    z-index: 99;
     pointer-events: none;
 }
 
@@ -485,7 +486,7 @@ body {
 
 /* Секція Напрямків */
 .directions {
-    background-color: #047a00; /* Помаранчевий колір з картинки */
+    background-color: #0D890D; /* Помаранчевий колір з картинки */
     padding: 100px 50px;
     color: #fff;
     min-height: 100vh;
@@ -895,7 +896,7 @@ body {
 
 /* Градиент для слова Digital (используем твой фирменный оранжевый) */
 .about-title span {
-    background:#0D990D;
+    background:#0D890D;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: #0D890D; 
@@ -1103,7 +1104,7 @@ body {
 
 .achievements-title span {
     font-family: "Stolzl", Sans-serif;
-    color: #03830e; /* Помаранчевий колір */
+    color: #0D890D; /* Помаранчевий колір */
 }
 
 .stats-grid {
@@ -1120,7 +1121,7 @@ body {
 .stat-value {
     font-size: 72px;
     font-weight: 900;
-    color: #008807;
+    color: #0D890D;
     line-height: 1;
     margin-bottom: 20px;
     font-family: "Stolzl", Sans-serif;
@@ -1174,12 +1175,12 @@ body {
 /* Убедись, что стрелки имеют z-index выше, чем у градиента */
 
 .cases-main-title {
+    text-align: left;
     font-family: 'Stolzl', sans-serif;
     font-weight: 600;
-    font-size: 50px;
-    text-align: left;
+    font-size: 72px;
     margin-bottom: 40px;
-    padding-left: 250px;
+    padding-left: 220px;
 }
 
 .cases-title-1 {
@@ -1670,7 +1671,7 @@ body {
 }
 
 .benefits-title span {
-    color: #008327; /* Помаранчевий акцент як на макеті */
+    color: #0D890D; /* Помаранчевий акцент як на макеті */
     font-family: "Stolzl", Sans-serif;
     padding-left: 550px;
 }
@@ -1699,7 +1700,7 @@ body {
 .benefit-line {
     width: 100%;
     height: 3px;
-    background-color: #008817;
+    background-color: #0D890D;
     position: absolute;
     top: 0;
     left: 0;
@@ -1848,7 +1849,7 @@ body {
     transition: 0.3s;
 }
 
-.footer-socials a:hover { opacity: 1; color: #22c55e; }
+.footer-socials a:hover { opacity: 1; color: #0D890D; }
 
 .copyright {
     font-size: 0.8rem;
@@ -1912,7 +1913,7 @@ body {
 }
 
 .steps-main-title span {
-    color: #1f8600;
+    color: #0D890D;
 }
 
 /* ТАБЛИЦА */
@@ -1935,7 +1936,7 @@ body {
     padding-left: 30px;
     font-size: 28px;
     font-weight: 700;
-    color: #009213;
+    color: #0D890D;
     font-family: "Stolzl", Sans-serif;
 }
 
@@ -2031,7 +2032,7 @@ body {
 .contact-info h2 span {
     margin-left: 50px;
     display: block;
-    color: #168500;
+    color: #0D890D;
     font-family: "Stolzl", Sans-serif;
 }
 
@@ -2091,6 +2092,7 @@ body {
 
 .left {
     padding-left: 50px;
+    padding-top: 20px;
     grid-column: 1;
     margin: 0px;
     font-size: 18px;
@@ -2160,7 +2162,7 @@ body {
 }
 
 .footer p{
-    color: #FFFFFFBF;
+    color: #fff;
     font-size: 18px;
     font-weight: 400;
     opacity: 0.5;
@@ -2178,8 +2180,8 @@ body {
 }
 
 :root {
-    --orange: #047700;
-    --green: #22c55e;
+    --orange: #0D890D;
+    --green: #0D890D;
     --black: #000000;
     --white: #ffffff;
     --gray: #f5f5f5;
@@ -2191,7 +2193,6 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
 
 .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
 
-/* Navbar */
 .navbar { display: flex; justify-content: space-between; align-items: center; padding: 30px 50px; }
 .logo { font-size: 24px; font-weight: 900; }
 .logo span { color: var(--orange); }
@@ -2199,13 +2200,11 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
 .nav-links a { color: #fff; text-decoration: none; font-size: 14px; }
 .btn-outline { border: 1px solid #333; padding: 10px 20px; color: #fff; text-decoration: none; border-radius: 5px; }
 
-/* Hero Section */
 .hero { height: 100vh; text-align: center; display: flex; flex-direction: column; }
 .hero h1 { font-size: 80px; margin-top: 50px; line-height: 1; }
 .highlight-green { color: var(--green); }
 .team-photo img { width: 100%; max-width: 1000px; margin-top: -50px; }
 
-/* Steps Section */
 .steps { background-color: var(--white); color: #000; padding: 100px 0; }
 .parrot { width: 150px; }
 .step-row { display: grid; grid-template-columns: 150px 1fr 1fr; padding: 30px 0; border-bottom: 1px solid #ddd; }
@@ -2213,11 +2212,6 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
 .step-name { font-weight: 900;  font-size: 1.5rem; }
 
 
-/* ============================================================
-   === COMPREHENSIVE MOBILE RESPONSIVE OVERRIDES ===
-   ============================================================ */
-
-/* ─── HAMBURGER BUTTON ─────────────────────────────────── */
 .hamburger-btn {
     display: none;
     flex-direction: column;
@@ -2243,7 +2237,6 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
 .hamburger-btn.is-open span:nth-child(2) { opacity: 0; }
 .hamburger-btn.is-open span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
 
-/* ─── TABLETS & SMALL LAPTOPS (≤ 1024px) ──────────────── */
 @media (max-width: 1024px) {
     .line-1 { font-size: 70px; }
     .highlight { font-size: 110px; margin-left: 200px; }
@@ -2254,10 +2247,8 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
     .footer-contact { background-size: cover; height: auto; min-height: 480px; }
 }
 
-/* ─── TABLETS PORTRAIT (≤ 768px) ──────────────────────── */
 @media (max-width: 768px) {
 
-    /* Header: fixed + hamburger */
     .header {
         position: fixed;
         top: 0;
@@ -2303,16 +2294,13 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
     }
     .btn-contact.nav-open { display: inline-flex; }
 
-    /* Spacer — header is now ~70px tall */
     .header-spacer { height: 120px; }
     .header-spacer2 { height: 20px; }
 
-    /* Hero titles */
     .line-1 { font-size: 44px; }
     .highlight { font-size: 72px; margin-left: 0; margin-top: -20px; text-align: right; }
     .hero-content { padding: 0 20px; }
 
-    /* Hero bottom info */
     .container-wide {
         flex-direction: column;
         align-items: flex-start;
@@ -2323,7 +2311,6 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
     .bottom-title { font-size: 40px; padding-left: 0; letter-spacing: -1px; }
     .bottom-description { padding-right: 0; font-size: 15px; }
 
-    /* Cases section */
     .cases-main-title { padding-left: 20px; font-size: 36px; }
     .cases-viewport {
         width: 100%;
@@ -2355,23 +2342,18 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
     .slider-navigation { gap: 200px; }
     .case-arrow-btn { width: 100px; }
 
-    /* Benefits */
     .benefits-title { font-size: 44px; }
     .benefits-title span { padding-left: 0; display: block; text-align: center; }
     .benefits-title { text-align: center; }
 
-    /* Footer contact form */
     .footer-contact { height: auto; padding: 60px 20px; background-size: cover; }
     .form-inputs { flex-direction: column; gap: 30px; }
     .btn-submit { width: 100%; }
 
-    /* Team section */
     .team-count, .team-subtitle { font-size: 48px; }
 
-    /* Achievements */
     .achievements-title { font-size: 48px; }
 
-    /* Work steps bird (hides to prevent overflow) */
     .bird-decor { display: none; }
     .steps-header {
         justify-content: center;
@@ -2380,7 +2362,6 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
     }
     .steps-main-title { text-align: center; font-size: 40px; }
 
-    /* Contacts section */
     .contact-flex { display: flex; flex-direction: column; gap: 40px; }
     .contact-info { display: block; }
     .contact-info h2 { font-size: 48px; margin-bottom: 30px; }
@@ -2391,18 +2372,14 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
     .footer { margin-top: 50px; flex-direction: column; gap: 12px; }
 }
 
-/* ─── PHONES (≤ 480px) ─────────────────────────────────── */
 @media (max-width: 480px) {
 
-    /* Hero titles */
     .line-1 { font-size: 32px; }
     .highlight { font-size: 54px; margin-left: 0; }
     .header-spacer { height: 90px; }
 
-    /* Bottom info */
     .bottom-title { font-size: 30px; }
 
-    /* Modal */
     .modal-content {
         height: auto;
         max-height: 90vh;
@@ -2413,7 +2390,6 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
     .modal-title { font-size: 30px; }
     .modal-footer { flex-direction: column; align-items: flex-start; gap: 16px; }
 
-    /* Cases slider — full width cards */
     .case-card {
         flex: 0 0 calc(100vw - 30px);
         width: calc(100vw - 30px);
@@ -2422,44 +2398,32 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
     .slider-navigation { gap: 100px; }
     .case-arrow-btn { width: 80px; }
 
-    /* Steps */
     .steps-main-title { font-size: 30px; }
     .step-title { font-size: 18px; }
     .step-details p { font-size: 15px; padding-left: 0; }
 
-    /* Stats */
     .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 20px; }
     .stat-value { font-size: 40px; white-space: normal; }
     .achievements-title { font-size: 36px; }
 
-    /* Benefits */
     .benefit-card p { font-size: 20px; }
     .benefits-title { font-size: 34px; }
 
-    /* Experience grid */
     .experience-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 10px; }
 
-    /* Team */
     .team-count, .team-subtitle { font-size: 36px; }
 
-    /* Partners */
     .title-line { font-size: 28px; white-space: normal; }
 
-    /* Contacts */
     .contact-info h2 { font-size: 36px; }
     .settings { font-size: 22px; }
     .office { font-size: 20px; }
 }
 
-/* ============================================================
-   === TARGETED FIXES v2 — based on screenshot review ===
-   ============================================================ */
 
-/* ─── GLOBAL OVERFLOW GUARD ─────────────────────────────── */
 @media (max-width: 768px) {
     html, body { overflow-x: hidden; max-width: 100vw; }
 
-    /* ─── HERO TITLES — use clamp so they NEVER overflow ─── */
     .line-1 {
         font-size: clamp(22px, 7.5vw, 44px) !important;
         white-space: normal !important;
@@ -2478,7 +2442,6 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
         overflow: hidden;
     }
 
-    /* ─── ABOUT TITLE — prevent cut-off ─────────────────── */
     .about-title {
         font-size: clamp(28px, 9vw, 52px) !important;
         word-break: break-word;
@@ -2486,7 +2449,6 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
     }
     .about { overflow: hidden; }
 
-    /* ─── CASES SLIDER — force full width with !important ── */
     .cases-viewport {
         width: 100% !important;
         max-width: 100vw !important;
@@ -2525,11 +2487,9 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
         font-size: clamp(26px, 8vw, 36px) !important;
     }
 
-    /* ─── SLIDER ARROWS — bring them closer together ─────── */
     .slider-navigation { gap: clamp(60px, 40vw, 200px) !important; }
     .case-arrow-btn { width: clamp(60px, 18vw, 110px) !important; }
 
-    /* ─── BOTTOM HERO INFO — stack and remove padding ────── */
     .container-wide {
         flex-direction: column !important;
         padding: 0 16px !important;
@@ -2548,7 +2508,6 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
         max-width: 100% !important;
     }
 
-    /* ─── BENEFITS — fix the span padding ───────────────── */
     .benefits-title span {
         padding-left: 0 !important;
         display: block !important;
@@ -2556,7 +2515,6 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
     }
     .benefits-title { text-align: center !important; }
 
-    /* ─── FOOTER CONTACT — no fixed height ──────────────── */
     .footer-contact {
         height: auto !important;
         min-height: unset !important;
@@ -2570,7 +2528,6 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
         margin-bottom: 36px !important;
     }
 
-    /* ─── MODAL — scrollable on small screens ────────────── */
     .modal-content {
         width: 96% !important;
         height: auto !important;
@@ -2586,13 +2543,104 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
     .line-1 { font-size: clamp(20px, 6.5vw, 30px) !important; }
     .highlight { font-size: clamp(32px, 11vw, 54px) !important; }
 
-    /* Stats grid stays 2-col on phone */
     .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 24px 12px !important; }
     .stat-value { font-size: clamp(28px, 8vw, 40px) !important; white-space: normal !important; }
     .achievements-title { font-size: clamp(26px, 8vw, 36px) !important; }
 
     .about-title { font-size: clamp(24px, 8vw, 36px) !important; }
 
-    /* Team section */
     .team-count, .team-subtitle { font-size: clamp(28px, 8.5vw, 40px) !important; }
+}
+.insta-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 4px;
+}
+
+.insta-contact-link {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    opacity: 0.85;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    flex-shrink: 0;
+}
+
+.insta-contact-link:hover {
+    opacity: 1;
+    transform: scale(1.08);
+}
+.footer {
+    grid-column: span 2;
+    margin-top: 60px;
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer p,
+.footer-email {
+    color: #fff;
+    font-size: 20px;
+    font-family: "Stolzl Book", sans-serif;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-email:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+        align-items: center;
+    }
+    .insta-row { flex-wrap: wrap; }
+}
+
+.insta-row {
+    grid-column: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    margin-top: 0 !important;
+}
+
+.office,
+.Mon,
+.insta {
+    opacity: 1 !important;
+    color: #fff !important;
+}
+
+.Mon {
+    font-size: 20px !important;
+    font-family: "Stolzl Book", sans-serif !important;
+    line-height: 1.6 !important;
+}
+
+.insta {
+    font-size: 20px !important;
+    font-family: "Stolzl Book", sans-serif !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+}
+
+.btn-white {
+    width: 320px !important;
+    padding: 22px 40px !important;
+    font-size: 1rem !important;
+    font-family: "Stolzl", sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+}
+
+@media (max-width: 992px) {
+    .insta-row { grid-column: 1 !important; }
+    .btn-white { width: 100% !important; }
 }

@@ -112,6 +112,12 @@ body {
 }
 
 /* Текст соцсетей */
+.social-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .social-text {
     font-family: 'Stolzl Book';
     font-size: 18px;
@@ -119,6 +125,18 @@ body {
     padding-left: 20px;
     color: #FFFFFF;
     opacity: 0.9;
+}
+
+.insta-link {
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.75);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.insta-link:hover {
+    opacity: 0.85;
+    transform: scale(1.1);
 }
 
 /* Адаптивность для мобилок */
