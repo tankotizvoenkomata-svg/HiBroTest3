@@ -876,20 +876,20 @@
     <div class="container">
         <div class="contact-box">
             
-            <form class="contact-form-order">
-                <div class="form-inputs">
-                    <div class="input-group">
-                        <input type="text" name="name" id="name" placeholder="Ім'я">
-                    </div>
-                    <div class="input-group">
-                        <input type="tel" name="phone" id="phone" required placeholder="Ваш номер*">
-                    </div>
-                    <div class="input-group">
-                        <input type="url" name="link" id="link" required placeholder="Посилання на сайт/Instagram*">
-                    </div>
-                </div>
-                <button type="submit" class="btn-submit-modal">ЗВ'ЯЗАТИСЬ З НАМИ</button>
-            </form>
+<form class="contact-form-order" method="POST">
+    <div class="form-inputs">
+        <div class="input-group">
+            <input type="text" name="name" id="name" placeholder="Ім'я">
+        </div>
+        <div class="input-group">
+            <input type="tel" name="phone" id="phone" required placeholder="Ваш номер*">
+        </div>
+        <div class="input-group">
+            <input type="url" name="link" id="link" required placeholder="Посилання на сайт/Instagram*">
+        </div>
+    </div>
+    <button type="submit" class="btn-submit-modal">ЗВ'ЯЗАТИСЬ З НАМИ</button>
+</form>
         </div>
 
 </section>
@@ -948,13 +948,13 @@
                     <p class="Mon">Графік роботи:<br>Пн-Пт 11:00-19:00</p>
                     <p class="insta">Слідкуйте за нами<br> в соцмережах</p>
                 </div>
-                <form class="contact-form">
-                    <input type="text" placeholder="Ім'я*" required>
-                    <input type="tel" placeholder="Ваш номер*" required>
-                    <input type="url" placeholder="Посилання на сайт*">
-                    <textarea placeholder="Опишіть ваш запит"></textarea>
-                    <button type="submit" class="btn-white">ВІДПРАВИТИ</button>
-                </form>
+<form class="contact-form" method="POST">
+    <input type="text" name="name" placeholder="Ім'я*" required>
+    <input type="tel" name="phone" placeholder="Ваш номер*" required>
+    <input type="url" name="link" placeholder="Посилання на сайт*">
+    <textarea name="comment" placeholder="Опишіть ваш запит"></textarea>
+    <button type="submit" class="btn-white">ВІДПРАВИТИ</button>
+</form>
             </div>
             <footer class="footer">
                 <p>info@ludi.digital</p>
