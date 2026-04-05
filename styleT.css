@@ -1,4 +1,3 @@
-/* Обнуление и базовые стили */
 * {
     margin: 0;
     padding: 0;
@@ -25,16 +24,11 @@
 }
 
 body {
-    /* Ваша новая строка: */
     background-image: url('img/case-bg.jpg'); 
-    
-    /* Дополнительные настройки, чтобы фото стояло красиво: */
-    background-size: cover;        /* Растягивает фото на весь экран */
-    background-position: center;   /* Центрирует изображение */
-    background-attachment: fixed;  /* Фото не будет прокручиваться */
-    background-repeat: no-repeat;  /* Чтобы картинка не дублировалась плиткой */
-    
-    /* Остальное оставляем как было */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     background-color: #000; 
     color: #fff;
     font-family: 'Inter', Arial, sans-serif;
@@ -49,7 +43,6 @@ body {
     padding: 20px;
 }
 
-/* Заголовки */
 .main-title {
     font-family: 'Stolzl';
     font-size: 60px;
@@ -64,7 +57,7 @@ body {
 }
 
 .orange-text {
-    color: #007e0a; /* Яркий оранжевый как на скрине */
+    color: #007e0a;
     padding-left: 150px;
     padding-bottom: 10px;
 }
@@ -75,27 +68,21 @@ body {
     font-size: 54px;
 }
 
-/* Кнопка */
 .btn-home {
     display: inline-block;
-    
-    /* Увеличиваем ширину и высоту за счет внутренних отступов */
     padding: 18px 45px; 
-    
-    /* Минимальная ширина, чтобы кнопка не схлопывалась, если текст короткий */
     min-width: 200px; 
-    
-    border: 2px solid #0c9600; /* Сделал рамку чуть толще (2px), чтобы она не терялась */
+    border: 2px solid #0c9600;
     background: transparent;
     
     color: #FFFFFF;
     text-decoration: none;
-    text-transform: uppercase; /* Капс дает ощущение «эпичности» */
+    text-transform: uppercase;
     
-    font-weight: 500;          /* Максимально жирный шрифт */
-    font-size: 18px;           /* Крупный, читабельный размер */
+    font-weight: 500;
+    font-size: 18px;
     line-height: 1;
-    letter-spacing: 2px;       /* Растянем буквы для стиля */
+    letter-spacing: 2px;
     text-align: center;
     
     transition: all 0.3s ease;
@@ -111,7 +98,6 @@ body {
     background-color: #129c00;
 }
 
-/* Текст соцсетей */
 .social-row {
     display: inline-flex;
     align-items: center;
@@ -139,7 +125,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Адаптивность для мобилок */
 @media (max-width: 768px) {
     .main-title {
         font-size: 32px;

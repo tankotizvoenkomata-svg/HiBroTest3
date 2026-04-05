@@ -7,7 +7,7 @@ if ($data) {
     $link    = !empty($data['link'])  ? strip_tags($data['link'])  : 'Не вказано';
     $comment = !empty($data['comment']) ? strip_tags($data['comment']) : 'Без коментаря';
 
-    // Формируем текст сообщения для Telegram
+    // Текст сповіщення в Telegram
     $tg_msg = "🔔 <b>Нова заявка!</b>\n";
     $tg_msg .= "👤 Ім'я: $name\n";
     $tg_msg .= "📞 Телефон: $phone\n";
@@ -17,7 +17,7 @@ if ($data) {
         $tg_msg .= "📝 Запит: $comment";
     }
 
-    // Отправка в TG (используем parse_mode=HTML для жирного шрифта)
+    // Відправка в TG
     $token = getenv('TG_TOKEN');
     $chat_id = getenv('TG_CHAT_ID');
     
@@ -26,7 +26,6 @@ if ($data) {
         file_get_contents($url);
     }
 
-    // ... блок с Resend оставляем без изменений, он написан верно ...
 
     echo json_encode(["status" => "success"]);
 } else {
