@@ -270,53 +270,69 @@ document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('fixedModal');
     const openBtn = document.getElementById('openModalBtn');
     const closeBtn = document.getElementById('closeModalBtn');
-    const form = document.getElementById('modalForm');
-
-    // Відкриття
-    openBtn.onclick = function() {
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    };
-
-    // Закриття
-    closeBtn.onclick = closeModal;
-    window.onclick = function(e) { if (e.target === modal) closeModal(); };
-
+    
+    // Функция закрытия (Ваша без изменений)
     function closeModal() {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     }
 
-    // ВІДПРАВКА НА SEND.PHP
-    form.onsubmit = async function(e) {
-        e.preventDefault();
-
-        // Формуємо об'єкт для JSON
-        const payload = {
-            name: form.elements['name'].value,
-            phone: form.elements['phone'].value,
-            link: form.elements['link'].value
+    // Открытие модалки (Ваша без изменений)
+    if (openBtn) {
+        openBtn.onclick = function() {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         };
+    }
 
-        try {
-            const response = await fetch('send.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
+    // Закрытие
+    if (closeBtn) closeBtn.onclick = closeModal;
+    window.onclick = function(e) { if (e.target === modal) closeModal(); };
 
-            if (response.ok) {
-                alert('Успішно відправлено!');
-                form.reset();
-                closeModal();
-            } else {
-                alert('Помилка при відправці.');
+    // --- УНИВЕРСАЛЬНАЯ ОТПРАВКА ДЛЯ ВСЕХ ФОРМ ---
+    
+    // Находим все формы на странице (модальную, в футере и с комментарием)
+    const allForms = document.querySelectorAll('form');
+
+    allForms.forEach(currentForm => {
+        currentForm.onsubmit = async function(e) {
+            e.preventDefault();
+
+            // Формируем объект для JSON. 
+            // Используем форму, которая сейчас отправляется (currentForm)
+            const payload = {
+                name: currentForm.elements['name'] ? currentForm.elements['name'].value : '',
+                phone: currentForm.elements['phone'] ? currentForm.elements['phone'].value : '',
+                link: currentForm.elements['link'] ? currentForm.elements['link'].value : '',
+                comment: currentForm.elements['comment'] ? currentForm.elements['comment'].value : ''
+            };
+
+            try {
+                const response = await fetch('send.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    alert('Успішно відправлено!');
+                    currentForm.reset(); // Очищаем именно ту форму, которую отправили
+                    
+                    // Если отправляли из модалки — закрываем её
+                    if (currentForm.id === 'modalForm') {
+                        closeModal();
+                    }
+                } else {
+                    alert('Помилка при відправці.');
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                alert('Зв’язок з сервером розірвано.');
             }
-        } catch (error) {
-            console.error('Fetch error:', error);
-            alert('Зв’язок з сервером розірвано.');
-        }
-    };
+        };
+    });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
