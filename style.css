@@ -1,4 +1,4 @@
-/* ШРИФТИ */
+/* ПІДКЛЮЧЕННЯ ШРИФТІВ */
 @font-face {
     font-family: 'Stolzl Book';
     src: url('fonts/Stolzl-Book.woff2') format('woff2'),
@@ -18,8 +18,11 @@
     scroll-behavior: smooth;
 }
 
-/* АДАПТИВНА ВЕРСТКА */
+/* ==========================================
+   --- АДАПТИВНА ВЕРСТКА (RESPONSIVE) ---
+   ========================================== */
 
+/* 1. Планшети та невеликі ноутбуки (до 1024px) */
 @media (max-width: 1024px) {
     .container, .container-contacts {
         max-width: 90%;
@@ -27,24 +30,25 @@
     }
 
     .hero h1 {
-        font-size: 50px;
+        font-size: 50px; /* Трохи зменшуємо головний заголовок */
     }
 
     .cases-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки замість 3 */
     }
 }
 
+/* 2. Планшети вертикальні (до 768px) */
 @media (max-width: 768px) {
     .header {
-        flex-direction: column;
+        flex-direction: column; /* Лого, меню і кнопка стають один під одним */
         gap: 20px;
         padding: 20px;
     }
 
     .nav {
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: wrap; /* Меню в два ряди, якщо не влізе */
         justify-content: center;
         gap: 15px;
     }
@@ -54,21 +58,21 @@
     }
 
     .hero-stats {
-        flex-direction: column;
+        flex-direction: column; /* Статистика в стовпчик */
         align-items: center;
         gap: 30px;
     }
 
     .cases-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Кейси в одну колонку */
     }
 
     .work-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Етапи роботи в одну колонку */
     }
 
     .contact-flex {
-        flex-direction: column;
+        flex-direction: column; /* Форма під текстом */
         gap: 40px;
     }
 
@@ -77,9 +81,10 @@
     }
 }
 
+/* 3. Мобільні телефони (до 480px) */
 @media (max-width: 480px) {
     .hero h1 {
-        font-size: 32px;
+        font-size: 32px; /* Компактний шрифт для мобілок */
         line-height: 1.2;
     }
 
@@ -88,16 +93,16 @@
     }
 
     .nav a {
-        font-size: 12px;
+        font-size: 12px; /* Дрібніше меню */
     }
 
     .btn-contact {
-        width: 100%;
+        width: 100%; /* Кнопка на всю ширину */
         text-align: center;
     }
 
     .case-card img {
-        height: auto;
+        height: auto; /* Щоб картинки не сплющувались */
     }
 
     .modal-content {
@@ -112,8 +117,9 @@
     }
 }
 
+/* Додаткове виправлення для слайдера на мобільних */
 .slider-container {
-    overflow: hidden;
+    overflow: hidden; /* Щоб нічого не вилазило за межі екрана */
 }
 
 /* ЗАГАЛЬНІ НАЛАШТУВАННЯ */
@@ -148,10 +154,12 @@ body {
     animation: flyFromCenter 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Первая строка появляется без задержки */
 .main-title .line-1 {
     animation-delay: 0s;
 }
 
+/* Вторая строка (це люди) вылетает с задержкой в 0.3 секунды */
 .main-title .highlight {
     animation-delay: 0.5s;
 }
@@ -177,26 +185,28 @@ body {
 .contact-title,
 .contact-info h2 {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(40px); /* Сдвиг вниз */
     transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 }
 
 .title-line.top {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(40px); /* Сдвиг вниз */
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
+/* Скрываем ТОЛЬКО заголовки h2 перед началом анимации */
 .main-title-top, 
 .main-title-bottom {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(40px); /* или scale(0.3), смотря какую анимацию ты выбрал */
     transition: opacity 1.5s ease-out, transform 1.5s ease-out;
 }
 
+/* 2. Класс, который скрипт добавит при прокрутке */
 .fade-in-visible {
     opacity: 1 !important;
-    transform: translateY(0) !important;
+    transform: translateY(0) !important; /* Возвращаем на место */
 }
 
 .nav a {
@@ -219,7 +229,7 @@ body {
     height: 44px;
     background: transparent;
     border: 1px solid #0D890D;
-    border-radius: 1px;
+    border-radius: 6px;
     color: #fff;
     font-family: 'Stolzl', sans-serif;
     font-size: 16px;
@@ -253,7 +263,7 @@ body {
     background-image: url("img/case-bg.jpg");
     padding: 40px;
     width: 90%;
-    height: 550px;
+    height: 450px;
     max-width: 600px;
     position: relative;
     color: #fff;
@@ -279,8 +289,7 @@ body {
     text-transform: none;
     letter-spacing: 1px;
     font-family: 'Stolzl', sans-serif;
-    padding-left: 40px;
-    padding-bottom: 40px;
+    padding-left: 10px;
 }
 
 .modal-input {
@@ -288,7 +297,7 @@ body {
     background: transparent;
     border: none;
     border-bottom: 1px solid #444;
-    padding: 20px 0;
+    padding: 12px 0;
     margin-bottom: 15px;
     color: #fff;
     outline: none;
@@ -308,6 +317,18 @@ body {
     font-family: 'Stolzl', sans-serif;
     background: #fff;
     color: #000;
+    border: none;
+    padding: 20px 30px;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-submit-modal:hover {
+    font-family: 'Stolzl', sans-serif;
+    background: #121212;
+    color: #fff;
     border: none;
     padding: 20px 30px;
     font-weight: bold;
@@ -351,7 +372,7 @@ body {
 .highlight {
     font-family: "Stolzl", sans-serif;
     color: #0D890D;
-    font-size: 180px;
+    font-size: 180px; /* Великий розмір для акценту */
     font-weight: 900;
     margin-left: 600px;
     display: block;
@@ -404,6 +425,13 @@ body {
 }
 
 /* ХОТСПОТИ */
+
+.hotspot:hover {
+    transform: translate(-50%, -50%) scale(1.1); 
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
 .hotspot {
     position: absolute;
     width: 10px;
@@ -412,27 +440,46 @@ body {
     border-radius: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
-    font-family: "Stolzl Book", sans-serif;
-    font-weight: 600;
+    font-weight: 700;
     text-align: center;
+    transition: transform 0.2s ease-in-out; 
 }
 
 .tooltip {
     visibility: hidden;
     position: absolute;
-    bottom: 25px;
+    top: 20px; 
     left: 50%;
     transform: translateX(-50%);
     background: rgba(34, 34, 34, 0.95);
     color: #fff;
     padding: 8px 12px;
     border-radius: 6px;
-    font-size: 14px;
+    font-family: "Stolzl", sans-serif;
+    font-weight: 700;
+    font-size: 15.6px;
     white-space: nowrap;
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    text-align: center;
+    z-index: 11;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.hotspot:hover .tooltip { visibility: visible; }
+
+.hotspot:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(5px); 
+}
+
+.tooltip span {
+    display: block;
+    font-family: "Stolzl Book", sans-serif;
+    font-weight: 400;
+    color: #28a745;
+    font-size: 14px;
+}
 
 /* НИЖНІЙ ТЕКСТ */
 .hero-bottom-info {
@@ -479,7 +526,7 @@ body {
 
 /* Секція Напрямків */
 .directions {
-    background-color: #0D890D;
+    background-color: #0D890D; /* Помаранчевий колір з картинки */
     padding: 100px 50px;
     color: #fff;
     min-height: 100vh;
@@ -506,49 +553,53 @@ body {
 
 /* Сітка іконок */
 .experience-section {
-  background-color: #0D890D;
+  background-color: #0D890D; /* Сохраняем ваш цвет фона */
   background-image: url('img/Group-406-e1673364338680.jpg');
   background-size: cover;
   background-position: center;
-  padding: 80px 20px;
+  padding: 80px 20px; /* Немного увеличил отступ сверху */
   color: #fff;
   font-family: "Stolzl", Sans-serif;
   box-sizing: border-box;
 }
 
 .experience-section .container {
-  max-width: 1200px;
+  max-width: 1200px; /* Чуть расширил контейнер */
   margin: 0 auto;
 }
 
+/* === ИСПРАВЛЕННЫЙ БЛОК ЗАГОЛОВКОВ (Desktop) === */
 .header-block {
     width: 100%;
     margin-bottom: 60px;
 }
 
+/* Верхняя линия: subtitle слева, Напрямки справа */
 .header-top-row {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: flex-end; /* Выравнивание по нижней линии шрифта */
     width: 100%;
-    margin-bottom: 5px;
+    margin-bottom: 5px; /* Минимальный зазор между строками заголовка */
 }
 
+/* Настройка маленького текста */
 .subtitle {
     opacity: 1;
     transform: none;
     font-family: "Stolzl book", Sans-serif;
     font-size: 18px;
     line-height: 1.4;
-    color: #000;
+    color: #fff;
     margin: 0;
     text-align: left;
 }
 
+/* Общие стили для обеих частей большого заголовка */
 .main-title-top, 
 .main-title-bottom {
     font-family: "Stolzl", Sans-serif;
-    font-size: 72px;
+    font-size: 72px; /* Твой размер из файла */
     font-weight: 900;
     line-height: 1;
     margin: 0;
@@ -556,11 +607,13 @@ body {
     text-align: right;
 }
 
+/* Нижняя часть заголовка просто прижимается вправо */
 .main-title-bottom {
     width: 100%;
     display: block;
 }
 
+/* --- Адаптив для мобилок (чтобы не сломалось) --- */
 @media (max-width: 768px) {
     .header-top-row {
         flex-direction: column;
@@ -580,6 +633,8 @@ body {
     }
 }
 
+/* === ОСТАЛЬНЫЕ СТИЛИ (СЕТКА) ОСТАЮТСЯ ВАШИМИ === */
+/* Сетка (4 колонки) */
 .experience-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -587,6 +642,7 @@ body {
   text-align: center;
 }
 
+/* Карточка элемента */
 .grid-item {
   display: flex;
   flex-direction: column;
@@ -623,11 +679,12 @@ body {
   color: #fff;
 }
 
-/* АДАПТИВНІСТЬ */
+/* === АДАПТИВНОСТЬ (Mobile) === */
 @media (max-width: 768px) {
+  /* ВОЗВРАЩАЕМ ЗАГОЛОВКИ В КОЛОНКУ И ЦЕНТРИРУЕМ НА МОБИЛЕ */
   .header-block {
-    display: block;
-    text-align: center;
+    display: block; /* Выключаем Flex */
+    text-align: center; /* Центрируем все */
     margin-bottom: 40px;
   }
   
@@ -638,8 +695,8 @@ body {
   }
 
   .main-title {
-    font-size: 32px;
-    text-align: center;
+    font-size: 32px; /* Чуть увеличил для читаемости, было 24 */
+    text-align: center; /* Центрируем крупный текст */
   }
 
   .experience-grid {
@@ -662,15 +719,15 @@ body {
     height: 60px;
   }
 }
-
+/* ============================================================ */
 
 .services-section {
     background-image: url("img/image-18-Traced.svg");
-    background-color: #fff;
-    padding: 60px 20px;
-    color: #000;
-    font-family: 'Montserrat', sans-serif;
-    text-align: right;
+    background-color: #fff; /* Белый фон */
+    padding: 60px 20px; /* Отступы сверху и снизу */
+    color: #000; /* Глобальный цвет текста */
+    font-family: 'Montserrat', sans-serif; /* Подключи этот шрифт для максимальной похожести */
+    text-align: right; /* Глобальное выравнивание по правому краю для заголовка */
 }
 
 .services-section .container {
@@ -678,36 +735,41 @@ body {
   margin: 0 auto;
 }
 
-/* СЕКЦІЯ ПОСЛУГ */
+/* =========================================
+   СЕКЦІЯ ПОСЛУГ (Східчастий заголовок)
+========================================= */
 .services-section {
     padding: 80px 0;
-    background-color: #fff;
+    background-color: #fff; /* Білий фон секції */
 }
 
+/* Обертка для заголовка */
 .staggered-title-wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Ставимо блоки один під одним */
     width: 100%;
     margin-bottom: 60px;
-    gap: 10px;
+    gap: 10px; /* Відстань між зеленим і чорним текстом */
 }
 
-.cases_title {
+/* Зелений текст (притиснутий вправо) */
+.cases_title {/* Притискає блок до правого краю */
     text-align: left;
-    color: #0D890D;
+    color: #0D890D;       /* Твій зелений колір */
     font-family: 'Stolzl', sans-serif;
-    font-size: 64px;
+    font-size: 64px;      /* Розмір під макет */
     font-weight: 900;
     line-height: 1.1;
     margin: 0;
 }
 
+/* Чорний текст (притиснутий вліво) */
 .title-black.left-align {
-    align-self: flex-start;
-    text-align: left;
+    align-self: flex-start; /* Притискає блок до лівого краю */
+    text-align: left;       /* Вирівнює сам текст вліво */
     color: #000;
     font-family: 'Stolzl', sans-serif;
-    font-size: 55px;
+    font-size: 55px;        /* Чорний текст зазвичай трохи менший, підкоригуй за потреби */
     font-weight: 900;
     line-height: 1.1;
     margin: 0;
@@ -723,7 +785,7 @@ body {
     margin: 0;
 }
 
-/* Адаптивність */
+/* --- Адаптивність для планшетів та мобільних --- */
 @media (max-width: 1024px) {
     .title-green.right-align { font-size: 48px; }
     .title-black.left-align { font-size: 36px; }
@@ -731,27 +793,28 @@ body {
 
 @media (max-width: 768px) {
     .staggered-title-wrapper {
-        align-items: center;
+        align-items: center; /* По центру на телефонах */
         gap: 20px;
     }
     
     .title-green.right-align, 
     .title-black.left-align {
-        align-self: center;
+        align-self: center; /* Скидаємо вирівнювання по краях */
         text-align: center;
         font-size: 32px;
     }
 }
 
-/* СІТКА ПОСЛУГ */
+/* === СЕТКА УСЛУГ (Desktop) === */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
   text-align: left;
+  align-items: stretch;
 }
 
-/* КАРТКИ ПОСЛУГ */
+/* === КАРТОЧКА УСЛУГИ === */
 .service-card {
   display: flex;
   flex-direction: column;
@@ -759,12 +822,13 @@ body {
   position: relative;
 }
 
-/* ІКОНКИ */
+/* Настройка иконок */
 .service-icon {
   width: 85px;
   height: 80px;
   object-fit: contain;
   margin-bottom: 20px;
+  flex-shrink: 0;
 }
 
 .computer-icon {
@@ -772,31 +836,39 @@ body {
   height: 80px;
   object-fit: contain;
   margin-bottom: 20px;
+  flex-shrink: 0;
 }
 
+/* Разделительная зеленая линия */
 .divider-line-serv {
   width: 100%;
   height: 3px;
   background-color: #0D890D;
   margin-bottom: 20px;
+  flex-shrink: 0;
 }
 
+/* Название услуги */
 .service-title {
   font-family: "Stolzl", Sans-serif;
   font-size: 26px;
-  font-weight: 800; /* Жирный */
+  font-weight: 800;
   color: #000;
   margin-bottom: 15px;
+  flex-shrink: 0;
 }
 
+/* Описание услуги */
 .service-description {
   font-family: "Stolzl Book", Sans-serif;
   font-size: 14px;
   color: #000;
   margin-bottom: 25px;
   line-height: 1.5;
+  flex: 1;
 }
 
+/* Кнопка с зеленой рамкой */
 .service-button {
   display: inline-block;
   border: 2px solid #0D890D;
@@ -807,15 +879,19 @@ body {
   padding: 12px 24px;
   transition: background 0.3s, color 0.3s;
   font-family: "Stolzl", Sans-serif;
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
+/* Эффект при наведении на кнопку */
 .service-button:hover {
   background-color: #0D890D;
   color: #fff;
 }
 
-/* АДАПТИВНІСТЬ */
+/* === АДАПТИВНОСТЬ (Mobile) === */
 @media (max-width: 992px) {
+  /* 2 колонки на планшетах */
   .services-grid {
     grid-template-columns: repeat(2, 1fr); 
     gap: 30px;
@@ -823,26 +899,28 @@ body {
 }
 
 @media (max-width: 768px) {
+  /* Переключаем всё в колонку */
   .services-section {
-    text-align: center;
+    text-align: center; /* Центрируем заголовок */
   }
 
   .services-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* 1 колонка на мобиле */
     gap: 20px;
-    text-align: center;
+    text-align: center; /* Центрируем текст внутри карточек */
   }
 
   .service-card {
-    align-items: center;
+    align-items: center; /* Центрируем все по вертикали */
   }
 
   .header-line-1, .header-line-2 {
-    font-size: 24px;
+    font-size: 24px; /* Уменьшаем шрифт заголовка */
   }
 }
 
 /* Секція Про Нас */
+/* === СЕКЦИЯ ABOUT === */
 .about {
     padding-top: 100px;
     background-image: url('img/Group-409.jpg');
@@ -851,19 +929,20 @@ body {
     background-repeat: no-repeat; 
     color: #fff;
     overflow: hidden;
-    position: relative;
+    position: relative; /* Полезно, если потом захочешь добавить затемнение поверх фона */
     padding-bottom: 50px;
 }
 
 .about-title {
     text-align: center;
-    font-size: 72px;
+    font-size: 72px; /* Размер подгони под свой макет */
     text-transform: none;
     font-weight: 900;
     margin-bottom: 40px;
-    font-family: 'Stolzl', sans-serif;
+    font-family: 'Stolzl', sans-serif; /* Встановлено Stolzl за замовчуванням */
 }
 
+/* Градиент для слова Digital (используем твой фирменный оранжевый) */
 .about-title span {
     background:#0D890D;
     -webkit-background-clip: text;
@@ -872,28 +951,32 @@ body {
     font-family: "Stolzl", Sans-serif;
 }
 
+/* Контейнер для 3-х колонок */
 .about-content {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; /* Центрируем по вертикали */
     gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
+/* Боковые колонки с текстом */
 .about-column {
     display: flex;
     flex-direction: column;
-    gap: 50px;
-    flex: 1;
+    gap: 50px; /* Расстояние между пунктами */
+    flex: 1; /* Колонки занимают равное место */
     z-index: 2;
 }
 
+/* Левая колонка - текст прижат вправо */
 .side-left {
     text-align: right;
     align-items: flex-end;
 }
 
+/* Правая колонка - текст прижат влево */
 .side-right {
     text-align: left;
     align-items: flex-start;
@@ -901,7 +984,7 @@ body {
 
 /* Отдельный пункт */
 .about-item {
-    max-width: 280px;
+    max-width: 280px; /* Ограничиваем ширину, чтобы текст шел в столбик */
     position: relative;
     text-align: left;
     color: #B0B0B0;
@@ -932,11 +1015,12 @@ body {
     font-family: "Stolzl", Sans-serif;
 }
 
+/* --- Линии, указывающие на картинку (по желанию) --- */
 .side-left .about-item::after {
     content: '';
     position: absolute;
     top: 12px;
-    right: -50px;
+    right: -50px; /* Линия выходит вправо */
     width: 30px;
     height: 1px;
     background-color: rgba(255, 255, 255, 0.2);
@@ -946,14 +1030,15 @@ body {
     content: '';
     position: absolute;
     top: 12px;
-    left: -50px;
+    left: -50px; /* Линия выходит влево */
     width: 30px;
     height: 1px;
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+/* Центральное фото */
 .about-portrait {
-    flex: 1.2;
+    flex: 1.2; /* Фото занимает чуть больше места, чем текст */
     display: flex;
     justify-content: center;
     position: relative;
@@ -962,11 +1047,14 @@ body {
 
 .about-portrait img {
     width: 100%;
-    max-width: 450px;
+    max-width: 450px; /* Максимальный размер фото */
     height: auto;
     object-fit: contain;
+    /* Легкое свечение сзади картинки, если нужно:
+    filter: drop-shadow(0 0 40px rgba(255, 94, 0, 0.15)); */
 }
 
+/* Логотипы партнеров */
 .partner-logos {
     display: flex;
     gap: 20px;
@@ -979,17 +1067,18 @@ body {
     object-fit: contain;
 }
 
-/* АДАПТИВНІСТЬ */
+/* === АДАПТИВНОСТЬ (МОБИЛЬНАЯ ВЕРСИЯ) === */
 @media (max-width: 992px) {
     .about-content {
-        flex-direction: column;
+        flex-direction: column; /* Выстраиваем всё в один столбец */
     }
     
     .about-portrait {
-        order: -1;
+        order: -1; /* Поднимаем фото наверх */
         margin-bottom: 40px;
     }
 
+    /* На мобилке всё центрируем */
     .side-left, .side-right {
         text-align: center;
         align-items: center;
@@ -1000,6 +1089,7 @@ body {
         text-align: center;
     }
 
+    /* Убираем боковые линии на мобилках */
     .side-left .about-item::after,
     .side-right .about-item::after {
         display: none; 
@@ -1062,12 +1152,12 @@ body {
 
 .achievements-title span {
     font-family: "Stolzl", Sans-serif;
-    color: #0D890D;
+    color: #0D890D; /* Помаранчевий колір */
 }
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* 3 колонки */
     gap: 60px 100px;
 }
 
@@ -1084,17 +1174,18 @@ body {
     margin-bottom: 20px;
     font-family: "Stolzl", Sans-serif;
 
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    white-space: nowrap;
+    /* ДОДАЄМО ЦЕ: */
+    display: flex;            /* Робимо внутрішній флекс */
+    align-items: baseline;    /* Вирівнюємо слово по нижній лінії цифр */
+    gap: 10px;                /* Відступ між цифрою та словом */
+    white-space: nowrap;      /* ЗАБОРОНЯЄМО перенос на новий рядок */
 }
 
 .stat-label {
-    font-size: 15px;
+    font-size: 15px;         /* Додав "px", без нього шрифт не зміниться */
     font-weight: 400;
     max-width: 300px;
-    line-height: 1.2;
+    line-height: 1.2;        /* Трохи збільшив, щоб текст не злипався (було 1) */
     font-family: "Stolzl Book", Sans-serif;
 }
 
@@ -1104,7 +1195,7 @@ body {
         grid-template-columns: repeat(2, 1fr);
     }
     .stat-value {
-        font-size: 48px;
+        font-size: 48px; /* Зменшуємо на середніх екранах */
     }
 }
 
@@ -1125,10 +1216,11 @@ body {
 }
 
 .cases-main-container {
-    background: url('img/case-bg.png') center center / cover no-repeat;
+    background: url('img/case-bg.png') center center / cover no-repeat; /* Общий фон секции */
     background-size: 1700px;
 }
 
+/* Убедись, что стрелки имеют z-index выше, чем у градиента */
 
 .cases-main-title {
     font-family: 'Stolzl', sans-serif;
@@ -1151,6 +1243,7 @@ body {
     display: inline;
 }
 
+/* Общий контейнер, чтобы всё было по центру */
 .slider-outer-container {
     display: flex;
     flex-direction: column;
@@ -1158,25 +1251,28 @@ body {
     width: 100%;
 }
 
+/* ОСНОВНОЙ БЛОК: 909px на 407px */
+/* ВЕСЬ БЛОК КЕЙСІВ (909x407) */
 .cases-viewport {
     width: 1009px;
     height: auto;
     height: 547px;
-    overflow: hidden;
-    background-color: transparent;
-    border-radius: 0;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    overflow: hidden; /* Ховаємо те, що виходить за межі */
+    background-color: transparent; /* Робимо прозорим, щоб бачити фон секції в пропусках */
+    border-radius: 0; /* Прибираємо закруглення тут, воно буде на самих картках */
+    user-select: none;           /* Стандарт */
+    -webkit-user-select: none;   /* Safari */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* IE/Edge */
     
+    /* Убираем возможность перетаскивать картинки как файлы */
     -webkit-user-drag: none;
 }
 
 /* ТРЕК СЛАЙДЕРА */
 .cases-track {
     display: flex;
-    align-items: stretch;
+    align-items: stretch; /* Важливо: щоб всі слайди мали однакову висоту в межах одного ряду */
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -1184,12 +1280,15 @@ body {
 .case-card {
     flex: 0 0 1009px;
     width: 1009px;
+    /* Висота залежить від контенту */
     height: auto; 
+    /* Мінімальна висота, щоб порожні блоки не схлопувалися */
     min-height: 400px; 
     margin-right: 40px;
     background-image: url("img/case-bg.jpg");
     display: flex;
     overflow: hidden;
+    /* Це важливо для вирівнювання внутрішніх блоків */
     align-items: stretch; 
     user-select: none;
     -webkit-user-select: none;
@@ -1197,15 +1296,18 @@ body {
 
 .case-card-content {
     display: flex;
-    width: 100%;
+    width: 120%;
     height: 100%;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between; /* Распределяет блоки по краям */
     align-items: stretch;
 }
 
+/* ============================ */
+/* ТЕКСТОВА ЧАСТИНА (ЗЛІВА)     */
+/* ============================ */
 .case-text {
-    flex: 0 0 40%;
+    flex: 0 0 40%; /* Не растет, не сжимается, строго 40% */
     width: 40%;
     padding: 60px;
     display: block;
@@ -1224,40 +1326,45 @@ body {
     white-space: nowrap;
 }
 
+/* Блоки з інформацією */
+/* Збільшуємо пробіл між інфо-блоками */
 .case-info-block {
-    margin-bottom: 34px;
+    margin-bottom: 34px; /* Було 12px, тепер простір більший */
 }
 
 .case-label {
-    font-family: 'Stolzl Book', sans-serif;
+    font-family: 'Stolzl Book', sans-serif; /* Примусово ставимо твій тонкий шрифт */
     font-weight: 400;
     font-size: 18px;
     color: #0D890D;
-    margin-bottom: 6px;
+    margin-bottom: 6px; /* Трохи більше повітря між лейблом і текстом */
 }
 
 .case-value {
-    font-family: 'Stolzl', sans-serif;
-    font-size: 17px;
+    font-family: 'Stolzl', sans-serif; /* Робимо основний текст також тонким */
+    font-size: 14px;
     color: #fff;
     line-height: 1.2;
-    width: 350px;
 }
 
+/* ============================ */
+/* КАРТИНКА (СПРАВА)            */
+/* ============================ */
 .case-image-wrapper {
-    flex: 0 0 60%;
+    flex: 0 0 60%; /* Строго 50% */
     width: 60%;
     display: flex;
-    align-items: flex-end; 
-    justify-content: flex-end; 
+    align-items: flex-end; /* Прижимает фото к низу */
+    justify-content: flex-end; /* Прижимает фото к правому краю */
     position: relative;
-    overflow: hidden; 
-    padding-bottom: 15px;
+    overflow: hidden; /* Чтобы части фото не вылетали за скругление */
+    padding-top: 120px;
 }
 
+/* САМА КАРТИНКА */
 .case-img {
     width: 150%;
-    height: 120%;
+    height: 120%; /* Чтобы картинка не стала выше самого блока с текстом */
     object-fit: contain;
     object-position: bottom right;
     display: block;
@@ -1268,16 +1375,22 @@ body {
     -moz-user-drag: none;
     -o-user-drag: none;
     
+    /* Делаем картинку "прозрачной" для событий мыши, 
+       чтобы mousedown срабатывал на обертке слайда */
     pointer-events: none;
 }
 
+/* НАВИГАЦИЯ ПО КРАЯМ БЛОКА */
 .slider-navigation {
     position: relative;
     z-index: 10;
+    
+    /* 1. РАСТЯГИВАЕМ НА ВСЮ ШИРИНУ */
     width: 100%; 
     left: 0;
     
-    padding-top: 65px;
+    /* 2. ПЛАВНЫЙ ГРАДИЕНТ */;
+    padding-top: 65px; /* Высота самого перехода */
     padding-bottom: 50px;
 
     background: linear-gradient(
@@ -1288,10 +1401,11 @@ body {
         rgba(0, 0, 0, 1) 100%
     );
 
+    /* 3. ЦЕНТРИРУЕМ СТРЕЛКИ ВНУТРИ */
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Сначала в центр */
     align-items: center;
-    gap: 800px;
+    gap: 800px; /* Расстояние между стрелками, чтобы они совпали с краями кейсов */
 }
 
 .case-arrow-btn {
@@ -1307,6 +1421,7 @@ body {
     transform: scale(1.03);
 }
 
+/* Адаптив для планшетов/телефонов */
 @media (max-width: 950px) {
     .cases-viewport, .case-card, .slider-navigation {
         width: 100%;
@@ -1326,7 +1441,7 @@ body {
     }
 }
 
-/* Секція Команди */
+/* Секція Команди (33 фахівці) */
 .team-info {
     background-color: #000;
     color: #fff;
@@ -1336,30 +1451,31 @@ body {
 .team-row {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: baseline; /* Выравнивание по базовой линии шрифта */
     width: 100%;
 }
 
 .team-row-top {
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Отступ между линиями */
 }
 
+/* Заголовок першого рівня (верхній) */
 .team-count, .team-subtitle {
     font-size: 64px;
     font-weight: 400;
     line-height: 0.9;
     margin: 0;
     font-family: 'Stolzl', sans-serif;
-    white-space: nowrap;
+    white-space: nowrap; /* Чтобы не переносились */
 }
 
 .team-subtitle {
-    color: #0D890D;
+    color: #0D890D; /* Зеленый цвет */
     font-family: 'Stolzl', sans-serif;
 }
 
 .team-text-right, .team-text-left {
-    max-width: 350px;
+    max-width: 350px; /* Ограничиваем ширину текста как на макете */
     font-size: 14px;
     color: #fff;
     font-family: 'Stolzl Book', sans-serif;
@@ -1373,16 +1489,18 @@ body {
     text-align: left;
 }
 
+/* Контейнер для всього, що нижче першого заголовка */
 .team-bottom-grid {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: flex-end; /* Вирівнювання по нижній лінії */
     gap: 30px;
 }
 
+/* Група: Зелене слово + опис проєкту */
 .team-left-group {
     display: flex;
-    align-items: baseline;
+    align-items: baseline; /* Текст опису буде на одній лінії з низом великого слова */
     gap: 40px;
     flex: 2;
 }
@@ -1398,11 +1516,12 @@ body {
 
 .team-description {
     font-size: 18px;
-    max-width: 320px;
+    max-width: 320px; /* Щоб текст опису красиво переносився */
     color: #ccc;
     line-height: 1.4;
 }
 
+/* Текст у правій частині екрана */
 .team-secondary-text {
     flex: 1;
     text-align: right;
@@ -1412,9 +1531,10 @@ body {
     font-size: 18px;
     line-height: 1.4;
     max-width: 250px;
-    margin-left: auto;
+    margin-left: auto; /* Притискаємо до правого краю */
 }
 
+/* Декоративна лінія */
 .divider-line {
     display: flex;
     align-items: center;
@@ -1425,7 +1545,7 @@ body {
 .line {
     flex: 1;
     height: 1px;
-    background-color: rgba(232, 76, 26, 0.3);
+    background-color: rgba(232, 76, 26, 0.3); /* Напівпрозора помаранчева лінія */
 }
 
 .arrow-left, .arrow-right {
@@ -1441,12 +1561,12 @@ body {
 
 @media (max-width: 768px) {
     .team-row {
-        flex-direction: column;
+        flex-direction: column; /* На мобилках всё в один столбик */
         align-items: flex-start;
         gap: 15px;
     }
     .team-row-bottom {
-        flex-direction: column-reverse;
+        flex-direction: column-reverse; /* Заголовок "фахівців" будет выше своего описания на мобилках */
     }
     .team-text-right {
         text-align: left;
@@ -1456,10 +1576,11 @@ body {
     }
 }
 
+/* Секція Лідери ринку */
 
 .partners-slider {
     background: url("img/Group-413.jpg") no-repeat center/cover;
-    padding: 50px 0;
+    padding: 50px 0; /* Укоротили слайдер (было 80px) */
     overflow: hidden;
     user-select: none; 
     -webkit-user-select: none;
@@ -1470,7 +1591,7 @@ body {
     flex-direction: column;
     width: 100%;
     max-width: 1000px; 
-    margin: 0 auto 40px auto;
+    margin: 0 auto 40px auto; /* Немного уменьшили отступ снизу */
     padding: 0 20px;
     box-sizing: border-box;
 }
@@ -1497,7 +1618,7 @@ body {
     margin: 0 auto;
     overflow: hidden;
     position: relative;
-    cursor: default;
+    cursor: default; /* Курсор-рука для понимания, что можно тащить */
 }
 
 .partners-track {
@@ -1507,6 +1628,7 @@ body {
 }
 
 .logo-item {
+    /* ЖЕСТКАЯ фиксация ровно 4 элементов */
     flex: 0 0 25%; 
     max-width: 25%; 
     width: 25%;
@@ -1515,7 +1637,7 @@ body {
     align-items: center;
     padding: 0 15px; 
     box-sizing: border-box;
-    height: 80px;
+    height: 80px; /* Ограничитель высоты ячейки */
 }
 
 .logo-item img {
@@ -1527,19 +1649,22 @@ body {
     -webkit-user-drag: none;
 }
 
+/* --- ЖЕСТКИЙ ЛИМИТ ДЛЯ LOB LOGO --- */
 .logo-item img[src*="Lob_logo"] {
-    width: 170px !important;
+    width: 170px !important; /* Строгая ширина */
     height: 95px !important; 
-    max-height: 45px !important;
+    max-height: 45px !important; /* Строгая высота */
     object-fit: contain;
 }
 
 .logo-item-lob {
+    /* Максимально увеличиваем */
     max-height: 110px; 
     width: auto;
     max-width: 200px;
     object-fit: contain;
     filter: none;
+    /* Запрещаем браузеру пытаться "тащить" саму картинку как файл */
     pointer-events: none; 
     -webkit-user-drag: none;
 }
@@ -1549,11 +1674,12 @@ body {
     transform: scale(1.1);
 }
 
+/* Пагінація (точки) */
 .partners-dots {
     display: flex;
     justify-content: center;
     gap: 8px;
-    margin-top: 30px;
+    margin-top: 30px; /* Чуть ближе к логотипам */
 }
 
 .partners-dots span {
@@ -1584,18 +1710,19 @@ body {
 }
 
 .benefits-title {
-    font-size: 60px;
-    font-weight: 900;
+    font-size: 72px;
+    font-weight: 700;
     text-align: center;
     margin-bottom: 80px;
     line-height: 1,5;
     text-transform: none;
     font-family: "Stolzl", Sans-serif;
     color: #000;
+    width: 1100px;
 }
 
 .benefits-title span {
-    color: #0D890D;
+    color: #0D890D; /* Помаранчевий акцент як на макеті */
     font-family: "Stolzl", Sans-serif;
     padding-left: 550px;
 }
@@ -1645,28 +1772,58 @@ body {
     .benefit-card p { font-size: 1.2rem; }
 }
 
-/* Фінальна секція */
+/* Фінальна секція з формою */
 .footer-contact {
     background-image: url('img/Rectangle-1110.jpg');
+    
+    /* 1. Уменьшаем общую высоту секции */
     height: 400px; 
+    
     background-repeat: no-repeat; 
+    
+    /* 2. background-size: 150% может сильно увеличивать картинку, 
+       лучше использовать cover, чтобы фото подстраивалось под новую высоту */
     background-size: cover; 
+    
     background-position: center;
+    
+    /* 3. Уменьшаем внутренние отступы (сверху 60px, снизу 40px) */
     padding: 60px 0 40px; 
+    
     color: #fff;
     
+    /* Чтобы контент внутри не вываливался, если текста много */
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 .contact-box {
     text-align: center;
+    /* Уменьшаем внешний отступ снизу, чтобы секция стала ниже */
     margin-bottom: 40px; 
+}
+
+.form-title {
+    font-family: "Stolzl", sans-serif;
+    font-weight: 700;
+    font-size: 62px; 
+    color: #ffffff;
+    line-height: 1.2;
+    display: inline-block;
+    margin-bottom: 50px;
+}
+
+.form-title span {
+    display: block;
+    color: #0D890D;
+    text-align: right;
+    padding-left: 450px;
 }
 
 .contact-form-order {
     max-width: 1500px;
     margin: 0 auto;
+    /* Центрируем содержимое внутри контейнера */
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -1674,14 +1831,14 @@ body {
 
 .form-inputs {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Центрируем инпуты по горизонтали */
     gap: 30px;
-    margin-bottom: 30px;
-    width: 100%;
+    margin-bottom: 30px;    /* Уменьшили отступ, чтобы поджать высоту */
+    width: 100%;            /* Растягиваем на всю доступную ширину */
 }
 
 .input-group {
-    flex: 0 1 auto;
+    flex: 0 1 auto;         /* Позволяем группе подстраиваться под контент */
     text-align: left;
     display: flex;
     flex-direction: column;
@@ -1692,9 +1849,10 @@ body {
     border: none;
     border-bottom: 1px solid rgb(190, 190, 190);
     
+    /* Вместо жесткого width используем max-width */
     width: 100%;            
-    max-width: 500px;
-    min-width: 300px;
+    max-width: 500px;       /* Теперь инпут не будет больше 500px, но сможет сужаться */
+    min-width: 300px;       /* Чтобы на мобилках не схлопнулся совсем */
     
     padding: 10px 0;
     color: #fff;
@@ -1716,8 +1874,8 @@ body {
 }
 
 .btn-submit {
-    display: block;
-    margin: 0 auto;
+    display: block;       /* Делаем кнопку блочной */
+    margin: 0 auto;      /* Центрируем её горизонтально */
     background-color: #fff;
     color: #000;
     border: none;
@@ -1785,12 +1943,17 @@ body {
     position: relative;
 }
 
+.work-steps .container {
+    max-width: 1300px;
+}
+
 .steps-header {
     position: relative;
     display: flex;
+    padding-top: 120px;
     justify-content: flex-end; 
-    align-items: flex-end;
-    min-height: 180px;
+    align-items: flex-end; /* Выровняли заголовок по низу */
+    min-height: 180px; /* Увеличил высоту, чтобы влезла большая птица */
     margin-bottom: 0; 
 }
 
@@ -1798,23 +1961,23 @@ body {
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 320px;
+    width: 420px;
     z-index: 10;
     pointer-events: none;
-    transform: translateX(-50%); 
-    transition: all 0.3s ease; 
+    transform: translateX(-40%);
+    transition: all 0.3s ease;
 }
 
 .bird-decor img {
     width: 100%;
-    height: auto;
+    height: auto; /* Высота подстроится пропорционально */
     display: block;
     transform: translateY(5%);
 }
 
 .steps-main-title {
-    padding-bottom: 30px;
-    font-size: 64px;
+    padding-bottom: 50px;
+    font-size: 72px; /* Чуть увеличил для веса */
     font-weight: 700;
     text-align: right;
     margin: 0;
@@ -1825,6 +1988,7 @@ body {
     color: #0D890D;
 }
 
+/* ТАБЛИЦА */
 .steps-table {
     border-top: 1px solid #000;
     position: relative;
@@ -1833,36 +1997,39 @@ body {
 
 .steps-row {
     display: grid;
-    grid-template-columns: 150px 1fr 1fr;
-    padding: 40px 0;
+    grid-template-columns: 200px 1.4fr 1.6fr;
+    padding: 60px 0;
     border-bottom: 1px solid #000000;
     align-items: start;
+    gap: 0 60px;
 }
 
 
 .step-number {
-    padding-left: 30px;
-    font-size: 28px;
+    padding-left: 0;
+    font-size: 32px;
+    margin-left: 30px;
     font-weight: 700;
     color: #0D890D;
     font-family: "Stolzl", Sans-serif;
 }
 
 .step-title {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 700;
-    padding-left: 20px;
+    padding-left: 0;
     font-family: "Stolzl", Sans-serif;
 }
 
 .step-details p {
-    font-size: 18px;
+    font-size: 20px;
     color: #343434;
     margin-bottom: 8px;
-    padding-left: 40px;
+    padding-left: 0;
     font-family: "Stolzl Book", Sans-serif;
 }
 
+/* Нумерація всередині етапів */
 .step-details li::before {
     content: counter(item) ". ";
     counter-increment: item;
@@ -1918,12 +2085,14 @@ body {
     padding: 0 20px;
 }
 
+/* Гнучка сітка для всього контенту */
 .contact-flex {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1.5fr 1fr; /* Ліва частина (заголовок + форма) ширша */
     gap: 0 80px;
 }
 
+/* Заголовок на всю ширину (займає обидві колонки зверху) */
 .contact-info h2 {
     grid-column: span 2;
     font-size: 72px;
@@ -1941,10 +2110,12 @@ body {
     font-family: "Stolzl", Sans-serif;
 }
 
+/* Контейнер-привид, щоб розділити h2 та p */
 .contact-info {
     display: contents; 
 }
 
+/* Тексти про офіс та графік (відправляємо в ПРАВУ колонку) */
 .contact-info {
     grid-column: 2;
     font-size: 28px;
@@ -1952,9 +2123,8 @@ body {
     margin-bottom: 15px;
     opacity: 0.9;
 
-} 
-
-.office {
+} /* Будемо раді побачити... */
+.office { /* Пн-Пт... */
     grid-column: 2;
     font-size: 28px;
     font-weight: 700;
@@ -1963,7 +2133,7 @@ body {
     font-family: "Stolzl", Sans-serif;
 }
 
-.Mon {
+.Mon { /* Пн-Пт... */
     grid-column: 2;
     font-size: 18px;
     font-weight: 400;
@@ -1983,8 +2153,9 @@ body {
     line-height: 1.5em;
 }
 
+/* "Налаштувати вам рекламу?" та "Залишайте заявку" (над формою ЗЛІВА) */
 .settings {
-    padding-left: 50px;
+    padding-left: 0;
     grid-column: 1;
     margin: 0;
     font-size: 28px;
@@ -1994,10 +2165,11 @@ body {
 }
 
 .left {
-    padding-left: 50px;
-    padding-top: 20px;
+    padding-left: 0;
+    padding-top: 12px;
     grid-column: 1;
     margin: 0px;
+    margin-bottom: 30px;
     font-size: 18px;
     font-weight: 400;
     font-family: "Stolzl Book", Sans-serif;
@@ -2007,10 +2179,11 @@ body {
 .contact-info p:nth-of-type(3) {
     font-size: 16px;
     font-weight: 400;
-    margin-bottom: 30px;
+    margin-bottom: 30px; /* Відступ перед полями вводу */
     opacity: 0.7;
 }
 
+/* Форма (ЗЛІВА під фразами про рекламу) */
 .contact-form {
     grid-column: 1;
     display: grid;
@@ -2019,6 +2192,7 @@ body {
 }
 
 
+/* Стиль полів */
 .contact-form input, 
 .contact-form textarea {
     background: transparent;
@@ -2039,10 +2213,27 @@ body {
     font-family: "Stolzl Book", Sans-serif;
 }
 
+/* Кнопка */
 .btn-white {
     grid-column: 1;
+    font-family: 'Stolzl', sans-serif;
     background-color: #fff;
     color: #000;
+    border: none;
+    padding: 20px 40px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 20px;
+    width: fit-content;
+    transition: all 0.3s ease;
+}
+
+.btn-white:hover {
+    grid-column: 1;
+    font-family: 'Stolzl', sans-serif;
+    background: #0D890D;
+    color: #fff;
     border: none;
     padding: 20px 40px;
     font-weight: 700;
@@ -2055,10 +2246,11 @@ body {
 /* Футер */
 .footer {
     grid-column: span 2;
-    margin-top: 100px;
-    padding-top: 40px;
+    margin-top: 60px;
+    padding-top: 30px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .footer p{
@@ -2087,109 +2279,29 @@ body {
     --gray: #f5f5f5;
 }
 
-* { 
-    margin: 0;
-    padding: 0; 
-    box-sizing: border-box; 
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-body { 
-    background-color: var(--black); 
-    color: var(--white); 
-    overflow-x: hidden; 
-}
+body { background-color: var(--black); color: var(--white); overflow-x: hidden; }
 
-.container { 
-    max-width: 1000px; 
-    margin: 0 auto; 
-    padding: 0 20px; 
-}
+.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
 
-.navbar { 
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 30px 50px; 
-}
+.navbar { display: flex; justify-content: space-between; align-items: center; padding: 30px 50px; }
+.logo { font-size: 24px; font-weight: 900; }
+.logo span { color: var(--orange); }
+.nav-links { display: flex; list-style: none; gap: 30px; }
+.nav-links a { color: #fff; text-decoration: none; font-size: 14px; }
+.btn-outline { border: 1px solid #333; padding: 10px 20px; color: #fff; text-decoration: none; border-radius: 5px; }
 
-.logo { 
-    font-size: 24px; 
-    font-weight: 900; 
-}
+.hero { height: 100vh; text-align: center; display: flex; flex-direction: column; }
+.hero h1 { font-size: 80px; margin-top: 50px; line-height: 1; }
+.highlight-green { color: var(--green); }
+.team-photo img { width: 100%; max-width: 1000px; margin-top: -50px; }
 
-.logo span { 
-    color: var(--orange);
-}
-
-.nav-links { 
-    display: flex; 
-    list-style: none; 
-    gap: 30px; 
-}
-
-.nav-links a { 
-    color: #fff; 
-    text-decoration: none; 
-    font-size: 14px; 
-}
-
-.btn-outline { 
-    border: 1px solid #333;
-    padding: 10px 20px; 
-    color: #fff; 
-    text-decoration: none; 
-    border-radius: 5px;
-}
-
-.hero { 
-    height: 100vh; 
-    text-align: center; 
-    display: flex; 
-    flex-direction: column;
-}
-
-.hero h1 { 
-    font-size: 80px;
-    margin-top: 50px;
-    line-height: 1;
-}
-
-.highlight-green { 
-    color: var(--green);
-}
-
-.team-photo img { 
-    width: 100%; 
-    max-width: 1000px; 
-    margin-top: -50px; 
-}
-
-.steps { 
-    background-color: var(--white); 
-    color: #000; 
-    padding: 100px 0; 
-}
-
-.parrot { 
-    width: 150px;
-}
-
-.step-row { 
-    display: grid; 
-    grid-template-columns: 150px 1fr 1fr; 
-    padding: 30px 0; 
-    border-bottom: 1px solid #ddd; 
-}
-
-.step-num { 
-    color: var(--orange); 
-    font-weight: 900; 
-}
-
-.step-name {
-    font-weight: 900;
-    font-size: 1.5rem; 
-}
+.steps { background-color: var(--white); color: #000; padding: 100px 0; }
+.parrot { width: 150px; }
+.step-row { display: grid; grid-template-columns: 150px 1fr 1fr; padding: 30px 0; border-bottom: 1px solid #ddd; }
+.step-num { color: var(--orange); font-weight: 900; }
+.step-name { font-weight: 900;  font-size: 1.5rem; }
 
 
 .hamburger-btn {
@@ -2555,6 +2667,7 @@ body {
     grid-column: span 2;
     margin-top: 60px;
     padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.12);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -2623,4 +2736,15 @@ body {
 @media (max-width: 992px) {
     .insta-row { grid-column: 1 !important; }
     .btn-white { width: 100% !important; }
+}
+
+.form-title {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+.form-title.fade-in-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
