@@ -64,10 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let slides = Array.from(document.querySelectorAll('.case-card'));
     const getSlideWidth = () => {
-        const vp = viewport ? viewport.offsetWidth : 1009;
-        return window.innerWidth <= 768 ? window.innerWidth - 32 : vp;
+    const vp = viewport ? viewport.offsetWidth : 1009;
+    return window.innerWidth <= 950 ? window.innerWidth - 40 : vp;
     };
-    const getGap = () => window.innerWidth <= 768 ? 16 : 40;
+    const getGap = () => window.innerWidth <= 950 ? 20 : 40;
     let gap = getGap();
     let slideWidth = getSlideWidth();
     let totalStep = slideWidth + gap;

@@ -1167,7 +1167,24 @@ body {
 }
 
 /* Адаптив для планшетов/телефонов */
-
+@media (max-width: 950px) {
+    .cases-viewport, .case-card, .slider-navigation {
+        width: 100%;
+        max-width: 600px;
+    }
+    .case-card-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .case-image-wrapper {
+        flex: 0 0 auto;
+        width: 100%;
+        height: 200px;
+    }
+    .case-arrow-btn {
+        width: 140px;
+    }
+}
 
 /* Секція Команди (33 фахівці) */
 .team-info {
@@ -2098,4 +2115,71 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
 .form-title.fade-in-visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+@media (max-width: 950px) {
+    .cases-viewport {
+        width: 100% !important;
+        max-width: 100vw !important;
+        height: auto !important;
+        min-height: 400px;
+        overflow: hidden !important;
+    }
+    .case-card-content {
+        flex-direction: column !important;
+        height: auto !important;
+        align-items: stretch;
+    }
+    .case-text {
+        flex: none !important;
+        width: 100% !important;
+        padding: 30px 24px 20px !important;
+        box-sizing: border-box;
+    }
+    .case-image-wrapper {
+        flex: none !important;
+        width: 100% !important;
+        height: 220px !important;
+        padding-top: 0 !important;
+        justify-content: center !important;
+        align-items: center !important;
+        overflow: hidden !important;
+    }
+    .case-img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        transform: none !important;
+    }
+    .cases-viewport { touch-action: pan-y; }
+}
+
+@media (min-width: 481px) {
+    .logo-item {
+        flex: 0 0 25% !important;
+        max-width: 25% !important;
+        width: 25% !important;
+    }
+    .logo-item img {
+        width: 180px !important;
+        max-height: 80px !important;
+    }
+}
+@media (max-width: 480px) {
+    .logo-item {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+        width: 50% !important;
+    }
+    .logo-item img {
+        width: 160px !important;
+        max-height: 70px !important;
+    }
+    .partners-viewport { height: 120px !important; }
+}
+@media (min-width: 1025px) {
+    .logo-item img {
+        width: 220px !important;
+        max-height: 90px !important;
+    }
 }

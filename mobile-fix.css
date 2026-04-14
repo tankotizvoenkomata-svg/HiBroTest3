@@ -326,8 +326,6 @@
   }
 }
 
-/* =======================================About Section=============================== */
-
 @media (max-width: 992px) {
     /* 1. ГЛАВНЫЙ КОНТЕЙНЕР (СЕТКА) */
     .about-content, 
@@ -538,24 +536,6 @@
     }
 }
 
-@media (max-width: 950px) {
-    .cases-viewport, .case-card, .slider-navigation {
-        width: 100%;
-        max-width: 600px;
-    }
-    .case-card-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    .case-image-wrapper {
-        flex: 0 0 auto;
-        width: 100%;
-        height: 200px;
-    }
-    .case-arrow-btn {
-        width: 140px;
-    }
-}
 
 /* =========================================Team Info Section ===============================*/
 
@@ -678,32 +658,22 @@
 
 /* =========================================Partners Section=================================================== */
 
-/* 2 logos per view instead of 4 */
-.logo-item {
-    flex: 0 0 50% !important;
-    max-width: 50% !important;
-    width: 50% !important;
-    height: 100px !important;
-}
-
-/* Normalise Lob_logo to match other logos */
-.logo-item img[src*="Lob_logo"] {
-    max-height: 55px !important;
-    height: auto !important;
-    width: auto !important;
-    max-width: 160px !important;
-    object-fit: contain !important;
-}
-
 /* Make partner viewport slightly taller for 2-logo view */
-.partners-viewport {
-    height: 130px !important;
-}
-
 @media (max-width: 768px) {
+    .logo-item {
+        flex: 0 0 50% !important;
+        width: 100px !important;
+        height: 100px !important;
+    }
+    .logo-item img[src*="Lob_logo"] {
+        max-height: 100px !important;
+        height: 100px !important;
+        width: 120px !important;
+        object-fit: contain !important;
+    }
     .partners-title { font-size: 1.8rem; }
     .logos-track { gap: 30px; flex-wrap: wrap; }
-    .logo-item img { height: 30px; }
+    .logo-item img { height: 100px; }
 }
 
 /* =======================================Benefits Section=============================== */
@@ -779,9 +749,6 @@
     .benefit-card p { font-size: 1.2rem; }
 }
 
-/* =======================================Order Form Section======================================================== */
-
-
 .footer-contact {
     height: auto !important;
     min-height: 300px !important;
@@ -854,117 +821,110 @@
 }
 
 
-/*======================================== Steps Section ==========================================*/
+/* ======================================== Steps Section ========================================== */
 
-@media (max-width: 1024px) {
-    /* Fix step grid for mid-size tablets */
+@media (min-width: 427px) {
     .steps-row {
-        grid-template-columns: 150px 1fr 1fr !important;
-        gap: 0 30px !important;
-        padding: 40px 0 !important;
+        display: grid !important;
+        /* Три колонки: номер, заголовок, описание */
+        grid-template-columns: 100px 1fr 1.5fr !important; 
+        gap: 20px 40px !important;
+        padding: 40px 20px !important;
+        align-items: center !important;
+        border-bottom: 1px solid #333 !important;
     }
+
     .step-number {
-        margin-left: 0 !important;
+        color: #2e7d32 !important; /* Ваш зеленый */
+        font-weight: 800 !important;
+        font-size: 18px !important;
+    }
+
+    .step-title {
+        font-weight: 800 !important;
+        font-size: 22px !important;
+        text-transform: uppercase !important;
+        color: #000 !important;
+    }
+
+    .step-details p {
+        font-size: 16px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 5px !important;
+    }
+    
+    .bird-decor {
+        width: 180px !important;
     }
 }
 
-@media (max-width: 768px) {
-    /* Show parrot again — positioned at top-right of the header */
-    .bird-decor {
-        display: block !important;
-        position: relative !important;
-        width: 130px !important;
-        transform: none !important;
-        left: auto !important;
-        bottom: auto !important;
-        flex-shrink: 0 !important;
-    }
-
-    .bird-decor img {
-        transform: none !important;
-        width: 100% !important;
-        height: auto !important;
-    }
-
-    .steps-header {
-        display: flex !important;
-        flex-direction: row !important;
-        justify-content: space-between !important;
-        align-items: flex-end !important;
-        padding: 20px 20px 0 20px !important;
-        min-height: 120px !important;
-    }
-
+/* МОБИЛЬНЫЕ УСТРОЙСТВА (426px и ниже) — ВСЁ В СТОЛБИК */
+@media (max-width: 426px) {
     .steps-main-title {
-        font-size: clamp(26px, 7.5vw, 40px) !important;
+        display: block !important;
+        font-size: clamp(28px, 8vw, 42px) !important;
         text-align: right !important;
-        padding-bottom: 16px !important;
-        flex: 1 !important;
+        font-weight: 800 !important;
+        color: #000000 !important;
+        padding: 40px 20px 20px 20px !important;
+        margin-top: 50px !important;
     }
 
-    /* Steps table rows become flex columns */
+    .steps-main-title span {
+        color: #2e7d32 !important;
+    }
+
     .steps-row {
         display: flex !important;
         flex-direction: column !important;
-        gap: 10px !important;
-        padding: 24px 20px !important;
         align-items: flex-start !important;
+        gap: 15px !important;
+        padding: 30px 20px !important;
+        border-bottom: 1px solid #333 !important;
     }
 
     .step-number {
+        color: #2e7d32 !important; 
+        font-weight: 800 !important;
+        font-size: 18px !important;
+    }
+
+    .step-title {
+        font-weight: 800 !important;
         font-size: 20px !important;
-        margin-left: 0 !important;
-        padding-left: 0 !important;
+        color: #000 !important;
+        text-transform: uppercase !important;
+    }
+
+    .step-details p {
+        font-size: 16px !important;
+        color: #333 !important;
+        line-height: 1.4 !important;
+    }
+
+    .bird-decor {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 140px !important;
+        z-index: 10 !important;
+    }
+}
+/* Корректировки для совсем маленьких экранов (480px и ниже) */
+@media (max-width: 480px) {
+    .bird-decor {
+        width: 110px !important;
+    }
+    
+    .steps-main-title {
+        font-size: 26px !important;
+        margin-top: 30px !important;
     }
 
     .step-title {
         font-size: 18px !important;
-        padding-left: 0 !important;
-    }
-
-    .step-details p {
-        font-size: 15px !important;
-        padding-left: 0 !important;
     }
 }
-
-@media (max-width: 480px) {
-    .bird-decor {
-        width: 100px !important;
-    }
-    .steps-main-title {
-        font-size: clamp(22px, 7vw, 30px) !important;
-    }
-}
-
-@media (max-width: 1024px) {
-    .bird-decor {
-        width: 200px; 
-        transform: translateY(3%);
-    }
-    .steps-main-title { font-size: 40px; }
-    .step-row {
-        grid-template-columns: 100px 1fr;
-    }
-    .step-details { grid-column: 1 / span 2; margin-top: 20px; }
-}
-
-@media (max-width: 768px) {
-    .step-row {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-    .bird-decor {
-        width: 150px;
-        transform: translateY(4%);
-    }
-    .steps-header {
-        min-height: 120px;
-    }
-}
-
 /* =======================================Footer Section===================================================== */
 
 @media (max-width: 992px) {
@@ -1303,3 +1263,235 @@
 
     .team-count, .team-subtitle { font-size: clamp(28px, 8.5vw, 40px) !important; }
 }
+
+.case-card-content {
+    width: 100% !important;
+}
+
+.cases-viewport {
+    width: 1009px !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+}
+
+.case-card {
+    flex: 0 0 1009px !important;
+    width: 1009px !important;
+    margin-right: 40px !important; 
+}
+
+@media (max-width: 950px) {
+    .cases-viewport {
+        width: calc(100vw - 40px) !important;
+    }
+
+    .case-card {
+        flex: 0 0 calc(100vw - 40px) !important;
+        width: calc(100vw - 40px) !important;
+        margin-right: 20px !important;
+        min-height: auto !important;
+    }
+
+    .case-card-content {
+        flex-direction: column !important;
+    }
+
+    .case-text {
+        width: 100% !important;
+        flex: none !important;
+        padding: 30px 20px 20px !important;
+    }
+
+    .case-image-wrapper {
+        width: 100% !important;
+        flex: none !important;
+        height: 250px !important; /* Высота блока под картинку */
+        padding: 0 20px !important; /* Небольшие отступы по бокам, чтобы не прилипало к краям */
+        justify-content: center !important;
+        align-items: flex-end !important; /* Прижимаем картинку к низу блока */
+    }
+
+    /* Сама картинка */
+    .case-img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important; /* ВАЖНО: заставляет картинку помещаться целиком */
+        object-position: center bottom !important; /* Центрируем и ставим на "пол" */
+        transform: none !important; /* Убираем все старые сдвиги, которые ломали отображение */
+    }
+
+    .slider-navigation {
+        width: 100% !important;
+        gap: 50vw !important; 
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+    }
+    
+    .case-arrow-btn {
+        width: clamp(60px, 15vw, 120px) !important;
+    }
+}
+
+.case-card-content {
+    width: 100% !important;
+}
+
+.cases-viewport {
+    width: 1009px !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+}
+
+.case-card {
+    flex: 0 0 1009px !important;
+    width: 1009px !important;
+    margin-right: 40px !important; 
+}
+
+@media (max-width: 468px) {
+    .cases-viewport {
+        width: calc(100vw - 40px) !important;
+    }
+
+    .case-card {
+        flex: 0 0 calc(100vw - 40px) !important;
+        width: calc(100vw - 40px) !important;
+        margin-right: 20px !important;
+        min-height: auto !important;
+    }
+
+    .case-card-content {
+        flex-direction: column !important;
+    }
+
+    .case-text {
+        width: 100% !important;
+        flex: none !important;
+        padding: 30px 20px 20px !important;
+    }
+
+    .case-image-wrapper {
+        width: 100% !important;
+        flex: none !important;
+        height: 250px !important; 
+        padding: 0 20px !important; 
+        justify-content: center !important;
+        align-items: flex-end !important; 
+    }
+
+    /* Сама картинка */
+    .case-img {
+        width: 125% !important;
+        height: 125% !important;
+        object-fit: contain !important; 
+        object-position: center bottom !important; 
+        transform: none !important;
+    }
+
+    .slider-navigation {
+        width: 100% !important;
+        gap: 50vw !important; 
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+    }
+    
+    .case-arrow-btn {
+        width: clamp(60px, 15vw, 120px) !important;
+    }
+}
+
+@media (max-width: 768px) and (min-width: 469px) {
+    .cases-viewport {
+        width: calc(100vw - 40px) !important;
+    }
+
+    .case-card {
+        flex: 0 0 calc(100vw - 40px) !important;
+        width: calc(100vw - 40px) !important;
+        margin-right: 20px !important;
+        min-height: auto !important;
+    }
+
+    .case-card-content {
+        width: 100% !important; 
+        flex-direction: row !important; 
+    }
+
+    .case-text {
+        width: 45% !important;
+        flex: 0 0 45% !important;
+        padding: 40px 30px !important; 
+    }
+
+    .case-image-wrapper {
+        width: 55% !important;
+        flex: 0 0 55% !important;
+        height: auto !important;
+        padding-top: 60px !important;
+    }
+
+    .case-img {
+        width: 150% !important;
+        height: 150% !important;
+        object-fit: contain !important; 
+        object-position: center bottom !important; 
+        transform: none !important; 
+    }
+
+    .slider-navigation {
+        width: 100% !important;
+        gap: 50vw !important; 
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+    }
+    
+    .case-arrow-btn {
+        width: clamp(60px, 15vw, 120px) !important;
+    }
+}
+
+@media (max-width: 1100px) and (min-width: 769px) { 
+    .cases-viewport {
+        width: calc(100vw - 60px) !important;
+        max-width: 960px !important;
+        margin: 0 auto !important;
+        touch-action: pan-y !important; 
+    }
+
+    .case-card {
+        flex: 0 0 calc(100vw - 60px) !important;
+        width: calc(100vw - 60px) !important;
+        max-width: 960px !important;
+        margin-right: 40px !important; 
+        min-height: 400px !important;
+    }
+
+    .case-card-content {
+        width: 100% !important; 
+        flex-direction: row !important; 
+    }
+
+    .case-text {
+        width: 45% !important;
+        flex: 0 0 45% !important;
+        padding: 40px 30px !important; 
+    }
+    
+    .case-name {
+        font-size: 34px !important; 
+    }
+
+    .case-image-wrapper {
+        width: 55% !important;
+        flex: 0 0 55% !important;
+        height: auto !important;
+        padding-top: 60px !important;
+    }
+
+    .case-img {
+        width: 150% !important;
+        height: 150% !important;
+        object-fit: contain !important; 
+        object-position: center bottom !important; 
+        transform: none !important; 
+    }
