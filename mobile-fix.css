@@ -1,0 +1,1305 @@
+/* =============================Main Section============================== */
+
+@media (max-width: 1024px) {
+    .container, .container-contacts {
+        max-width: 90%;
+        padding: 0 15px;
+    }
+
+    .hero h1 {
+        font-size: 50px; /* Трохи зменшуємо головний заголовок */
+    }
+
+    .cases-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки замість 3 */
+    }
+}
+
+/* 2. Планшети вертикальні (до 768px) */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column; /* Лого, меню і кнопка стають один під одним */
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .nav {
+        display: flex;
+        flex-wrap: wrap; /* Меню в два ряди, якщо не влізе */
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero-stats {
+        flex-direction: column; /* Статистика в стовпчик */
+        align-items: center;
+        gap: 30px;
+    }
+
+    .cases-grid {
+        grid-template-columns: 1fr; /* Кейси в одну колонку */
+    }
+
+    .work-grid {
+        grid-template-columns: 1fr; /* Етапи роботи в одну колонку */
+    }
+
+    .contact-flex {
+        flex-direction: column; /* Форма під текстом */
+        gap: 40px;
+    }
+
+    .contact-info {
+        text-align: center;
+    }
+}
+
+/* 3. Мобільні телефони (до 480px) */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 32px; /* Компактний шрифт для мобілок */
+        line-height: 1.2;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .nav a {
+        font-size: 12px; /* Дрібніше меню */
+    }
+
+    .btn-contact {
+        width: 100%; /* Кнопка на всю ширину */
+        text-align: center;
+    }
+
+    .case-card img {
+        height: auto; /* Щоб картинки не сплющувались */
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+
+/* Додаткове виправлення для слайдера на мобільних */
+.slider-container {
+    overflow: hidden; /* Щоб нічого не вилазило за межі екрана */
+}
+
+@media (max-width: 1024px) {
+    .container, .container-contacts {
+        max-width: 90%;
+        padding: 0 15px;
+    }
+
+    .hero h1 {
+        font-size: 50px; /* Трохи зменшуємо головний заголовок */
+    }
+
+    .cases-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки замість 3 */
+    }
+}
+
+/* 2. Планшети вертикальні (до 768px) */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column; /* Лого, меню і кнопка стають один під одним */
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .nav {
+        display: flex;
+        flex-wrap: wrap; /* Меню в два ряди, якщо не влізе */
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero-stats {
+        flex-direction: column; /* Статистика в стовпчик */
+        align-items: center;
+        gap: 30px;
+    }
+
+    .cases-grid {
+        grid-template-columns: 1fr; /* Кейси в одну колонку */
+    }
+
+    .work-grid {
+        grid-template-columns: 1fr; /* Етапи роботи в одну колонку */
+    }
+
+    .contact-flex {
+        flex-direction: column; /* Форма під текстом */
+        gap: 40px;
+    }
+
+    .contact-info {
+        text-align: center;
+    }
+}
+
+/* 3. Мобільні телефони (до 480px) */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 32px; /* Компактний шрифт для мобілок */
+        line-height: 1.2;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .nav a {
+        font-size: 12px; /* Дрібніше меню */
+    }
+
+    .btn-contact {
+        width: 100%; /* Кнопка на всю ширину */
+        text-align: center;
+    }
+
+    .case-card img {
+        height: auto; /* Щоб картинки не сплющувались */
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .photo-viewport {
+        height: 320px !important;
+        margin-top: -20px !important;
+    }
+    .dev-photo {
+        height: 320px !important;
+        width: auto !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .photo-viewport {
+        height: 260px !important;
+    }
+    .dev-photo {
+        height: 260px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-top-row {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .subtitle {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .main-title-top, 
+    .main-title-bottom {
+        font-size: 32px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+  /* ВОЗВРАЩАЕМ ЗАГОЛОВКИ В КОЛОНКУ И ЦЕНТРИРУЕМ НА МОБИЛЕ */
+  .header-block {
+    display: block; /* Выключаем Flex */
+    text-align: center; /* Центрируем все */
+    margin-bottom: 40px;
+  }
+  
+  .subtitle {
+    max-width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .main-title {
+    font-size: 40px; 
+    text-align: center; 
+    padding-bottom: 25px; 
+    padding-top: 55px; 
+  }
+
+  .experience-grid {
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 40px 10px;
+  }
+
+  .grid-item span,
+  .franchise span {
+    font-size: 16px;
+  } 
+
+  .grid-item img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .franchise img {
+    width: 148px;
+    height: 60px;
+  }
+}
+
+/* =======================================Services Section=============================== */
+
+
+/* --- Адаптивність для планшетів та мобільних --- */
+@media (max-width: 1024px) {
+    .title-green.right-align { font-size: 48px; }
+    .title-black.left-align { font-size: 36px; }
+}
+
+@media (max-width: 768px) {
+    .staggered-title-wrapper {
+        align-items: center; /* По центру на телефонах */
+        gap: 20px;
+    }
+    
+    .title-green.right-align, 
+    .title-black.left-align {
+        align-self: center; /* Скидаємо вирівнювання по краях */
+        text-align: center;
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 992px) {
+  /* 2 колонки на планшетах */
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Переключаем всё в колонку */
+  .services-section {
+    text-align: center; /* Центрируем заголовок */
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr; /* 1 колонка на мобиле */
+    gap: 20px;
+    text-align: center; /* Центрируем текст внутри карточек */
+  }
+
+  .service-card {
+    align-items: center; /* Центрируем все по вертикали */
+  }
+
+  .header-line-1, .header-line-2 {
+    font-size: 24px; /* Уменьшаем шрифт заголовка */
+  }
+}
+
+/* =======================================About Section=============================== */
+
+@media (max-width: 992px) {
+    /* 1. ГЛАВНЫЙ КОНТЕЙНЕР (СЕТКА) */
+    .about-content, 
+    .about-content-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important; /* Строго 2 колонки */
+        gap: 20px 8px !important; /* Минимальный зазор для максимальной ширины текста */
+        width: 100% !important;
+        padding: 0 12px !important;
+        flex-direction: row !important; /* Отключаем старые флексы */
+    }
+
+    /* 2. ПОРТРЕТ (НА ВСЮ ШИРИНУ) */
+    .about-portrait {
+        grid-column: 1 / -1 !important; /* Занимает обе колонки */
+        order: -2 !important; /* Всегда сверху */
+        width: 100% !important;
+        margin-bottom: 20px !important;
+    }
+
+    .about-portrait img {
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+    }
+
+    /* 3. ЗАГОЛОВОК */
+    .about-title {
+        grid-column: 1 / -1 !important;
+        order: -1 !important;
+        text-align: center !important;
+        margin-bottom: 25px !important;
+    }
+
+    /* 4. ВСКРЫТИЕ СТАРЫХ ОБЕРТОК */
+    .side-left, 
+    .side-right, 
+    .about-column {
+        display: contents !important;
+    }
+
+    /* 5. ТЕКСТ И ЯЧЕЙКИ (МАКСИМАЛЬНАЯ ШИРИНА) */
+    .about-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        text-align: left !important;
+    }
+
+    .about-item p {
+        font-size: 16px !important; /* ВАШ КРУПНЫЙ ШРИФТ */
+        line-height: 1.2 !important;
+        text-align: left !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding-right: 4px !important;
+    }
+
+    .item-num {
+        font-size: 15px !important; 
+        font-weight: bold !important;
+        margin-bottom: 4px !important;
+    }
+
+    /* 6. ЛОГОТИПЫ (В СЕТКЕ) */
+    .partner-logos {
+        grid-column: auto !important; /* Становятся в общую очередь колонок */
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    .partner-img {
+        width: 100% !important;
+        max-width: 150px !important;
+        height: auto !important;
+        display: block !important;
+    }
+
+    /* Убираем декор, который мешает */
+    .about-item::after {
+        display: none !important;
+    }
+}
+
+/* Фикс для микро-экранов */
+@media (max-width: 380px) {
+    .about-item p {
+        font-size: 14px !important; /* Чуть меньше только для самых маленьких */
+    }
+}
+
+/* =========================================Achievements Section================================*/
+
+@media (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .stat-value {
+        font-size: 48px; /* Зменшуємо на середніх екранах */
+    }
+}
+
+@media (max-width: 600px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    .achievements-title {
+        font-size: 2.2rem;
+    }
+}
+
+/* =========================================Cases Section ================================*/
+
+/* Tablet: between 769px and 1100px */
+@media (max-width: 1100px) {
+
+    .cases-main-title {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        box-sizing: border-box !important;
+        font-size: clamp(32px, 5vw, 60px) !important;
+    }
+
+    .cases-viewport {
+        width: calc(100vw - 60px) !important;
+        max-width: 960px !important;
+        height: auto !important;
+    }
+
+    .case-card {
+        flex: 0 0 calc(100vw - 60px) !important;
+        width: calc(100vw - 60px) !important;
+        max-width: 960px !important;
+        margin-right: 20px !important;
+    }
+}
+
+/* Tablet: layout arrow gap properly */
+@media (max-width: 1100px) and (min-width: 769px) {
+    .slider-navigation {
+        justify-content: space-between !important;
+        padding: 0 20px !important;
+        gap: 0 !important;
+        width: calc(100vw - 60px) !important;
+        max-width: 960px !important;
+        box-sizing: border-box !important;
+    }
+    .case-arrow-btn {
+        width: 100px !important;
+        height: 38px !important;
+    }
+}
+
+/* Mobile overrides */
+@media (max-width: 768px) {
+    .cases-viewport {
+        width: calc(100vw - 32px) !important;
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    .case-card {
+        flex: 0 0 calc(100vw - 32px) !important;
+        width: calc(100vw - 32px) !important;
+        max-width: none !important;
+        margin-right: 16px !important;
+        min-height: auto !important;
+    }
+
+    .slider-navigation {
+        justify-content: space-between !important;
+        padding: 0 16px !important;
+        gap: 0 !important;
+        width: calc(100vw - 32px) !important;
+        max-width: none !important;
+        box-sizing: border-box !important;
+    }
+
+    .case-arrow-btn {
+        width: 90px !important;
+        height: 36px !important;
+    }
+}
+
+
+@media (max-width: 950px) {
+    .cases-viewport, .case-card, .slider-navigation {
+        width: 100%;
+        max-width: 600px;
+    }
+    .case-card-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .case-image-wrapper {
+        flex: 0 0 auto;
+        width: 100%;
+        height: 200px;
+    }
+    .case-arrow-btn {
+        width: 140px;
+    }
+}
+
+@media (max-width: 950px) {
+    .cases-viewport, .case-card, .slider-navigation {
+        width: 100%;
+        max-width: 600px;
+    }
+    .case-card-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .case-image-wrapper {
+        flex: 0 0 auto;
+        width: 100%;
+        height: 200px;
+    }
+    .case-arrow-btn {
+        width: 140px;
+    }
+}
+
+/* =========================================Team Info Section ===============================*/
+
+/* --- Desktop grid layout --- */
+.team-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto auto !important;
+    grid-template-areas:
+        "count text-right"
+        "text-left subtitle" !important;
+    align-items: center !important;
+    row-gap: 20px !important;
+    column-gap: 40px !important;
+}
+
+.team-grid .team-count {
+    grid-area: count !important;
+    font-size: 64px !important;
+    font-weight: 900 !important;
+    line-height: 0.9 !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+    color: #fff !important;
+    font-family: 'Stolzl', sans-serif !important;
+}
+
+.team-grid .team-text-right {
+    grid-area: text-right !important;
+    align-self: center !important;
+    max-width: 350px !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    color: #fff !important;
+    font-family: 'Stolzl Book', sans-serif !important;
+}
+
+.team-grid .team-text-left {
+    grid-area: text-left !important;
+    align-self: center !important;
+    max-width: 350px !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    color: #fff !important;
+    font-family: 'Stolzl Book', sans-serif !important;
+}
+
+.team-grid .team-subtitle {
+    grid-area: subtitle !important;
+    font-size: 64px !important;
+    font-weight: 900 !important;
+    line-height: 0.9 !important;
+    margin: 0 !important;
+    color: #0D890D !important;
+    text-align: right !important;
+    white-space: nowrap !important;
+    padding-left: 0 !important;
+    font-family: 'Stolzl', sans-serif !important;
+}
+
+/* --- Mobile: headings stacked first, then texts below --- */
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: 1fr !important;
+        grid-template-areas:
+            "count"
+            "subtitle"
+            "text-left"
+            "text-right" !important;
+        row-gap: 12px !important;
+    }
+
+    .team-grid .team-count {
+        font-size: clamp(30px, 9vw, 48px) !important;
+        white-space: normal !important;
+    }
+
+    .team-grid .team-subtitle {
+        font-size: clamp(30px, 9vw, 48px) !important;
+        text-align: right !important;
+        white-space: normal !important;
+    }
+
+    .team-grid .team-text-left,
+    .team-grid .team-text-right {
+        max-width: 100% !important;
+        margin-top: 4px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .team-grid .team-count,
+    .team-grid .team-subtitle {
+        font-size: clamp(26px, 8.5vw, 38px) !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    .team-count, .team-subtitle {
+        font-size: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .team-row {
+        flex-direction: column; /* На мобилках всё в один столбик */
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .team-row-bottom {
+        flex-direction: column-reverse; /* Заголовок "фахівців" будет выше своего описания на мобилках */
+    }
+    .team-text-right {
+        text-align: left;
+    }
+    .team-count, .team-subtitle {
+        font-size: 40px;
+    }
+}
+
+/* =========================================Partners Section=================================================== */
+
+/* 2 logos per view instead of 4 */
+.logo-item {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+    width: 50% !important;
+    height: 100px !important;
+}
+
+/* Normalise Lob_logo to match other logos */
+.logo-item img[src*="Lob_logo"] {
+    max-height: 55px !important;
+    height: auto !important;
+    width: auto !important;
+    max-width: 160px !important;
+    object-fit: contain !important;
+}
+
+/* Make partner viewport slightly taller for 2-logo view */
+.partners-viewport {
+    height: 130px !important;
+}
+
+@media (max-width: 768px) {
+    .partners-title { font-size: 1.8rem; }
+    .logos-track { gap: 30px; flex-wrap: wrap; }
+    .logo-item img { height: 30px; }
+}
+
+/* =======================================Benefits Section=============================== */
+
+.benefits-title {
+    width: 100% !important;
+    max-width: 100% !important;
+    line-height: 1.5 !important;
+    box-sizing: border-box !important;
+    padding: 0 20px !important;
+}
+
+.benefits-title span {
+    padding-left: 0 !important;
+    display: block !important;
+    text-align: right !important;
+}
+
+@media (max-width: 992px) {
+    .benefits-title {
+        font-size: clamp(32px, 6vw, 56px) !important;
+        padding: 0 20px !important;
+        margin-bottom: 40px !important;
+    }
+    .benefits-title span {
+        text-align: right !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .benefits-title {
+        text-align: left;
+        font-size: clamp(28px, 8vw, 44px) !important;
+        padding: 0 16px !important;
+        margin-bottom: 32px !important;
+    }
+    .benefits-title span {
+        text-align: right !important;
+        padding-left: 40px;
+    }
+
+    /* Keep 2×2 grid on mobile as shown in reference */
+    .benefits-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 16px !important;
+    }
+    .benefit-card {
+        padding: 30px 16px 24px !important;
+    }
+    .benefit-card p {
+        font-size: 18px !important;
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .benefits-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 16px !important;
+    }
+    .benefit-card {
+        padding: 15px 4px 15px !important;
+    }
+    .benefit-card p {
+        font-size: 16px !important;
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .benefits-grid { grid-template-columns: 1fr; }
+    .benefits-title { font-size: 2.5rem; }
+    .benefit-card p { font-size: 1.2rem; }
+}
+
+/* =======================================Order Form Section======================================================== */
+
+
+.footer-contact {
+    height: auto !important;
+    min-height: 300px !important;
+    padding: 60px 20px !important;
+    box-sizing: border-box !important;
+}
+
+/* Fix "нашої історії?" right-shift on desktop */
+.form-title span {
+    padding-left: 0 !important;
+    text-align: right !important;
+    display: block !important;
+}
+
+/* Allow inputs to shrink below 300px */
+.input-group input {
+    min-width: 0 !important;
+}
+
+/* Tablet: wrap inputs */
+@media (max-width: 960px) {
+    .form-title {
+        font-size: clamp(28px, 5.5vw, 52px) !important;
+        margin-bottom: 36px !important;
+    }
+    .form-inputs {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 24px !important;
+    }
+    .input-group {
+        flex: 0 1 calc(50% - 20px) !important;
+        min-width: 200px !important;
+    }
+    .input-group input {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* Mobile: full-width stacked inputs */
+@media (max-width: 600px) {
+    .form-title {
+        font-size: clamp(22px, 7vw, 38px) !important;
+        margin-bottom: 28px !important;
+    }
+    .form-inputs {
+        flex-direction: column !important;
+        gap: 20px !important;
+        width: 100% !important;
+    }
+    .input-group {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+    }
+    .input-group input {
+        width: 100% !important;
+    }
+    .footer-contact .btn-submit-modal {
+        width: 100% !important;
+        padding: 18px 20px !important;
+        font-size: 15px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-inputs { flex-direction: column; gap: 40px; }
+    .contact-title { font-size: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 30px; text-align: center; }
+}
+
+
+/*======================================== Steps Section ==========================================*/
+
+@media (max-width: 1024px) {
+    /* Fix step grid for mid-size tablets */
+    .steps-row {
+        grid-template-columns: 150px 1fr 1fr !important;
+        gap: 0 30px !important;
+        padding: 40px 0 !important;
+    }
+    .step-number {
+        margin-left: 0 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Show parrot again — positioned at top-right of the header */
+    .bird-decor {
+        display: block !important;
+        position: relative !important;
+        width: 130px !important;
+        transform: none !important;
+        left: auto !important;
+        bottom: auto !important;
+        flex-shrink: 0 !important;
+    }
+
+    .bird-decor img {
+        transform: none !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .steps-header {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: flex-end !important;
+        padding: 20px 20px 0 20px !important;
+        min-height: 120px !important;
+    }
+
+    .steps-main-title {
+        font-size: clamp(26px, 7.5vw, 40px) !important;
+        text-align: right !important;
+        padding-bottom: 16px !important;
+        flex: 1 !important;
+    }
+
+    /* Steps table rows become flex columns */
+    .steps-row {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 24px 20px !important;
+        align-items: flex-start !important;
+    }
+
+    .step-number {
+        font-size: 20px !important;
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+    }
+
+    .step-title {
+        font-size: 18px !important;
+        padding-left: 0 !important;
+    }
+
+    .step-details p {
+        font-size: 15px !important;
+        padding-left: 0 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .bird-decor {
+        width: 100px !important;
+    }
+    .steps-main-title {
+        font-size: clamp(22px, 7vw, 30px) !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    .bird-decor {
+        width: 200px; 
+        transform: translateY(3%);
+    }
+    .steps-main-title { font-size: 40px; }
+    .step-row {
+        grid-template-columns: 100px 1fr;
+    }
+    .step-details { grid-column: 1 / span 2; margin-top: 20px; }
+}
+
+@media (max-width: 768px) {
+    .step-row {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .bird-decor {
+        width: 150px;
+        transform: translateY(4%);
+    }
+    .steps-header {
+        min-height: 120px;
+    }
+}
+
+/* =======================================Footer Section===================================================== */
+
+@media (max-width: 992px) {
+    .contact-flex { grid-template-columns: 1fr; gap: 40px; }
+    .office { margin-bottom: 30px; }
+    .footer { flex-direction: column; gap: 12px; text-align: center; }
+}
+
+@media (max-width: 768px) {
+    .contact-col-left h2 { font-size: 48px; margin-bottom: 30px; }
+    .contact-col-left h2 span { margin-left: 0; }
+    .contact-form { grid-template-columns: 1fr; }
+    .btn-white { width: 100% !important; }
+}
+
+@media (max-width: 992px) {
+    .contact-flex { grid-template-columns: 1fr; }
+    .contact-info h2, .contact-info p, .contact-form, .footer { grid-column: 1; }
+    .contact-form { grid-template-columns: 1fr; }
+    .footer { flex-direction: column; gap: 15px; }
+}
+
+/*===================================???=======================================*/
+
+@media (max-width: 1024px) {
+    .line-1 { font-size: 70px; }
+    .highlight { font-size: 110px; margin-left: 200px; }
+    .bottom-title { font-size: 52px; padding-left: 60px; }
+    .bottom-description { padding-right: 60px; }
+    .cases-main-title { padding-left: 40px; }
+    .benefits-title span { padding-left: 200px; }
+    .footer-contact { background-size: cover; height: auto; min-height: 480px; }
+}
+
+@media (max-width: 768px) {
+
+    .header {
+        position: fixed;
+        top: 0;
+        flex-wrap: wrap;
+        padding: 14px 20px;
+        background: rgba(0, 0, 0, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        gap: 0;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .logo { flex: 1; }
+    .hamburger-btn { display: flex; }
+
+    .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        background: rgba(0, 0, 0, 0.96);
+        padding: 20px 0 30px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .nav.nav-open { display: flex; }
+    .nav a {
+        margin: 0;
+        padding: 14px 20px;
+        font-size: 16px;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .btn-contact {
+        display: none;
+        width: calc(100% - 40px);
+        margin: 16px 20px 0;
+    }
+    .btn-contact.nav-open { display: inline-flex; }
+
+    .header-spacer { height: 120px; }
+    .header-spacer2 { height: 20px; }
+
+    .line-1 { font-size: 44px; }
+    .highlight { font-size: 72px; margin-left: 0; margin-top: -20px; text-align: right; }
+    .hero-content { padding: 0 20px; }
+
+    .container-wide {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 0 20px;
+        width: 100%;
+    }
+    .bottom-title { font-size: 40px; padding-left: 0; letter-spacing: -1px; }
+    .bottom-description { padding-right: 0; font-size: 15px; }
+
+    .cases-main-title { padding-left: 20px; font-size: 36px; }
+    .cases-viewport {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+    .case-card {
+        flex: 0 0 calc(100vw - 40px);
+        width: calc(100vw - 40px);
+        margin-right: 20px;
+        min-height: auto;
+    }
+    .case-card-content { flex-direction: column; }
+    .case-text {
+        flex: none;
+        width: 100%;
+        padding: 30px 25px 20px;
+    }
+    .case-image-wrapper {
+        flex: none;
+        width: 100%;
+        height: 220px;
+        padding-top: 0;
+        justify-content: center;
+        align-items: center;
+    }
+    .case-img { width: 100%; height: 100%; object-fit: cover; transform: none; }
+    .case-name { font-size: 32px; }
+    .slider-navigation { gap: 200px; }
+    .case-arrow-btn { width: 100px; }
+
+    .benefits-title { font-size: 44px; }
+    .benefits-title span { padding-left: 0; display: block; text-align: center; }
+    .benefits-title { text-align: center; }
+
+    .footer-contact { height: auto; padding: 60px 20px; background-size: cover; }
+    .form-inputs { flex-direction: column; gap: 30px; }
+    .btn-submit { width: 100%; }
+
+    .team-count, .team-subtitle { font-size: 48px; }
+
+    .achievements-title { font-size: 48px; }
+
+    .bird-decor { display: none; }
+    .steps-header {
+        justify-content: center;
+        min-height: auto;
+        padding: 30px 20px 20px;
+    }
+    .steps-main-title { text-align: center; font-size: 40px; }
+
+    .contact-flex { display: flex; flex-direction: column; gap: 40px; }
+    .contact-info { display: block; }
+    .contact-info h2 { font-size: 48px; margin-bottom: 30px; }
+    .contact-info h2 span { margin-left: 0; }
+    .office, .settings, .left { grid-column: unset; padding-left: 0; }
+    .Mon, .insta { grid-column: unset; }
+    .contact-form { grid-template-columns: 1fr; }
+    .footer { margin-top: 50px; flex-direction: column; gap: 12px; }
+}
+
+@media (max-width: 480px) {
+
+    .line-1 { font-size: 32px; }
+    .highlight { font-size: 54px; margin-left: 0; }
+    .header-spacer { height: 90px; }
+
+    .bottom-title { font-size: 30px; }
+
+    .modal-content {
+        height: auto;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 30px 20px;
+        width: 96%;
+    }
+    .modal-title { font-size: 30px; }
+    .modal-footer { flex-direction: column; align-items: flex-start; gap: 16px; }
+
+    .case-card {
+        flex: 0 0 calc(100vw - 30px);
+        width: calc(100vw - 30px);
+        margin-right: 15px;
+    }
+    .slider-navigation { gap: 100px; }
+    .case-arrow-btn { width: 80px; }
+
+    .steps-main-title { font-size: 30px; }
+    .step-title { font-size: 18px; }
+    .step-details p { font-size: 15px; padding-left: 0; }
+
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 20px; }
+    .stat-value { font-size: 40px; white-space: normal; }
+    .achievements-title { font-size: 36px; }
+
+    .benefit-card p { font-size: 20px; }
+    .benefits-title { font-size: 34px; }
+
+    .experience-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 10px; }
+
+    .team-count, .team-subtitle { font-size: 36px; }
+
+    .title-line { font-size: 28px; white-space: normal; }
+
+    .contact-info h2 { font-size: 36px; }
+    .settings { font-size: 22px; }
+    .office { font-size: 20px; }
+}
+
+
+@media (max-width: 768px) {
+    html, body { overflow-x: hidden; max-width: 100vw; }
+
+    .line-1 {
+        font-size: clamp(22px, 7.5vw, 44px) !important;
+        white-space: normal !important;
+        word-break: break-word;
+        text-align: center;
+    }
+    .highlight {
+        font-size: clamp(36px, 12vw, 72px) !important;
+        margin-left: 0 !important;
+        margin-top: -10px !important;
+        text-align: right;
+    }
+    .hero-content {
+        padding: 0 16px !important;
+        max-width: 100vw;
+        overflow: hidden;
+    }
+
+    .about-title {
+        font-size: clamp(28px, 9vw, 52px) !important;
+        word-break: break-word;
+        padding: 0 16px;
+    }
+    .about { overflow: hidden; }
+
+    .cases-viewport {
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow: hidden !important;
+    }
+    .case-card {
+        flex: 0 0 calc(100vw - 32px) !important;
+        width: calc(100vw - 32px) !important;
+        margin-right: 16px !important;
+        min-height: auto !important;
+    }
+    .cases-track { align-items: flex-start !important; }
+    .case-card-content {
+        flex-direction: column !important;
+        height: auto !important;
+    }
+    .case-text {
+        width: 100% !important;
+        flex: none !important;
+        padding: 24px 20px 16px !important;
+    }
+    .case-image-wrapper {
+        width: 100% !important;
+        flex: none !important;
+        height: 200px !important;
+        padding-top: 0 !important;
+    }
+    .case-img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        transform: none !important;
+    }
+    .cases-main-title {
+        padding-left: 16px !important;
+        font-size: clamp(26px, 8vw, 36px) !important;
+    }
+
+    .slider-navigation { gap: clamp(60px, 40vw, 200px) !important; }
+    .case-arrow-btn { width: clamp(60px, 18vw, 110px) !important; }
+
+    .container-wide {
+        flex-direction: column !important;
+        padding: 0 16px !important;
+        gap: 16px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    .bottom-title {
+        font-size: clamp(26px, 8vw, 40px) !important;
+        padding-left: 0 !important;
+        letter-spacing: -1px !important;
+    }
+    .bottom-description {
+        padding-right: 0 !important;
+        font-size: 14px !important;
+        max-width: 100% !important;
+    }
+
+    .benefits-title span {
+        padding-left: 0 !important;
+        display: block !important;
+        text-align: center;
+    }
+    .benefits-title { text-align: center !important; }
+
+    .footer-contact {
+        height: auto !important;
+        min-height: unset !important;
+        padding: 50px 16px !important;
+        background-size: cover !important;
+    }
+    .form-inputs { flex-direction: column !important; gap: 24px !important; }
+    .btn-submit { width: 100% !important; }
+    .contact-title {
+        font-size: clamp(20px, 6vw, 2rem) !important;
+        margin-bottom: 36px !important;
+    }
+
+    .modal-content {
+        width: 96% !important;
+        height: auto !important;
+        max-height: 88vh !important;
+        overflow-y: auto !important;
+        padding: 28px 18px !important;
+    }
+    .modal-title { font-size: clamp(22px, 7vw, 36px) !important; }
+    .modal-footer { flex-direction: column !important; align-items: flex-start !important; gap: 14px !important; }
+}
+
+@media (max-width: 480px) {
+    .line-1 { font-size: clamp(20px, 6.5vw, 30px) !important; }
+    .highlight { font-size: clamp(32px, 11vw, 54px) !important; }
+
+    .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 24px 12px !important; }
+    .stat-value { font-size: clamp(28px, 8vw, 40px) !important; white-space: normal !important; }
+    .achievements-title { font-size: clamp(26px, 8vw, 36px) !important; }
+
+    .about-title { font-size: clamp(24px, 8vw, 36px) !important; }
+
+    .team-count, .team-subtitle { font-size: clamp(28px, 8.5vw, 40px) !important; }
+}

@@ -18,88 +18,6 @@
     scroll-behavior: smooth;
 }
 
-/* Адаптация для мобильных устройств */
-/* ==========================================
-   --- ОПТИМИЗИРОВАННАЯ АДАПТАЦИЯ ---
-   ========================================== */
-
-@media (max-width: 768px) {
-    /* 1. Хедер: Лого и Бургер в одну линию */
-    .header {
-        padding: 10px 20px;
-        flex-direction: row !important; /* Принудительно в линию */
-        justify-content: space-between;
-        align-items: center;
-        top: 0;
-    }
-
-    /* Скрываем лишнее в хедере */
-    .nav, .header .btn-contact {
-        display: none; 
-    }
-
-    /* 2. Исправление пропавшего заголовка */
-    .main-title span {
-        opacity: 1 !important; /* Проявляем принудительно, если анимация не сработала */
-        transform: none !important; 
-        animation: none !important;
-        text-align: left;
-    }
-
-    .hero-content {
-        padding: 0 20px;
-        margin-top: 40px; /* Отступ от хедера */
-    }
-
-    .line-1 {
-        font-size: 42px !important;
-        line-height: 1.1;
-        display: block;
-        text-align: left !important;
-    }
-
-    .highlight {
-        font-size: 54px !important;
-        margin-left: 0 !important; /* Убираем десктопный отступ 600px */
-        margin-top: 5px !important;
-        display: block;
-    }
-
-    /* 3. Уменьшаем фото (делаем секцию компактнее) */
-    .photo-viewport {
-        height: 320px !important; /* Значительно меньше, как на скрине */
-        margin-top: 10px;
-    }
-
-    .header-spacer { height: 80px; } /* Уменьшаем пустое место сверху */
-    .header-spacer2 { height: 20px; }
-
-    /* 4. Нижний блок "Ми ваші люди" */
-    .container-wide {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 0 20px;
-    }
-
-    .bottom-title {
-        padding-left: 0 !important;
-        font-size: 38px !important;
-        margin-bottom: 15px;
-        line-height: 1;
-    }
-
-    .bottom-description {
-        padding-right: 0 !important;
-        font-size: 15px;
-        line-height: 1.4;
-    }
-
-    /* Хотспоты (точки на фото) — делаем чуть меньше для мобилок */
-    .hotspot {
-        width: 8px;
-        height: 8px;
-    }
-}
 
 /* ЗАГАЛЬНІ НАЛАШТУВАННЯ */
 * {
@@ -124,6 +42,10 @@ body {
     top: 8px;
     width: 100%;
     z-index: 100;
+}
+
+.hero-section {
+    padding-bottom: 5%;
 }
 
 .main-title span {
@@ -592,28 +514,6 @@ body {
     display: block;
 }
 
-/* --- Адаптив для мобилок (чтобы не сломалось) --- */
-@media (max-width: 768px) {
-    .header-top-row {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    
-    .subtitle {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .main-title-top, 
-    .main-title-bottom {
-        font-size: 32px;
-        text-align: center;
-    }
-}
-
-/* === ОСТАЛЬНЫЕ СТИЛИ (СЕТКА) ОСТАЮТСЯ ВАШИМИ === */
-/* Сетка (4 колонки) */
 .experience-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -658,47 +558,6 @@ body {
   color: #fff;
 }
 
-/* === АДАПТИВНОСТЬ (Mobile) === */
-@media (max-width: 768px) {
-  /* ВОЗВРАЩАЕМ ЗАГОЛОВКИ В КОЛОНКУ И ЦЕНТРИРУЕМ НА МОБИЛЕ */
-  .header-block {
-    display: block; /* Выключаем Flex */
-    text-align: center; /* Центрируем все */
-    margin-bottom: 40px;
-  }
-  
-  .subtitle {
-    max-width: 100%;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .main-title {
-    font-size: 32px; /* Чуть увеличил для читаемости, было 24 */
-    text-align: center; /* Центрируем крупный текст */
-  }
-
-  .experience-grid {
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 40px 10px;
-  }
-
-  .grid-item span,
-  .franchise span {
-    font-size: 16px;
-  } 
-
-  .grid-item img {
-    width: 60px;
-    height: 60px;
-  }
-
-  .franchise img {
-    width: 148px;
-    height: 60px;
-  }
-}
-/* ============================================================ */
 
 .services-section {
     background-image: url("img/image-18-Traced.svg");
@@ -764,25 +623,6 @@ body {
     margin: 0;
 }
 
-/* --- Адаптивність для планшетів та мобільних --- */
-@media (max-width: 1024px) {
-    .title-green.right-align { font-size: 48px; }
-    .title-black.left-align { font-size: 36px; }
-}
-
-@media (max-width: 768px) {
-    .staggered-title-wrapper {
-        align-items: center; /* По центру на телефонах */
-        gap: 20px;
-    }
-    
-    .title-green.right-align, 
-    .title-black.left-align {
-        align-self: center; /* Скидаємо вирівнювання по краях */
-        text-align: center;
-        font-size: 32px;
-    }
-}
 
 /* === СЕТКА УСЛУГ (Desktop) === */
 .services-grid {
@@ -869,34 +709,7 @@ body {
 }
 
 /* === АДАПТИВНОСТЬ (Mobile) === */
-@media (max-width: 992px) {
-  /* 2 колонки на планшетах */
-  .services-grid {
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 30px;
-  }
-}
 
-@media (max-width: 768px) {
-  /* Переключаем всё в колонку */
-  .services-section {
-    text-align: center; /* Центрируем заголовок */
-  }
-
-  .services-grid {
-    grid-template-columns: 1fr; /* 1 колонка на мобиле */
-    gap: 20px;
-    text-align: center; /* Центрируем текст внутри карточек */
-  }
-
-  .service-card {
-    align-items: center; /* Центрируем все по вертикали */
-  }
-
-  .header-line-1, .header-line-2 {
-    font-size: 24px; /* Уменьшаем шрифт заголовка */
-  }
-}
 
 /* Секція Про Нас */
 /* === СЕКЦИЯ ABOUT === */
@@ -1047,37 +860,6 @@ body {
 }
 
 /* === АДАПТИВНОСТЬ (МОБИЛЬНАЯ ВЕРСИЯ) === */
-@media (max-width: 992px) {
-    .about-content {
-        flex-direction: column; /* Выстраиваем всё в один столбец */
-    }
-    
-    .about-portrait {
-        order: -1; /* Поднимаем фото наверх */
-        margin-bottom: 40px;
-    }
-
-    /* На мобилке всё центрируем */
-    .side-left, .side-right {
-        text-align: center;
-        align-items: center;
-    }
-
-    .about-item {
-        max-width: 100%;
-        text-align: center;
-    }
-
-    /* Убираем боковые линии на мобилках */
-    .side-left .about-item::after,
-    .side-right .about-item::after {
-        display: none; 
-    }
-    
-    .partner-logos {
-        justify-content: center;
-    }
-}
 
 /* Секція Досягнень */
 .achievements {
@@ -1169,23 +951,7 @@ body {
 }
 
 /* Адаптивність */
-@media (max-width: 1024px) {
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .stat-value {
-        font-size: 48px; /* Зменшуємо на середніх екранах */
-    }
-}
 
-@media (max-width: 600px) {
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-    .achievements-title {
-        font-size: 2.2rem;
-    }
-}
 
 /* Фоновая секция */
 .cases-section {
@@ -1401,24 +1167,7 @@ body {
 }
 
 /* Адаптив для планшетов/телефонов */
-@media (max-width: 950px) {
-    .cases-viewport, .case-card, .slider-navigation {
-        width: 100%;
-        max-width: 600px;
-    }
-    .case-card-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    .case-image-wrapper {
-        flex: 0 0 auto;
-        width: 100%;
-        height: 200px;
-    }
-    .case-arrow-btn {
-        width: 140px;
-    }
-}
+
 
 /* Секція Команди (33 фахівці) */
 .team-info {
@@ -1532,28 +1281,7 @@ body {
 }
 
 /* Адаптивність */
-@media (max-width: 1200px) {
-    .team-count, .team-subtitle {
-        font-size: 60px;
-    }
-}
 
-@media (max-width: 768px) {
-    .team-row {
-        flex-direction: column; /* На мобилках всё в один столбик */
-        align-items: flex-start;
-        gap: 15px;
-    }
-    .team-row-bottom {
-        flex-direction: column-reverse; /* Заголовок "фахівців" будет выше своего описания на мобилках */
-    }
-    .team-text-right {
-        text-align: left;
-    }
-    .team-count, .team-subtitle {
-        font-size: 40px;
-    }
-}
 
 /* Секція Лідери ринку */
 
@@ -1675,11 +1403,7 @@ body {
 }
 
 /* Адаптивність */
-@media (max-width: 768px) {
-    .partners-title { font-size: 1.8rem; }
-    .logos-track { gap: 30px; flex-wrap: wrap; }
-    .logo-item img { height: 30px; }
-}
+
 
 /* Секція Переваг */
 .benefits {
@@ -1745,11 +1469,7 @@ body {
 }
 
 /* Адаптивність */
-@media (max-width: 768px) {
-    .benefits-grid { grid-template-columns: 1fr; }
-    .benefits-title { font-size: 2.5rem; }
-    .benefit-card p { font-size: 1.2rem; }
-}
+
 
 /* Фінальна секція з формою */
 .footer-contact {
@@ -1904,11 +1624,6 @@ body {
 }
 
 /* Адаптивність для форми */
-@media (max-width: 768px) {
-    .form-inputs { flex-direction: column; gap: 40px; }
-    .contact-title { font-size: 2rem; }
-    .footer-bottom { flex-direction: column; gap: 30px; text-align: center; }
-}
 
 /* Секція Етапів Роботи */
 .work-steps {
@@ -2023,33 +1738,7 @@ body {
 }
 
 /* Адаптивність */
-@media (max-width: 1024px) {
-    .bird-decor {
-        width: 200px; 
-        transform: translateY(3%);
-    }
-    .steps-main-title { font-size: 40px; }
-    .step-row {
-        grid-template-columns: 100px 1fr;
-    }
-    .step-details { grid-column: 1 / span 2; margin-top: 20px; }
-}
 
-@media (max-width: 768px) {
-    .step-row {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-    .bird-decor {
-        width: 150px;
-        transform: translateY(4%);
-    }
-    .steps-header {
-        min-height: 120px;
-    }
-}
 
 .contacts {
     background-color: #000;
@@ -2090,7 +1779,6 @@ body {
     display: block;
     color: #0D890D;
     font-family: "Stolzl", Sans-serif;
-    padding-left: 100px;
 }
 
 .contact-form-block {
@@ -2234,18 +1922,7 @@ body {
 }
 
 /* Mobile */
-@media (max-width: 992px) {
-    .contact-flex { grid-template-columns: 1fr; gap: 40px; }
-    .office { margin-bottom: 30px; }
-    .footer { flex-direction: column; gap: 12px; text-align: center; }
-}
 
-@media (max-width: 768px) {
-    .contact-col-left h2 { font-size: 48px; margin-bottom: 30px; }
-    .contact-col-left h2 span { margin-left: 0; }
-    .contact-form { grid-template-columns: 1fr; }
-    .btn-white { width: 100% !important; }
-}
 
 .footer p{
     color: #fff;
@@ -2258,12 +1935,7 @@ body {
 }
 
 /* Мобільна адаптація */
-@media (max-width: 992px) {
-    .contact-flex { grid-template-columns: 1fr; }
-    .contact-info h2, .contact-info p, .contact-form, .footer { grid-column: 1; }
-    .contact-form { grid-template-columns: 1fr; }
-    .footer { flex-direction: column; gap: 15px; }
-}
+
 
 :root {
     --orange: #0D890D;
@@ -2323,320 +1995,6 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
 .hamburger-btn.is-open span:nth-child(2) { opacity: 0; }
 .hamburger-btn.is-open span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
 
-@media (max-width: 1024px) {
-    .line-1 { font-size: 70px; }
-    .highlight { font-size: 110px; margin-left: 200px; }
-    .bottom-title { font-size: 52px; padding-left: 60px; }
-    .bottom-description { padding-right: 60px; }
-    .cases-main-title { padding-left: 40px; }
-    .benefits-title span { padding-left: 200px; }
-    .footer-contact { background-size: cover; height: auto; min-height: 480px; }
-}
-
-@media (max-width: 768px) {
-
-    .header {
-        position: fixed;
-        top: 0;
-        flex-wrap: wrap;
-        padding: 14px 20px;
-        background: rgba(0, 0, 0, 0.92);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        gap: 0;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .logo { flex: 1; }
-    .hamburger-btn { display: flex; }
-
-    .nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        flex-direction: column;
-        align-items: center;
-        gap: 0;
-        background: rgba(0, 0, 0, 0.96);
-        padding: 20px 0 30px;
-        border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    .nav.nav-open { display: flex; }
-    .nav a {
-        margin: 0;
-        padding: 14px 20px;
-        font-size: 16px;
-        width: 100%;
-        text-align: center;
-        border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .btn-contact {
-        display: none;
-        width: calc(100% - 40px);
-        margin: 16px 20px 0;
-    }
-    .btn-contact.nav-open { display: inline-flex; }
-
-    .header-spacer { height: 120px; }
-    .header-spacer2 { height: 20px; }
-
-    .line-1 { font-size: 44px; }
-    .highlight { font-size: 72px; margin-left: 0; margin-top: -20px; text-align: right; }
-    .hero-content { padding: 0 20px; }
-
-    .container-wide {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-        padding: 0 20px;
-        width: 100%;
-    }
-    .bottom-title { font-size: 40px; padding-left: 0; letter-spacing: -1px; }
-    .bottom-description { padding-right: 0; font-size: 15px; }
-
-    .cases-main-title { padding-left: 20px; font-size: 36px; }
-    .cases-viewport {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-    }
-    .case-card {
-        flex: 0 0 calc(100vw - 40px);
-        width: calc(100vw - 40px);
-        margin-right: 20px;
-        min-height: auto;
-    }
-    .case-card-content { flex-direction: column; }
-    .case-text {
-        flex: none;
-        width: 100%;
-        padding: 30px 25px 20px;
-    }
-    .case-image-wrapper {
-        flex: none;
-        width: 100%;
-        height: 220px;
-        padding-top: 0;
-        justify-content: center;
-        align-items: center;
-    }
-    .case-img { width: 100%; height: 100%; object-fit: cover; transform: none; }
-    .case-name { font-size: 32px; }
-    .slider-navigation { gap: 200px; }
-    .case-arrow-btn { width: 100px; }
-
-    .benefits-title { font-size: 44px; }
-    .benefits-title span { padding-left: 0; display: block; text-align: center; }
-    .benefits-title { text-align: center; }
-
-    .footer-contact { height: auto; padding: 60px 20px; background-size: cover; }
-    .form-inputs { flex-direction: column; gap: 30px; }
-    .btn-submit { width: 100%; }
-
-    .team-count, .team-subtitle { font-size: 48px; }
-
-    .achievements-title { font-size: 48px; }
-
-    .bird-decor { display: none; }
-    .steps-header {
-        justify-content: center;
-        min-height: auto;
-        padding: 30px 20px 20px;
-    }
-    .steps-main-title { text-align: center; font-size: 40px; }
-
-    .contact-flex { display: flex; flex-direction: column; gap: 40px; }
-    .contact-info { display: block; }
-    .contact-info h2 { font-size: 48px; margin-bottom: 30px; }
-    .contact-info h2 span { margin-left: 0; }
-    .office, .settings, .left { grid-column: unset; padding-left: 0; }
-    .Mon, .insta { grid-column: unset; }
-    .contact-form { grid-template-columns: 1fr; }
-    .footer { margin-top: 50px; flex-direction: column; gap: 12px; }
-}
-
-@media (max-width: 480px) {
-
-    .line-1 { font-size: 32px; }
-    .highlight { font-size: 54px; margin-left: 0; }
-    .header-spacer { height: 90px; }
-
-    .bottom-title { font-size: 30px; }
-
-    .modal-content {
-        height: auto;
-        max-height: 90vh;
-        overflow-y: auto;
-        padding: 30px 20px;
-        width: 96%;
-    }
-    .modal-title { font-size: 30px; }
-    .modal-footer { flex-direction: column; align-items: flex-start; gap: 16px; }
-
-    .case-card {
-        flex: 0 0 calc(100vw - 30px);
-        width: calc(100vw - 30px);
-        margin-right: 15px;
-    }
-    .slider-navigation { gap: 100px; }
-    .case-arrow-btn { width: 80px; }
-
-    .steps-main-title { font-size: 30px; }
-    .step-title { font-size: 18px; }
-    .step-details p { font-size: 15px; padding-left: 0; }
-
-    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 20px; }
-    .stat-value { font-size: 40px; white-space: normal; }
-    .achievements-title { font-size: 36px; }
-
-    .benefit-card p { font-size: 20px; }
-    .benefits-title { font-size: 34px; }
-
-    .experience-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 10px; }
-
-    .team-count, .team-subtitle { font-size: 36px; }
-
-    .title-line { font-size: 28px; white-space: normal; }
-
-    .contact-info h2 { font-size: 36px; }
-    .settings { font-size: 22px; }
-    .office { font-size: 20px; }
-}
-
-
-@media (max-width: 768px) {
-    html, body { overflow-x: hidden; max-width: 100vw; }
-
-    .line-1 {
-        font-size: clamp(22px, 7.5vw, 44px) !important;
-        white-space: normal !important;
-        word-break: break-word;
-        text-align: center;
-    }
-    .highlight {
-        font-size: clamp(36px, 12vw, 72px) !important;
-        margin-left: 0 !important;
-        margin-top: -10px !important;
-        text-align: right;
-    }
-    .hero-content {
-        padding: 0 16px !important;
-        max-width: 100vw;
-        overflow: hidden;
-    }
-
-    .about-title {
-        font-size: clamp(28px, 9vw, 52px) !important;
-        word-break: break-word;
-        padding: 0 16px;
-    }
-    .about { overflow: hidden; }
-
-    .cases-viewport {
-        width: 100% !important;
-        max-width: 100vw !important;
-        overflow: hidden !important;
-    }
-    .case-card {
-        flex: 0 0 calc(100vw - 32px) !important;
-        width: calc(100vw - 32px) !important;
-        margin-right: 16px !important;
-        min-height: auto !important;
-    }
-    .cases-track { align-items: flex-start !important; }
-    .case-card-content {
-        flex-direction: column !important;
-        height: auto !important;
-    }
-    .case-text {
-        width: 100% !important;
-        flex: none !important;
-        padding: 24px 20px 16px !important;
-    }
-    .case-image-wrapper {
-        width: 100% !important;
-        flex: none !important;
-        height: 200px !important;
-        padding-top: 0 !important;
-    }
-    .case-img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        transform: none !important;
-    }
-    .cases-main-title {
-        padding-left: 16px !important;
-        font-size: clamp(26px, 8vw, 36px) !important;
-    }
-
-    .slider-navigation { gap: clamp(60px, 40vw, 200px) !important; }
-    .case-arrow-btn { width: clamp(60px, 18vw, 110px) !important; }
-
-    .container-wide {
-        flex-direction: column !important;
-        padding: 0 16px !important;
-        gap: 16px !important;
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-    .bottom-title {
-        font-size: clamp(26px, 8vw, 40px) !important;
-        padding-left: 0 !important;
-        letter-spacing: -1px !important;
-    }
-    .bottom-description {
-        padding-right: 0 !important;
-        font-size: 14px !important;
-        max-width: 100% !important;
-    }
-
-    .benefits-title span {
-        padding-left: 0 !important;
-        display: block !important;
-        text-align: center;
-    }
-    .benefits-title { text-align: center !important; }
-
-    .footer-contact {
-        height: auto !important;
-        min-height: unset !important;
-        padding: 50px 16px !important;
-        background-size: cover !important;
-    }
-    .form-inputs { flex-direction: column !important; gap: 24px !important; }
-    .btn-submit { width: 100% !important; }
-    .contact-title {
-        font-size: clamp(20px, 6vw, 2rem) !important;
-        margin-bottom: 36px !important;
-    }
-
-    .modal-content {
-        width: 96% !important;
-        height: auto !important;
-        max-height: 88vh !important;
-        overflow-y: auto !important;
-        padding: 28px 18px !important;
-    }
-    .modal-title { font-size: clamp(22px, 7vw, 36px) !important; }
-    .modal-footer { flex-direction: column !important; align-items: flex-start !important; gap: 14px !important; }
-}
-
-@media (max-width: 480px) {
-    .line-1 { font-size: clamp(20px, 6.5vw, 30px) !important; }
-    .highlight { font-size: clamp(32px, 11vw, 54px) !important; }
-
-    .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 24px 12px !important; }
-    .stat-value { font-size: clamp(28px, 8vw, 40px) !important; white-space: normal !important; }
-    .achievements-title { font-size: clamp(26px, 8vw, 36px) !important; }
-
-    .about-title { font-size: clamp(24px, 8vw, 36px) !important; }
-
-    .team-count, .team-subtitle { font-size: clamp(28px, 8.5vw, 40px) !important; }
-}
 .insta-row {
     display: flex;
     align-items: center;

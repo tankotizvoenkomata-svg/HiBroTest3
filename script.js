@@ -401,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = originalCount; // Начинаем с оригиналов
 
     // Точный расчет ширины шага
-    const getStepWidth = () => viewport.getBoundingClientRect().width / 4;
+    const getStepWidth = () => viewport.getBoundingClientRect().width / 2;
 
     const setPosition = (smooth = true) => {
         const step = getStepWidth();
