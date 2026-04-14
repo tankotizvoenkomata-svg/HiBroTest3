@@ -2085,16 +2085,20 @@ body {
     padding: 0 20px;
 }
 
-/* Гнучка сітка для всього контенту */
 .contact-flex {
     display: grid;
-    grid-template-columns: 1.5fr 1fr; /* Ліва частина (заголовок + форма) ширша */
+    grid-template-columns: 1.5fr 1fr;
     gap: 0 80px;
+    align-items: start;
 }
 
-/* Заголовок на всю ширину (займає обидві колонки зверху) */
-.contact-info h2 {
-    grid-column: span 2;
+/* LEFT COLUMN */
+.contact-col-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-col-left h2 {
     font-size: 72px;
     font-weight: 700;
     line-height: 1;
@@ -2103,94 +2107,89 @@ body {
     font-family: "Stolzl", Sans-serif;
 }
 
-.contact-info h2 span {
-    margin-left: 50px;
+.contact-col-left h2 span {
     display: block;
     color: #0D890D;
     font-family: "Stolzl", Sans-serif;
+    padding-left: 100px;
 }
 
-/* Контейнер-привид, щоб розділити h2 та p */
-.contact-info {
-    display: contents; 
+.contact-form-block {
+    display: flex;
+    flex-direction: column;
 }
 
-/* Тексти про офіс та графік (відправляємо в ПРАВУ колонку) */
-.contact-info {
-    grid-column: 2;
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 15px;
-    opacity: 0.9;
-
-} /* Будемо раді побачити... */
-.office { /* Пн-Пт... */
-    grid-column: 2;
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 15px;
-    opacity: 0.9;
-    font-family: "Stolzl", Sans-serif;
-}
-
-.Mon { /* Пн-Пт... */
-    grid-column: 2;
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 15px;
-    opacity: 0.9;
-    font-family: "Stolzl Book", Sans-serif;
-    line-height: 1.5em;
-}
-
-.insta {
-    grid-column: 2;
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 15px;
-    opacity: 0.9;
-    font-family: "Stolzl Book", Sans-serif;
-    line-height: 1.5em;
-}
-
-/* "Налаштувати вам рекламу?" та "Залишайте заявку" (над формою ЗЛІВА) */
 .settings {
-    padding-left: 0;
-    grid-column: 1;
     margin: 0;
     font-size: 28px;
     font-weight: 700;
     font-family: "Stolzl", Sans-serif;
     line-height: 1.1em;
+    color: #fff;
 }
 
 .left {
-    padding-left: 0;
-    padding-top: 12px;
-    grid-column: 1;
-    margin: 0px;
-    margin-bottom: 30px;
+    padding-top: 10px;
+    margin: 0 0 30px 0;
     font-size: 18px;
     font-weight: 400;
     font-family: "Stolzl Book", Sans-serif;
     line-height: 1.5em;
+    color: rgba(255,255,255,0.65);
 }
 
-.contact-info p:nth-of-type(3) {
-    font-size: 16px;
+/* RIGHT COLUMN */
+.contact-col-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.office {
+    font-size: 26px;
+    font-weight: 700;
+    font-family: "Stolzl", Sans-serif;
+    line-height: 1.2;
+    color: #fff;
+    margin-bottom: 60px;
+    padding-top: 80px;
+}
+
+.contact-right-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.Mon {
+    font-size: 20px;
     font-weight: 400;
-    margin-bottom: 30px; /* Відступ перед полями вводу */
-    opacity: 0.7;
+    font-family: "Stolzl Book", Sans-serif;
+    line-height: 1.5em;
+    color: #fff;
+    margin: 0;
 }
 
-/* Форма (ЗЛІВА під фразами про рекламу) */
+.insta-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.insta {
+    font-size: 20px;
+    font-weight: 400;
+    font-family: "Stolzl Book", Sans-serif;
+    line-height: 1.4em;
+    color: #fff;
+    margin: 0;
+}
+
+/* Форма */
 .contact-form {
-    grid-column: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
 }
-
 
 /* Стиль полів */
 .contact-form input, 
@@ -2202,7 +2201,6 @@ body {
     padding: 15px 0;
     font-size: 18px;
     font-weight: 600;
-    line-height: 1,3em;
     outline: none;
     font-family: "Stolzl Book", Sans-serif;
 }
@@ -2225,32 +2223,49 @@ body {
     text-transform: uppercase;
     cursor: pointer;
     margin-top: 20px;
-    width: fit-content;
+    width: 320px;
     transition: all 0.3s ease;
 }
 
 .btn-white:hover {
-    grid-column: 1;
-    font-family: 'Stolzl', sans-serif;
     background: #0D890D;
     color: #fff;
-    border: none;
-    padding: 20px 40px;
-    font-weight: 700;
-    text-transform: uppercase;
-    cursor: pointer;
-    margin-top: 20px;
-    width: fit-content;
 }
 
 /* Футер */
 .footer {
-    grid-column: span 2;
     margin-top: 60px;
     padding-top: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.footer p,
+.footer-email {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 15px;
+    font-family: "Stolzl Book", sans-serif;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-email:hover {
+    color: #fff;
+}
+
+/* Mobile */
+@media (max-width: 992px) {
+    .contact-flex { grid-template-columns: 1fr; gap: 40px; }
+    .office { margin-bottom: 30px; }
+    .footer { flex-direction: column; gap: 12px; text-align: center; }
+}
+
+@media (max-width: 768px) {
+    .contact-col-left h2 { font-size: 48px; margin-bottom: 30px; }
+    .contact-col-left h2 span { margin-left: 0; }
+    .contact-form { grid-template-columns: 1fr; }
+    .btn-white { width: 100% !important; }
 }
 
 .footer p{
