@@ -19,64 +19,62 @@
 }
 
 /* Адаптация для мобильных устройств */
+/* ==========================================
+   --- ОПТИМИЗИРОВАННАЯ АДАПТАЦИЯ ---
+   ========================================== */
+
 @media (max-width: 768px) {
-    /* Хедер: Логотип слева, Бургер справа */
+    /* 1. Хедер: Лого и Бургер в одну линию */
     .header {
-        padding: 15px 20px;
-        flex-direction: row; /* Оставляем в линию */
+        padding: 10px 20px;
+        flex-direction: row !important; /* Принудительно в линию */
         justify-content: space-between;
         align-items: center;
-        position: fixed; /* Чтобы меню было всегда доступно */
-        background: #000;
+        top: 0;
     }
 
-    /* Скрываем десктопную навигацию и кнопку связи в хедере */
+    /* Скрываем лишнее в хедере */
     .nav, .header .btn-contact {
         display: none; 
     }
 
-    /* Показываем бургер (нужно добавить стили для .hamburger-btn в общий CSS) */
-    .hamburger-btn {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
-    .hamburger-btn span {
-        display: block;
-        width: 30px;
-        height: 2px;
-        background: #fff;
+    /* 2. Исправление пропавшего заголовка */
+    .main-title span {
+        opacity: 1 !important; /* Проявляем принудительно, если анимация не сработала */
+        transform: none !important; 
+        animation: none !important;
+        text-align: left;
     }
 
-    /* Главный заголовок как на скриншоте */
     .hero-content {
         padding: 0 20px;
-        text-align: left;
+        margin-top: 40px; /* Отступ от хедера */
     }
 
     .line-1 {
-        font-size: 48px; /* Уменьшаем размер */
-        text-align: left;
+        font-size: 42px !important;
         line-height: 1.1;
+        display: block;
+        text-align: left !important;
     }
 
     .highlight {
-        font-size: 56px; /* Крупнее основного текста */
-        margin-left: 0;  /* Убираем огромный отступ слева */
-        margin-top: 10px;
-        line-height: 1;
+        font-size: 54px !important;
+        margin-left: 0 !important; /* Убираем десктопный отступ 600px */
+        margin-top: 5px !important;
+        display: block;
     }
 
-    /* Секция с фото */
+    /* 3. Уменьшаем фото (делаем секцию компактнее) */
     .photo-viewport {
-        height: 450px; /* Уменьшаем высоту для мобилок */
-        margin-top: 20px;
+        height: 320px !important; /* Значительно меньше, как на скрине */
+        margin-top: 10px;
     }
 
-    /* Нижний заголовок "ми ваші люди" */
+    .header-spacer { height: 80px; } /* Уменьшаем пустое место сверху */
+    .header-spacer2 { height: 20px; }
+
+    /* 4. Нижний блок "Ми ваші люди" */
     .container-wide {
         flex-direction: column;
         align-items: flex-start;
@@ -84,37 +82,22 @@
     }
 
     .bottom-title {
-        padding-left: 0;
-        font-size: 42px;
-        margin-bottom: 20px;
+        padding-left: 0 !important;
+        font-size: 38px !important;
+        margin-bottom: 15px;
+        line-height: 1;
     }
 
     .bottom-description {
-        padding-right: 0;
-        font-size: 16px;
-    }
-}
-
-/* Стили для мобильного меню (когда оно открыто) */
-/* Эти стили сделают навигацию как на втором скриншоте */
-@media (max-width: 768px) {
-    .nav.active {
-        display: flex;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background: #000;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
+        padding-right: 0 !important;
+        font-size: 15px;
+        line-height: 1.4;
     }
 
-    .nav.active a {
-        font-size: 24px;
-        margin: 15px 0;
+    /* Хотспоты (точки на фото) — делаем чуть меньше для мобилок */
+    .hotspot {
+        width: 8px;
+        height: 8px;
     }
 }
 
