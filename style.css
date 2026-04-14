@@ -18,108 +18,104 @@
     scroll-behavior: smooth;
 }
 
-/* ==========================================
-   --- АДАПТИВНА ВЕРСТКА (RESPONSIVE) ---
-   ========================================== */
-
-/* 1. Планшети та невеликі ноутбуки (до 1024px) */
-@media (max-width: 1024px) {
-    .container, .container-contacts {
-        max-width: 90%;
-        padding: 0 15px;
-    }
-
-    .hero h1 {
-        font-size: 50px; /* Трохи зменшуємо головний заголовок */
-    }
-
-    .cases-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 колонки замість 3 */
-    }
-}
-
-/* 2. Планшети вертикальні (до 768px) */
+/* Адаптация для мобильных устройств */
 @media (max-width: 768px) {
+    /* Хедер: Логотип слева, Бургер справа */
     .header {
-        flex-direction: column; /* Лого, меню і кнопка стають один під одним */
-        gap: 20px;
-        padding: 20px;
-    }
-
-    .nav {
-        display: flex;
-        flex-wrap: wrap; /* Меню в два ряди, якщо не влізе */
-        justify-content: center;
-        gap: 15px;
-    }
-
-    .hero h1 {
-        font-size: 40px;
-    }
-
-    .hero-stats {
-        flex-direction: column; /* Статистика в стовпчик */
+        padding: 15px 20px;
+        flex-direction: row; /* Оставляем в линию */
+        justify-content: space-between;
         align-items: center;
-        gap: 30px;
+        position: fixed; /* Чтобы меню было всегда доступно */
+        background: #000;
     }
 
-    .cases-grid {
-        grid-template-columns: 1fr; /* Кейси в одну колонку */
+    /* Скрываем десктопную навигацию и кнопку связи в хедере */
+    .nav, .header .btn-contact {
+        display: none; 
     }
 
-    .work-grid {
-        grid-template-columns: 1fr; /* Етапи роботи в одну колонку */
+    /* Показываем бургер (нужно добавить стили для .hamburger-btn в общий CSS) */
+    .hamburger-btn {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .hamburger-btn span {
+        display: block;
+        width: 30px;
+        height: 2px;
+        background: #fff;
     }
 
-    .contact-flex {
-        flex-direction: column; /* Форма під текстом */
-        gap: 40px;
+    /* Главный заголовок как на скриншоте */
+    .hero-content {
+        padding: 0 20px;
+        text-align: left;
     }
 
-    .contact-info {
-        text-align: center;
-    }
-}
-
-/* 3. Мобільні телефони (до 480px) */
-@media (max-width: 480px) {
-    .hero h1 {
-        font-size: 32px; /* Компактний шрифт для мобілок */
-        line-height: 1.2;
+    .line-1 {
+        font-size: 48px; /* Уменьшаем размер */
+        text-align: left;
+        line-height: 1.1;
     }
 
-    .hero p {
+    .highlight {
+        font-size: 56px; /* Крупнее основного текста */
+        margin-left: 0;  /* Убираем огромный отступ слева */
+        margin-top: 10px;
+        line-height: 1;
+    }
+
+    /* Секция с фото */
+    .photo-viewport {
+        height: 450px; /* Уменьшаем высоту для мобилок */
+        margin-top: 20px;
+    }
+
+    /* Нижний заголовок "ми ваші люди" */
+    .container-wide {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 20px;
+    }
+
+    .bottom-title {
+        padding-left: 0;
+        font-size: 42px;
+        margin-bottom: 20px;
+    }
+
+    .bottom-description {
+        padding-right: 0;
         font-size: 16px;
     }
-
-    .nav a {
-        font-size: 12px; /* Дрібніше меню */
-    }
-
-    .btn-contact {
-        width: 100%; /* Кнопка на всю ширину */
-        text-align: center;
-    }
-
-    .case-card img {
-        height: auto; /* Щоб картинки не сплющувались */
-    }
-
-    .modal-content {
-        width: 95%;
-        padding: 20px;
-    }
-
-    .footer {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
 }
 
-/* Додаткове виправлення для слайдера на мобільних */
-.slider-container {
-    overflow: hidden; /* Щоб нічого не вилазило за межі екрана */
+/* Стили для мобильного меню (когда оно открыто) */
+/* Эти стили сделают навигацию как на втором скриншоте */
+@media (max-width: 768px) {
+    .nav.active {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #000;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .nav.active a {
+        font-size: 24px;
+        margin: 15px 0;
+    }
 }
 
 /* ЗАГАЛЬНІ НАЛАШТУВАННЯ */
