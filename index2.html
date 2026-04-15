@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Характеристики та Застосування</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+<section class="features-section">
+    <div class="features-wrapper">
+        
+        <div class="feature-card">
+            <span class="feature-number">04</span>
+            <h3>ОНОВЛЕННЯ ЧЕРЕЗ WI-FI</h3>
+            <p>Прошивка з телефону — пристрій завжди актуальний.</p>
+        </div>
+
+        <div class="feature-card">
+            <span class="feature-number">05</span>
+            <h3>ДВА МІКРОКОНТРОЛЕРИ</h3>
+            <p>Максимальна швидкість сканування завдяки розподілу задач.</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="main-container">
+    </section>
+
+<section class="main-container">
+    <div class="content-wrapper">
+        
+        <div class="specs-column">
+            <h2>Характеристики</h2>
+            <table class="specs-table">
+                <tr><td>Вага</td><td>510 г</td></tr>
+                <tr><td>Екран</td><td>4,3" + 0,96"</td></tr>
+                <tr><td>Крок сканування</td><td>5 МГц / 1 МГц</td></tr>
+                <tr><td>Акумулятор</td><td>10 000 мАг</td></tr>
+                <tr><td>Розміри</td><td>145х40х290 мм</td></tr>
+                <tr><td>Автономність</td><td>6-8 год</td></tr>
+            </table>
+        </div>
+
+        <div class="usage-column">
+            <h2>Де застосовують</h2>
+            <div class="usage-grid">
+                
+                <div class="usage-card">
+                    <h3>ОСОБИСТА БЕЗПЕКА</h3>
+                    <p>Цивільні в зоні активних бойових дій або поблизу фронту. Чуєте звук або бачите підозрілий об'єкт? Детектор за секунди покаже — є сигнал чи ні.</p>
+                </div>
+
+                <div class="usage-card">
+                    <h3>ЕВАКУАЦІЯ</h3>
+                    <p>Водії евакуаційних колон і волонтери. Колона на дорозі — ідеальна ціль. Оператор або пасажир тримає детектор увімкненим весь маршрут.</p>
+                </div>
+
+                </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="order-section-sq">
+    <div class="order-container-sq" id="multiselectContainer">
+        <div class="form-core">
+            <h2 class="form-title-sq">ОФОРМИТИ ЗАМОВЛЕННЯ</h2>
+            
+            <form id="orderFormSq" class="contact-form-sq">
+                
+<div class="form-group-sq multiselect-wrapper-sq">
+    <div class="select-trigger-sq" id="goodsTrigger">
+        <span id="selectedLabelSq">ОБЕРІТЬ ТОВАР</span>
+        <span class="arrow-icon">▼</span>
+    </div>
+    
+    <div class="dropdown-side-sq" id="goodsDropdown">
+        <label class="check-item-sq">
+            <input type="checkbox" value="Avrobit Detector тридіапазонний" onchange="updateSelectedSq()">
+            <span class="check-box-sq"></span>
+            <span class="check-text-sq">Avrobit Detector тридіапазонний</span>
+        </label>
+        </div>
+</div>
+
+                <div class="form-group-sq">
+                    <input type="text" name="name" placeholder="ІМ'Я" required>
+                </div>
+
+<div class="form-group-sq">
+    <input type="tel" name="phone" id="phoneInputSq" value="+380" maxlength="13" placeholder="НОМЕР ТЕЛЕФОНУ" required>
+</div>
+
+                <p class="methods-label-sq">ЯК ЗВ’ЯЗАТИСЯ?</p>
+
+                <div class="contact-methods-sq">
+                    <div class="method-tabs">
+                        <label class="tab-btn">
+                            <input type="radio" name="contact_type" value="telegram" required onclick="handleRadioSq(this)">
+                            <span>TELEGRAM</span>
+                        </label>
+                        <label class="tab-btn">
+                            <input type="radio" name="contact_type" value="viber" onclick="handleRadioSq(this)">
+                            <span>VIBER</span>
+                        </label>
+                        <label class="tab-btn">
+                            <input type="radio" name="contact_type" value="whatsapp" onclick="handleRadioSq(this)">
+                            <span>WHATSAPP</span>
+                        </label>
+                        <label class="tab-btn">
+                            <input type="radio" name="contact_type" value="signal" onclick="handleRadioSq(this)">
+                            <span>SIGNAL</span>
+                        </label>
+                        <label class="tab-btn">
+                            <input type="radio" name="contact_type" value="gmail" onclick="handleRadioSq(this)">
+                            <span>GMAIL</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="dynamicInputContainerSq" class="form-group-sq dynamic-field hidden">
+                    <input type="text" id="dynamicInputSq" name="contact_data" placeholder="">
+                </div>
+
+<div class="form-group-sq captcha-wrapper-sq">
+    <label class="methods-label-sq">Будь ласка, надайте відповідь:</label>
+    <div class="captcha-container-sq">
+        <span id="captchaQuestionSq" style="color: #fff; font-weight: bold; margin-right: 10px;"></span>
+        <input type="number" id="captchaInputSq" placeholder="?" required style="width: 60px; text-align: center;">
+    </div>
+</div>
+
+                <button type="submit" class="submit-btn-sq">ВІДПРАВИТИ ЗАЯВКУ</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script src="script2.js"></script>
+
+</body>
+</html>
