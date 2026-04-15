@@ -475,92 +475,114 @@ h2 {
 }
 
 /* ========================================= */
-/* --- МОБІЛЬНА АДАПТАЦІЯ ДЛЯ ФОРМИ --- */
+/* --- АДАПТАЦІЯ ФОРМИ ДЛЯ МОБІЛЬНИХ --- */
 /* ========================================= */
 
 @media (max-width: 600px) {
-    /* 1. Налаштування контейнера форми */
+    /* Контейнер секції та заголовок */
     .order-section-sq {
-        padding: 60px 15px !important; /* Менші відступи зверху/знизу */
+        padding: 40px 15px !important;
     }
 
     .form-title-sq {
-        font-size: 1.5rem !important; /* Зменшуємо заголовок */
+        font-size: 1.6rem !important;
         margin-bottom: 30px !important;
     }
 
-    /* 2. Адаптація плиток вибору зв'язку */
+    /* Адаптація плиток вибору зв'язку (робимо 2 в ряд) */
     .method-tabs {
-        display: grid !important; /* Переходимо на сітку для рівних колонок */
-        grid-template-columns: 1fr 1fr; /* По 2 елементи в ряд */
+        display: grid !important;
+        grid-template-columns: 1fr 1fr; /* Сітка на 2 колонки */
+        border: 1px solid #333;
     }
 
     .tab-btn {
-        min-width: 0 !important; /* Скидаємо обмеження */
+        min-width: 0 !important;
+        border: none !important;
     }
 
     .tab-btn span {
-        padding: 12px 5px !important; /* Компактніші кнопки */
+        padding: 15px 5px !important;
         font-size: 10px !important;
         border-right: 1px solid #333 !important;
         border-bottom: 1px solid #333 !important;
     }
 
-    /* Прибираємо праву межу у парних елементів, щоб сітка була чистою */
-    .tab-btn:nth-child(2n) span {
+    /* Останній елемент розтягуємо на всю ширину, якщо їх непарна кількість */
+    .tab-btn:last-child {
+        grid-column: span 2;
+    }
+
+    .tab-btn:last-child span {
         border-right: none !important;
     }
 
-    /* 3. Адаптація випадаючого списку товарів */
+    /* Випадаючий список товарів (робимо зручнішим для пальців) */
     .dropdown-side-sq {
-        position: fixed !important; /* На мобільних краще зробити як модальне вікно або на весь екран */
-        top: auto !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        max-height: 70vh !important; /* Не більше 70% висоти екрану */
-        border-top: 2px solid #fff !important;
-        border-left: none !important;
-        border-right: none !important;
-        box-shadow: 0 -10px 40px rgba(0,0,0,0.9) !important;
+        max-height: 300px !important;
     }
 
     .check-item-sq {
-        padding: 18px 20px !important; /* Збільшуємо зону кліку для пальців */
+        padding: 18px 20px !important; /* Більша зона натискання */
     }
 
-    /* 4. Поля вводу та капча */
-    .form-group-sq input, 
-    .select-trigger-sq {
-        padding: 16px 15px !important; /* Трохи компактніше */
+    .check-text-sq {
+        font-size: 12px !important;
+    }
+
+    /* Поля вводу та капча */
+    .form-group-sq input {
+        padding: 16px 15px !important;
         font-size: 13px !important;
     }
 
     .captcha-container-sq {
-        flex-direction: column !important; /* Капча в стовпчик якщо мало місця */
-        gap: 10px;
-        text-align: center;
+        padding: 12px !important;
     }
 
-    #captchaQuestionSq {
-        font-size: 18px !important;
-        margin-bottom: 5px;
+    .methods-label-sq {
+        font-size: 14px !important;
+        margin: 20px 0 15px 0 !important;
     }
 
-    /* 5. Кнопка відправки */
+    /* Кнопка відправки */
     .submit-btn-sq {
         padding: 18px !important;
         font-size: 14px !important;
     }
 }
+/* ========================================= */
+/* --- ВИПРАВЛЕННЯ ДЛЯ ВУЗЬКИХ ЕКРАНІВ --- */
+/* ========================================= */
 
-/* Специфічне виправлення для зовсім вузьких екранів (iPhone SE і т.д.) */
-@media (max-width: 340px) {
+@media (max-width: 380px) {
     .method-tabs {
-        grid-template-columns: 1fr; /* Все в один стовпчик */
+        display: flex !important; /* Перемикаємо на flex для кращого контролю */
+        flex-direction: column !important;
+        border: 1px solid #333 !important;
     }
-    
+
+    .tab-btn {
+        width: 100% !important;
+        display: block !important;
+    }
+
     .tab-btn span {
-        border-right: none !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        border-right: none !important; /* Прибираємо бокову межу */
+        border-bottom: 1px solid #333 !important; /* Лишаємо тільки нижню */
+        padding: 15px 10px !important;
+        text-align: center !important;
+    }
+
+    .tab-btn:last-child span {
+        border-bottom: none !important; /* В останнього елемента прибираємо і нижню межу */
+    }
+
+    /* Також адаптуємо капчу, щоб вона не вилазила за межі */
+    .captcha-container-sq {
+        flex-direction: column !important;
+        gap: 10px !important;
     }
 }
