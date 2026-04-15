@@ -138,23 +138,23 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 if (data.status === 'success') {
                     alert('Дякуємо! Замовлення прийнято.');
+                    
+                    // Очищаем форму перед уходом
                     this.reset();
-                    phoneInput.value = '+380';
-                    generateCaptchaSq(); // Нова задача після успіху
-                    document.getElementById('dynamicInputContainerSq')?.classList.add('hidden');
-                    updateSelectedSq();
-                    dropdown?.classList.remove('show');
+                    if (phoneInput) phoneInput.value = '+380';
+                    
+                    // ПЕРЕНАПРАВЛЕНИЕ:
+                    window.location.href = 'index2.html';
                 } else {
                     alert('Помилка: ' + (data.message || 'Сервер відхилив запит'));
+                    // Если была ошибка, обновляем капчу, чтобы пользователь мог попробовать снова
+                    if (typeof generateCaptchaSq === 'function') generateCaptchaSq();
                 }
             })
             .catch(err => {
                 console.error('Fetch Error:', err);
                 alert('Сталася помилка при відправці.');
             });
-        };
-    }
-});
 
 function updateSelectedSq() {
     const checkboxes = document.querySelectorAll('#goodsDropdown input:checked');
