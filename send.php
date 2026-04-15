@@ -1,23 +1,18 @@
 <?php
-// 1. Настройка доступа (CORS) — чтобы браузер не гневался
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+header("Access-Control-Allow-Headers: Content-Type");
 
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    exit;
-}
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') { exit; }
 
-require 'PHPMailer/Exception.php';
-require 'PHPMailer/PHPMailer.php';
-require 'PHPMailer/SMTP.php';
+// ПРАВИЛЬНОЕ ПОДКЛЮЧЕНИЕ ДЛЯ RAILWAY
+require 'vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
 
-// 3. Получение данных из формы
 $data = json_decode(file_get_contents('php://input'), true);
+// ... дальше ваш код
 
 if ($data) {
     $name    = !empty($data['name'])    ? strip_tags($data['name'])    : 'Не вказано';
