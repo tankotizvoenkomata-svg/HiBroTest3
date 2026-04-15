@@ -8,9 +8,11 @@ let scrollLeft;
 const onStart = (e) => {
     isDragging = true;
     viewport.style.cursor = 'grabbing';
-    // Фиксируем координату клика МИНУС текущий отступ канваса
+    // Запоминаем начальную координату X
     const x = e.pageX || e.touches[0].pageX;
-    startX = x - canvas.offsetLeft;
+    // Запоминаем текущее положение слайдера (убираем 'px' и преобразуем в число)
+    const currentLeft = parseFloat(canvas.style.left) || 0;
+    startX = x - currentLeft;
 };
 
 const onEnd = () => {
@@ -179,6 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
     track.addEventListener('pointermove', pointerMove);
     track.addEventListener('pointerup', pointerUp);
     track.addEventListener('pointerleave', pointerLeave);
+    track.addEventListener('pointercancel', pointerLeave);
 
     function getPositionX(event) {
         return event.clientX;

@@ -739,7 +739,7 @@ body {
    СЕКЦІЯ ПОСЛУГ (Східчастий заголовок)
 ========================================= */
 .services-section {
-    padding: 80px 0;
+    padding: 60px 0;
     background-color: #fff; /* Білий фон секції */
 }
 
@@ -922,7 +922,7 @@ body {
 /* Секція Про Нас */
 /* === СЕКЦИЯ ABOUT === */
 .about {
-    padding-top: 100px;
+    padding-top: 60px;
     background-image: url('img/Group-409.jpg');
     background-size: cover;     
     background-position: center; 
@@ -1103,7 +1103,7 @@ body {
 /* Секція Досягнень */
 .achievements {
     position: relative;
-    padding: 100px 0;
+    padding: 50px 0;
     color: #000;
     text-align: left;
     background-color: #fff;
@@ -1706,7 +1706,7 @@ body {
 .benefits {
     background-image: url("img/image-18-Traced.svg");
     background-color: #ffffff;
-    padding: 100px 0;
+    padding: 50px 0;
 }
 
 .benefits-title {
@@ -2632,7 +2632,6 @@ body { background-color: var(--black); color: var(--white); overflow-x: hidden; 
 
     .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 24px 12px !important; }
     .stat-value { font-size: clamp(28px, 8vw, 40px) !important; white-space: normal !important; }
-    .achievements-title { font-size: clamp(26px, 8vw, 36px) !important; }
 
     .about-title { font-size: clamp(24px, 8vw, 36px) !important; }
 
