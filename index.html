@@ -980,20 +980,24 @@ document.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const form = event.target;
+    // Проверяем, та ли это форма
     if (!form.classList.contains('contact-form') && 
         !form.classList.contains('contact-form-order') && 
         form.id !== 'modalForm') {
         return;
     }
 
+    // Собираем данные
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
+    // URL вашего сервера на Railway
     const serverUrl = 'https://hibrotest3-production.up.railway.app/send.php';
 
     try {
         const response = await fetch(serverUrl, {
             method: 'POST',
+            mode: 'cors', // Добавили для надежности
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -1007,12 +1011,16 @@ document.addEventListener('submit', async (event) => {
             if (form.id === 'modalForm') {
                 document.getElementById('fixedModal').style.display = 'none';
             }
+            // Если нужна страница благодарности — редиректим ТУТ, после успеха
+            // window.location.href = 'thanks.html'; 
         } else {
+            const errorData = await response.json();
+            console.error('Сервер ответил ошибкой:', errorData);
             throw new Error('Помилка сервера');
         }
     } catch (error) {
-        console.error('Ошибка:', error);
-        alert('Щось пішло не так...');
+        console.error('Ошибка при отправке:', error);
+        alert('Сталася помилка. Перевірте консоль (F12) или логи Railway.');
     }
 });
 </script>

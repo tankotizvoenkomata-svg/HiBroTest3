@@ -1,4 +1,5 @@
 <?php
+// 1. Настройка доступа
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
@@ -7,10 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit;
 }
 
-// 1. Подключаем автозагрузку библиотек (обязательно для Railway)
-require 'vendor/autoload.php';
-
-// 2. Получаем данные из запроса (JSON)
+// 2. Получение данных (убираем всё лишнее)
 $data = json_decode(file_get_contents('php://input'), true);
 
 if ($data) {
@@ -19,54 +17,52 @@ if ($data) {
     $link    = !empty($data['link'])    ? strip_tags($data['link'])    : 'Не вказано';
     $comment = !empty($data['comment']) ? strip_tags($data['comment']) : 'Без коментаря';
 
-    // --- А) ОТПРАВКА В TELEGRAM ---
+    // --- А) ТЕЛЕГРАМ (Чистый PHP) ---
     $token = getenv('TG_TOKEN');
     $chat_id = getenv('TG_CHAT_ID');
     
     if ($token && $chat_id) {
-        $tg_msg = "🔔 <b>Нова заявка!</b>\n";
-        $tg_msg .= "👤 Ім'я: $name\n";
-        $tg_msg .= "📞 Телефон: $phone\n";
-        $tg_msg .= "🔗 Посилання: $link\n";
-        if ($comment !== 'Без коментаря') { $tg_msg .= "📝 Запит: $comment"; }
-
-        $url = "https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chat_id}&parse_mode=HTML&text=" . urlencode($tg_msg);
-        $options = ['http' => ['method' => "GET", 'header' => "User-Agent: PHP\r\n"]];
-        @file_get_contents($url, false, stream_context_create($options));
-    }
-
-    // --- Б) ОТПРАВКА ЧЕРЕЗ RESEND (API) ---
-    $resend_api_key = getenv('RESEND_API_KEY');
-    $contact_email = getenv('CONTACT_EMAIL');
-
-    if ($resend_api_key && $contact_email) {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://api.resend.com/emails');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
+        $tg_msg = "🔔 Нова заявка!\n👤 Ім'я: $name\n📞 Телефон: $phone\n🔗 Посилання: $link\n📝 Запит: $comment";
+        $tg_url = "https://api.telegram.org/bot{$token}/sendMessage";
         
-        // Пока домен не верифицирован, Resend позволяет слать только с этого адреса:
-        $email_payload = [
-            'from' => 'LUDI.DIGITAL <onboarding@resend.dev>', 
-            'to' => [$contact_email],
-            'subject' => 'Нова заявка: ' . $name,
-            'html' => "
-                <h3>Нова заявка з сайту</h3>
-                <p><b>Ім'я:</b> {$name}</p>
-                <p><b>Телефон:</b> {$phone}</p>
-                <p><b>Посилання:</b> {$link}</p>
-                <p><b>Запит:</b> {$comment}</p>
-            "
+        $post_fields = [
+            'chat_id' => $chat_id,
+            'text' => $tg_msg,
+            'parse_mode' => 'HTML'
         ];
 
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($email_payload));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Authorization: Bearer ' . $resend_api_key,
-            'Content-Type: application/json'
-        ]);
+        $ch_tg = curl_init($tg_url);
+        curl_setopt($ch_tg, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch_tg, CURLOPT_POSTFIELDS, $post_fields);
+        curl_exec($ch_tg);
+        curl_close($ch_tg);
+    }
 
-        curl_exec($ch);
-        curl_close($ch);
+    // --- Б) RESEND (Чистый PHP через cURL) ---
+    $resend_key = getenv('RESEND_API_KEY');
+    $to_email = getenv('CONTACT_EMAIL');
+
+    if ($resend_key && $to_email) {
+        $resend_url = 'https://api.resend.com/emails';
+        
+        $email_data = [
+            'from' => 'LUDI.DIGITAL <onboarding@resend.dev>', 
+            'to' => [$to_email],
+            'subject' => 'Нова заявка: ' . $name,
+            'html' => "<h3>Нова заявка</h3><p><b>Ім'я:</b> $name</p><p><b>Телефон:</b> $phone</p><p><b>Запит:</b> $comment</p>"
+        ];
+
+        $ch_res = curl_init($resend_url);
+        curl_setopt($ch_res, CURLOPT_HTTPHEADER, [
+            "Authorization: Bearer $resend_key",
+            "Content-Type: application/json"
+        ]);
+        curl_setopt($ch_res, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch_res, CURLOPT_POST, true);
+        curl_setopt($ch_res, CURLOPT_POSTFIELDS, json_encode($email_data));
+        
+        curl_exec($ch_res);
+        curl_close($ch_res);
     }
 
     echo json_encode(["status" => "success"]);

@@ -1,0 +1,77 @@
+/* Общие настройки */
+body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Inter', Arial, sans-serif; /* Подойдет любой чистый гротеск */
+    margin: 0;
+    padding: 50px;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-weight: 700;
+}
+
+/* Стили таблицы характеристик */
+.specs-column {
+    flex: 1;
+}
+
+.specs-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.specs-table td {
+    padding: 15px 0;
+    border-bottom: 1px solid #333; /* Тонкая линия разделения */
+    font-size: 1rem;
+}
+
+.specs-table td:first-child {
+    color: #888; /* Серый цвет для названий */
+}
+
+.specs-table td:last-child {
+    text-align: right;
+    font-weight: bold;
+}
+
+/* Стили карточек справа */
+.usage-column {
+    flex: 1.5;
+}
+
+.usage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.usage-card {
+    background-color: #1a1a1a; /* Темно-серый фон карточки */
+    padding: 30px;
+    border-radius: 4px;
+}
+
+.usage-card h3 {
+    font-size: 1.1rem;
+    margin-top: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.usage-card p {
+    color: #ccc;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
