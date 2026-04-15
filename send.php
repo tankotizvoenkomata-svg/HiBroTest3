@@ -1,4 +1,16 @@
 <?php
+// Позволяем запросы с любого источника (или замените * на ваш домен)
+header("Access-Control-Allow-Origin: *");
+// Разрешаем определенные методы (POST важен для форм)
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+// Разрешаем заголовки, которые браузер может отправить (особенно Content-Type)
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+// Если это preflight-запрос (OPTIONS), просто выходим, не выполняя основной код
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    exit;
+}
+
 $data = json_decode(file_get_contents('php://input'), true);
 
 if ($data) {
