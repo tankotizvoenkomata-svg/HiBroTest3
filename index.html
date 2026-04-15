@@ -992,7 +992,7 @@ document.addEventListener('submit', async (event) => {
     const data = Object.fromEntries(formData.entries());
 
     // Укажите здесь URL вашего PHP-скрипта на Railway
-    const serverUrl = 'https://hibrotest3-production.up.railway.app/your-script.php';
+    const serverUrl = 'https://hibrotest3-production.up.railway.app/send.php';
 
     try {
         const response = await fetch(serverUrl, {
@@ -1016,7 +1016,7 @@ document.addEventListener('submit', async (event) => {
         }
     } catch (error) {
         console.error('Ошибка:', error);
-        alert('Тіні заважають відправці... Перевірте консоль.');
+        alert('Щось пішло не так...');
     }
 });
 </script>
