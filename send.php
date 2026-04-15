@@ -1,25 +1,29 @@
 <?php
-// Позволяем запросы с любого источника (или замените * на ваш домен)
+// 1. Настройка доступа (CORS) — чтобы браузер не гневался
 header("Access-Control-Allow-Origin: *");
-// Разрешаем определенные методы (POST важен для форм)
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-// Разрешаем заголовки, которые браузер может отправить (особенно Content-Type)
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// Если это preflight-запрос (OPTIONS), просто выходим, не выполняя основной код
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit;
 }
 
+// 2. Подключение PHPMailer (нужно после обновления composer.json)
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
+
+// 3. Получение данных из формы
 $data = json_decode(file_get_contents('php://input'), true);
 
 if ($data) {
-    $name    = !empty($data['name'])  ? strip_tags($data['name'])  : 'Не вказано';
-    $phone   = !empty($data['phone']) ? strip_tags($data['phone']) : 'Не вказано';
-    $link    = !empty($data['link'])  ? strip_tags($data['link'])  : 'Не вказано';
+    $name    = !empty($data['name'])    ? strip_tags($data['name'])    : 'Не вказано';
+    $phone   = !empty($data['phone'])   ? strip_tags($data['phone'])   : 'Не вказано';
+    $link    = !empty($data['link'])    ? strip_tags($data['link'])    : 'Не вказано';
     $comment = !empty($data['comment']) ? strip_tags($data['comment']) : 'Без коментаря';
 
-    // Текст сповіщення в Telegram
+    // --- ОТПРАВКА В TELEGRAM ---
     $tg_msg = "🔔 <b>Нова заявка!</b>\n";
     $tg_msg .= "👤 Ім'я: $name\n";
     $tg_msg .= "📞 Телефон: $phone\n";
@@ -29,37 +33,54 @@ if ($data) {
         $tg_msg .= "📝 Запит: $comment";
     }
 
-    // Відправка в TG
     $token = getenv('TG_TOKEN');
     $chat_id = getenv('TG_CHAT_ID');
     
     if ($token && $chat_id) {
         $url = "https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chat_id}&parse_mode=HTML&text=" . urlencode($tg_msg);
-        file_get_contents($url);
+        
+        // Используем контекст, чтобы Railway не блокировал запрос
+        $options = ['http' => ['method' => "GET", 'header' => "User-Agent: PHP\r\n"]];
+        $context = stream_context_create($options);
+        @file_get_contents($url, false, $context);
     }
 
-// --- ОТПРАВКА НА ПОЧТУ ЧЕРЕЗ СКРЫТУЮ ПЕРЕМЕННУЮ ---
-$to = getenv('CONTACT_EMAIL'); // Достаємо вашу пошту з налаштувань хостингу
+    // --- ОТПРАВКА НА ПОЧТУ ЧЕРЕЗ SMTP (PHPMailer) ---
+    $mail = new PHPMailer(true);
 
-if ($to) {
-    $subject = "Нова заявка від " . $name;
-    
-    $email_content = "Ви отримали нову заявку через форму:\n\n";
-    $email_content .= "👤 Ім'я: $name\n";
-    $email_content .= "📞 Телефон: $phone\n";
-    $email_content .= "🔗 Посилання: $link\n";
-    $email_content .= "📝 Запит: $comment\n";
+    try {
+        // Настройки сервера из переменных окружения
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com'; // Или ваш SMTP хост
+        $mail->SMTPAuth   = true;
+        $mail->Username   = getenv('SMTP_USER'); // Ваша почта для отправки
+        $mail->Password   = getenv('SMTP_PASS'); // Пароль приложения
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
 
-    // Формуємо заголовки
-    $headers = "From: no-reply@" . $_SERVER['HTTP_HOST'] . "\r\n";
-    $headers .= "Reply-To: no-reply@" . $_SERVER['HTTP_HOST'] . "\r\n";
-    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-    $headers .= "X-Mailer: PHP/" . phpversion();
+        // Получатели
+        $mail->setFrom(getenv('SMTP_USER'), 'LUDI.DIGITAL');
+        $mail->addAddress(getenv('CONTACT_EMAIL')); // Ваша почта из переменных
 
-    // Намагаємось відправити
-    @mail($to, $subject, $email_content, $headers);
-}
+        // Контент письма
+        $mail->CharSet = 'UTF-8';
+        $mail->isHTML(true);
+        $mail->Subject = "Нова заявка: " . $name;
+        $mail->Body    = "
+            <h3>Нова заявка з вашого сайту</h3>
+            <p><b>Ім'я:</b> {$name}</p>
+            <p><b>Телефон:</b> {$phone}</p>
+            <p><b>Посилання:</b> {$link}</p>
+            <p><b>Запит:</b> {$comment}</p>
+        ";
 
+        $mail->send();
+    } catch (Exception $e) {
+        // Ошибка записывается в логи сервера, если почта не ушла
+        error_log("Помилка PHPMailer: " . $mail->ErrorInfo);
+    }
+
+    // Возвращаем успех фронтенду
     echo json_encode(["status" => "success"]);
 } else {
     http_response_code(400);

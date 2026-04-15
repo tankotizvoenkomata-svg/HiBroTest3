@@ -1628,7 +1628,7 @@ body {
 }
 
 .logo-item {
-    /* ЖЕСТКАЯ фиксация ровно 4 элементов */
+    /* 2 logos visible at all times: each item = half the viewport */
     flex: 0 0 25%; 
     max-width: 25%; 
     width: 25%;
@@ -1637,7 +1637,7 @@ body {
     align-items: center;
     padding: 0 15px; 
     box-sizing: border-box;
-    height: 80px; /* Ограничитель высоты ячейки */
+    height: 80px;
 }
 
 .logo-item img {
@@ -2224,7 +2224,7 @@ body {
 .footer {
     margin-top: 60px;
     padding-top: 30px;
-    border-top: 0px solid rgba(255,255,255,0.12);
+    border-top: 1px solid rgba(255,255,255,0.12);
     display: flex;
     justify-content: space-between;
     align-items: center;

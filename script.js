@@ -368,122 +368,138 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const track = document.getElementById('partnersTrack');
+    const track    = document.getElementById('partnersTrack');
     const viewport = document.getElementById('partnersViewport');
     const dotsContainer = document.getElementById('partnersDots');
-    const items = Array.from(track.children);
-    const originalCount = items.length;
+    if (!track || !viewport || !dotsContainer) return;
 
-    // 1. Правильное клонирование
-    const leftClones = document.createDocumentFragment();
-    const rightClones = document.createDocumentFragment();
-    
-    items.forEach(item => {
-        leftClones.appendChild(item.cloneNode(true));
-        rightClones.appendChild(item.cloneNode(true));
-    });
-    
-    track.insertBefore(leftClones, track.firstChild);
-    track.appendChild(rightClones);
+    // ── 1. Snapshot original items BEFORE touching the DOM ──────────────
+    const originalItems = Array.from(track.children);
+    const N = originalItems.length; // e.g. 14
 
-    // 2. Создание точек
+    // ── 2. Build an infinite track: 7 full copies (3 buffer + 1 real + 3 buffer)
+    //    This way the user can never drag fast enough to reach the edge.
+    const BUFFER = 3;
+    track.innerHTML = ''; // clear
+
+    for (let copy = 0; copy < BUFFER * 2 + 1; copy++) {
+        originalItems.forEach(item => track.appendChild(item.cloneNode(true)));
+    }
+    // Total items in DOM = N * (BUFFER*2+1), e.g. 14 * 7 = 98
+
+    // ── 3. Dots ──────────────────────────────────────────────────────────
     dotsContainer.innerHTML = '';
-    items.forEach((_, i) => {
+    for (let i = 0; i < N; i++) {
         const dot = document.createElement('span');
         if (i === 0) dot.classList.add('active');
         dotsContainer.appendChild(dot);
-    });
-    const dots = dotsContainer.querySelectorAll('span');
+    }
+    const dots = Array.from(dotsContainer.querySelectorAll('span'));
 
+    // ── 4. State ─────────────────────────────────────────────────────────
+    // Start in the middle buffer zone so both directions have plenty of room
+    let currentIndex = BUFFER * N; // e.g. 42
+    let currentTranslate = 0;
     let isDragging = false;
     let startX = 0;
-    let currentTranslate = 0;
-    let currentIndex = originalCount; // Начинаем с оригиналов
+    let isSnapping = false; // lock new drags while snap-animation is running
 
-    // Точный расчет ширины шага
-    const getStepWidth = () => viewport.getBoundingClientRect().width / 2;
+    const getVisibleCount = () => window.innerWidth <= 768 ? 2 : 4;
+    const getStepWidth = () => viewport.getBoundingClientRect().width / getVisibleCount();
 
-    const setPosition = (smooth = true) => {
+    const setPosition = (smooth) => {
         const step = getStepWidth();
         currentTranslate = -currentIndex * step;
-        track.style.transition = smooth ? 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+        track.style.transition = smooth
+            ? 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)'
+            : 'none';
         track.style.transform = `translateX(${currentTranslate}px)`;
     };
 
     const updateDots = () => {
-        const index = ((currentIndex % originalCount) + originalCount) % originalCount;
-        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+        const dotIdx = ((currentIndex % N) + N) % N;
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === dotIdx));
     };
 
-    // Старт
+    // After the snap animation finishes, silently jump back into the middle buffer
+    // zone if we drifted into the outer buffers. The user never sees this jump
+    // because transition is set to 'none'.
+    const wrapIfNeeded = () => {
+        const low  = BUFFER * N;        // e.g. 42
+        const high = (BUFFER + 1) * N;  // e.g. 56
+        if (currentIndex < low) {
+            currentIndex += N;
+            setPosition(false);
+        } else if (currentIndex >= high) {
+            currentIndex -= N;
+            setPosition(false);
+        }
+    };
+
+    // ── 6. Initial render ────────────────────────────────────────────────
     setPosition(false);
     updateDots();
 
-    // 3. Обработка Drag & Swipe
+    // ── 7. Drag / Swipe handlers ─────────────────────────────────────────
     const dragStart = (e) => {
+        if (isSnapping) return;
         isDragging = true;
         startX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
-        track.style.transition = 'none'; // Мгновенная остановка
+        track.style.transition = 'none';
     };
 
     const dragMove = (e) => {
         if (!isDragging) return;
-        if (e.cancelable) e.preventDefault(); 
-        const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
-        const diff = currentX - startX;
-        // Двигаем слайдер за курсором в реальном времени
+        if (e.cancelable) e.preventDefault();
+        const x    = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+        const diff = x - startX;
         track.style.transform = `translateX(${currentTranslate + diff}px)`;
     };
 
     const dragEnd = (e) => {
         if (!isDragging) return;
         isDragging = false;
-        
-        const endX = e.type.includes('mouse') ? e.pageX : (e.changedTouches ? e.changedTouches[0].pageX : startX);
-        const diff = endX - startX; // Разница между стартом и концом
+
+        const endX = e.type.includes('mouse')
+            ? e.pageX
+            : (e.changedTouches ? e.changedTouches[0].pageX : startX);
+        const diff = endX - startX;
         const step = getStepWidth();
 
-        // Считаем, на сколько логотипов мы смахнули
-        const movedSteps = Math.round(diff / step);
+        // How many logo-widths did we travel?
+        // Clamp to ±3 so a wild fling can't fly into empty space
+        let moved = Math.round(-diff / step);
+        moved = Math.max(-3, Math.min(3, moved));
 
-        // Логика переключения
-        if (movedSteps === 0) {
-            // Если смахнули чуть-чуть, но больше 30px - листаем 1 логотип
-            if (diff < -30) currentIndex++;
-            else if (diff > 30) currentIndex--;
-        } else {
-            // Если смахнули сильно - листаем на пропорциональное количество
-            currentIndex -= movedSteps;
+        // Threshold: if tiny movement, treat as single swipe
+        if (moved === 0) {
+            if (diff < -30) moved =  1;
+            else if (diff > 30) moved = -1;
         }
 
-        // Анимируем к ровному индексу
+        currentIndex += moved;
+        isSnapping = true;
         setPosition(true);
         updateDots();
 
-        // Бесшовный перенос для бесконечности
+        // After animation completes, do the invisible re-center
         setTimeout(() => {
-            if (currentIndex >= originalCount * 2) {
-                currentIndex -= originalCount;
-                setPosition(false);
-            } else if (currentIndex < originalCount) {
-                currentIndex += originalCount;
-                setPosition(false);
-            }
-        }, 500); // 500ms равно времени CSS transition
+            isSnapping = false;
+            wrapIfNeeded();
+        }, 420); // slightly less than transition duration
     };
 
-    viewport.addEventListener('mousedown', dragStart);
-    window.addEventListener('mousemove', dragMove);
-    window.addEventListener('mouseup', dragEnd);
+    // ── 8. Event listeners ───────────────────────────────────────────────
+    viewport.addEventListener('mousedown',  dragStart);
+    window.addEventListener  ('mousemove',  dragMove);
+    window.addEventListener  ('mouseup',    dragEnd);
     viewport.addEventListener('mouseleave', dragEnd);
-    
-    viewport.addEventListener('touchstart', dragStart, { passive: false });
-    viewport.addEventListener('touchmove', dragMove, { passive: false });
-    viewport.addEventListener('touchend', dragEnd);
 
-    window.addEventListener('resize', () => {
-        setPosition(false);
-    });
+    viewport.addEventListener('touchstart', dragStart, { passive: false });
+    viewport.addEventListener('touchmove',  dragMove,  { passive: false });
+    viewport.addEventListener('touchend',   dragEnd);
+
+    window.addEventListener('resize', () => setPosition(false));
 });
 
 document.addEventListener("DOMContentLoaded", function() {

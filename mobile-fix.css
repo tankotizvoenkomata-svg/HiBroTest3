@@ -872,42 +872,25 @@
 
 @media (max-width: 468px) {
     .title-line { font-size: 32px; white-space: normal; }
-    .partners-title-wrapper {
-        text-align: right;
-    }
-    .logo-item {
-        flex: 0 0 50% !important;
-        width: 100px !important;
-        height: 100px !important;
-    }
+    .partners-title-wrapper { text-align: right; }
+    .logo-item img { height: 60px; }
     .logo-item img[src*="Lob_logo"] {
-        max-height: 100px !important;
-        height: 100px !important;
-        width: 120px !important;
+        max-height: 45px !important;
+        height: auto !important;
+        width: auto !important;
         object-fit: contain !important;
     }
-    .partners-title { font-size: 1.8rem; }
-    .logos-track { gap: 30px; flex-wrap: wrap; }
-    .logo-item img { height: 100px; }
 }
 
-/* Make partner viewport slightly taller for 2-logo view */
 @media (max-width: 768px) and (min-width: 469px) {
     .title-line { font-size: 50px; white-space: normal; }
-    .logo-item {
-        flex: 0 0 50% !important;
-        width: 100px !important;
-        height: 100px !important;
-    }
+    .logo-item img { height: 70px; }
     .logo-item img[src*="Lob_logo"] {
-        max-height: 100px !important;
-        height: 100px !important;
-        width: 120px !important;
+        max-height: 45px !important;
+        height: 80% !important;
+        width: 80% !important;
         object-fit: contain !important;
     }
-    .partners-title { font-size: 1.8rem; }
-    .logos-track { gap: 30px; flex-wrap: wrap; }
-    .logo-item img { height: 100px; }
 }
 
 @media (max-width: 1024px) and (min-width: 769px) {
@@ -1749,5 +1732,34 @@
         z-index: 101 !important;
         cursor: pointer !important;
         pointer-events: auto !important;
+    }
+}
+
+/* Партнери: 2 логотипи на планшетах та мобільних */
+@media (max-width: 768px) and (min-width: 469px) {
+    .logo-item {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+        width: 50% !important;
+    }
+    .logo-item img {
+        max-width: 240px !important;
+        width: 70%;
+        height: auto;
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 468px) {
+    .logo-item {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+        width: 50% !important;
+    }
+    .logo-item img {
+        max-width: 120px !important; 
+        width: 90%; 
+        height: auto;
+        object-fit: contain;
     }
 }
