@@ -1,4 +1,122 @@
+@media screen and (max-width: 468px) {
+    /* 1. Общий контейнер футера — избавляемся от конфликтов */
+    .footer-contact,
+    .footer {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important; /* Выравнивание по левому краю для эстетики */
+        text-align: left !important;
+        padding: 40px 20px !important; /* Увеличили боковые отступы, чтобы текст не лип к краям */
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 2. ЗАГОЛОВОК "КОНТАКТИ" */
+    .form-title,
+    .contact-col-left h2,
+    .footer-contact h1 {
+        font-size: clamp(32px, 10vw, 44px) !important; /* Адаптивный размер без лишних медиа-запросов */
+        line-height: 1.1 !important;
+        font-weight: 800 !important;
+        text-align: left !important;
+        width: 100% !important;
+        margin: 0 0 30px 0 !important;
+        word-wrap: break-word !important;
+    }
+
+    /* Акцент (зеленый/оранжевый) — делаем переносы корректными */
+    .form-title span,
+    .footer-contact h1 span {
+        color: #009419 !important; 
+        display: inline-block !important; /* Изменил с block на inline-block для гибкости */
+    }
+
+    /* 3. ФОРМА И ПОЛЯ */
+    .contact-form,
+    .form-inputs {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* 4. Группы инпутов */
+    .input-group {
+        width: 100% !important;
+        margin-bottom: 15px !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Поля ввода */
+    .input-group input,
+    .input-group textarea,
+    .form-input {
+        width: 100% !important;
+        background: transparent !important;
+        border: none !important;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.7) !important;
+        padding: 18px 5px !important; /* Оптимальный отступ */
+        font-size: 18px !important;
+        color: #fff !important;
+        border-radius: 0 !important;
+        box-sizing: border-box !important;
+        appearance: none; /* Убираем системные тени iOS */
+    }
+
+    /* 5. КНОПКА ОТПРАВКИ */
+    .btn-white,
+    .btn-submit,
+    .btn-submit-modal {
+        width: 100% !important;
+        margin-top: 25px !important;
+        padding: 20px !important;
+        font-size: 18px !important;
+        text-transform: uppercase !important;
+        font-weight: 900 !important;
+        cursor: pointer !important;
+        display: block !important;
+        text-align: center !important;
+        border: none !important;
+    }
+
+    /* 6. Нижний текст и иконки */
+    .office,
+    .footer-bottom,
+    .settings {
+        text-align: left !important;
+        width: 100% !important;
+        margin-top: 25px !important;
+        font-size: 14px !important;
+        opacity: 0.9;
+    }
+
+    .insta-row {
+        display: flex !important;
+        flex-wrap: wrap !important; /* Если иконки не влезут, они перенесутся */
+        gap: 20px !important;
+        margin-top: 25px !important;
+    }
+}
+
 /* =============================Main Section============================== */
+
+@media (max-width: 1440px) {
+    .hero h1 {
+        display: flex;
+        flex-direction: column; /* Ставимо рядки один під одним */
+        align-items: flex-start; /* Вирівнюємо все строго по лівому краю */
+        text-align: left;
+    }
+
+    .highlight {
+        margin-left: 450px; /* Прибираємо зайвий відступ, що штовхав текст */
+        margin-top: -10px; /* Трохи підтягуємо вгору до основного напису */
+        display: inline-block;
+        white-space: nowrap; /* Не даємо словам розриватися */
+    }
+}
 
 @media (max-width: 1024px) {
     .container, .container-contacts {
@@ -6,12 +124,36 @@
         padding: 0 15px;
     }
 
+    /* Зменшуємо заголовок трохи більше, щоб звільнити місце */
     .hero h1 {
-        font-size: 50px; /* Трохи зменшуємо головний заголовок */
+        font-size: 42px; 
+        line-height: 1.1;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 10; /* Текст завжди зверху */
+    }
+
+    /* Контролюємо контейнер з фото, щоб він не наповзав на текст */
+    .photo-viewport {
+        height: 400px !important; /* Обмежуємо висоту */
+        margin-top: 20px !important; /* Відсуваємо від тексту вниз */
+        z-index: 1;
+        position: relative;
+    }
+
+    .highlight {
+        padding-left: 150px;
+    }
+
+    .dev-photo {
+        height: 100% !important;
+        width: auto !important;
+        object-fit: contain;
+        z-index: 1;
     }
 
     .cases-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 колонки замість 3 */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -85,12 +227,6 @@
     .modal-content {
         width: 95%;
         padding: 20px;
-    }
-
-    .footer {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
     }
 }
 
@@ -184,12 +320,6 @@
     .modal-content {
         width: 95%;
         padding: 20px;
-    }
-
-    .footer {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
     }
 }
 
@@ -289,10 +419,14 @@
         gap: 20px;
     }
     
-    .title-green.right-align, 
+    .title-green.right-align {
+        align-self: center; /* Скидаємо вирівнювання по краях */
+        text-align: right;
+        font-size: 32px;
+    }
     .title-black.left-align {
         align-self: center; /* Скидаємо вирівнювання по краях */
-        text-align: center;
+        text-align: left;
         font-size: 32px;
     }
 }
@@ -443,13 +577,13 @@
 
 /* =========================================Cases Section ================================*/
 
-/* Tablet: between 769px and 1100px */
+/* ── LAPTOP fix (1024–1100px): gradient nav spans full card width ── */
 @media (max-width: 1100px) {
 
     .cases-main-title {
         width: 100% !important;
         max-width: 100% !important;
-        padding-left: 20px !important;
+        padding-left: 36px !important;
         padding-right: 20px !important;
         box-sizing: border-box !important;
         font-size: clamp(32px, 5vw, 60px) !important;
@@ -467,26 +601,67 @@
         max-width: 960px !important;
         margin-right: 20px !important;
     }
-}
 
-/* Tablet: layout arrow gap properly */
-@media (max-width: 1100px) and (min-width: 769px) {
+    /* Fix: nav must match the card width exactly and use space-between */
     .slider-navigation {
-        justify-content: space-between !important;
-        padding: 0 20px !important;
-        gap: 0 !important;
         width: calc(100vw - 60px) !important;
         max-width: 960px !important;
+        justify-content: space-between !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        gap: 0 !important;
         box-sizing: border-box !important;
     }
+
     .case-arrow-btn {
-        width: 100px !important;
-        height: 38px !important;
+        width: 110px !important;
+        height: 40px !important;
     }
 }
 
-/* Mobile overrides */
+/* ── TABLET layout (769–1100px): keep side-by-side, improve image ── */
+@media (max-width: 1100px) and (min-width: 769px) {
+
+    /* Card stays as a row */
+    .case-card-content {
+        flex-direction: row !important;
+        height: auto !important;
+        min-height: 400px !important;
+    }
+
+    .case-text {
+        flex: 0 0 45% !important;
+        width: 45% !important;
+        padding: 40px 30px !important;
+    }
+
+    /* Image takes right 55%, fills all the way to card edges */
+    .case-image-wrapper {
+        flex: 0 0 55% !important;
+        width: 55% !important;
+        height: auto !important;          /* grows with the card */
+        min-height: 360px !important;
+        padding-top: 0 !important;
+        align-items: flex-end !important;
+        justify-content: flex-end !important;
+        overflow: hidden !important;
+        position: relative !important;
+    }
+
+    .case-img {
+        width: 130% !important;           /* intentionally overflows so the image fills the space */
+        height: 110% !important;
+        object-fit: contain !important;
+        object-position: bottom right !important;
+        transform: translateY(-20px) !important;
+        pointer-events: none !important;
+        -webkit-user-drag: none !important;
+    }
+}
+
+/* ── MOBILE layout (≤768px): stacked column, large image bottom-right ── */
 @media (max-width: 768px) {
+
     .cases-viewport {
         width: calc(100vw - 32px) !important;
         max-width: 100% !important;
@@ -501,9 +676,49 @@
         min-height: auto !important;
     }
 
+    /* Stack: text on top, image below */
+    .case-card-content {
+        flex-direction: column !important;
+        height: auto !important;
+    }
+
+    .case-text {
+        flex: none !important;
+        width: 100% !important;
+        padding: 28px 22px 16px !important;
+    }
+
+    /* Image wrapper: tall enough so the product art looks large */
+    .case-image-wrapper {
+        flex: none !important;
+        width: 100% !important;
+        height: 300px !important;         /* tall section for the image */
+        padding-top: 0 !important;
+        overflow: hidden !important;
+        position: relative !important;
+        align-items: flex-end !important;
+        justify-content: flex-end !important;
+    }
+
+    /* Image: big, pinned bottom-right just like the Kartell reference */
+    .case-img {
+        width: 110% !important;            /* slightly wider than the wrapper */
+        height: 115% !important;           /* slightly taller so it anchors to bottom */
+        object-fit: contain !important;
+        object-position: bottom right !important;
+        transform: none !important;        /* no translate needed; height overflow handles positioning */
+        pointer-events: none !important;
+        -webkit-user-drag: none !important;
+        position: absolute !important;
+        bottom: 0 !important;
+        right: 0 !important;
+    }
+
+    /* Arrows */
     .slider-navigation {
         justify-content: space-between !important;
-        padding: 0 16px !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
         gap: 0 !important;
         width: calc(100vw - 32px) !important;
         max-width: none !important;
@@ -516,23 +731,20 @@
     }
 }
 
-
-@media (max-width: 950px) {
-    .cases-viewport, .case-card, .slider-navigation {
-        width: 100%;
-        max-width: 600px;
-    }
-    .case-card-content {
-        flex-direction: column;
-        text-align: center;
-    }
+/* ── Extra-small phones ── */
+@media (max-width: 480px) {
     .case-image-wrapper {
-        flex: 0 0 auto;
-        width: 100%;
-        height: 200px;
+        height: 260px !important;
     }
+
+    .case-img {
+        width: 105% !important;
+        height: 110% !important;
+    }
+
     .case-arrow-btn {
-        width: 140px;
+        width: 72px !important;
+        height: 30px !important;
     }
 }
 
@@ -658,8 +870,11 @@
 
 /* =========================================Partners Section=================================================== */
 
-/* Make partner viewport slightly taller for 2-logo view */
-@media (max-width: 768px) {
+@media (max-width: 468px) {
+    .title-line { font-size: 32px; white-space: normal; }
+    .partners-title-wrapper {
+        text-align: right;
+    }
     .logo-item {
         flex: 0 0 50% !important;
         width: 100px !important;
@@ -674,6 +889,29 @@
     .partners-title { font-size: 1.8rem; }
     .logos-track { gap: 30px; flex-wrap: wrap; }
     .logo-item img { height: 100px; }
+}
+
+/* Make partner viewport slightly taller for 2-logo view */
+@media (max-width: 768px) and (min-width: 469px) {
+    .title-line { font-size: 50px; white-space: normal; }
+    .logo-item {
+        flex: 0 0 50% !important;
+        width: 100px !important;
+        height: 100px !important;
+    }
+    .logo-item img[src*="Lob_logo"] {
+        max-height: 100px !important;
+        height: 100px !important;
+        width: 120px !important;
+        object-fit: contain !important;
+    }
+    .partners-title { font-size: 1.8rem; }
+    .logos-track { gap: 30px; flex-wrap: wrap; }
+    .logo-item img { height: 100px; }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    .title-line { font-size: 64px; white-space: normal; }
 }
 
 /* =======================================Benefits Section=============================== */
@@ -757,19 +995,27 @@
 }
 
 /* Fix "нашої історії?" right-shift on desktop */
-.form-title span {
-    padding-left: 0 !important;
-    text-align: right !important;
-    display: block !important;
-}
 
 /* Allow inputs to shrink below 300px */
 .input-group input {
     min-width: 0 !important;
 }
 
+@media (max-width: 1024px) and (min-width: 901px) {
+    .form-title span {
+        padding-left: 0 !important;
+        text-align: right !important;
+        display: block !important;
+    }
+}
+
 /* Tablet: wrap inputs */
-@media (max-width: 960px) {
+@media (max-width: 960px) and (min-width: 601px) {
+    .form-title span {
+        padding-left: 0 !important;
+        text-align: right !important;
+        display: block !important;
+    }
     .form-title {
         font-size: clamp(28px, 5.5vw, 52px) !important;
         margin-bottom: 36px !important;
@@ -790,10 +1036,40 @@
 }
 
 /* Mobile: full-width stacked inputs */
-@media (max-width: 600px) {
+@media (max-width: 600px) and (min-width: 469px) {
     .form-title {
         font-size: clamp(22px, 7vw, 38px) !important;
         margin-bottom: 28px !important;
+    }
+    .form-inputs {
+        flex-direction: column !important;
+        gap: 20px !important;
+        width: 100% !important;
+    }
+    .input-group {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+    }
+    .input-group input {
+        width: 100% !important;
+    }
+    .footer-contact .btn-submit-modal {
+        width: 100% !important;
+        padding: 18px 20px !important;
+        font-size: 15px !important;
+    }
+}
+
+@media (max-width: 468px) {
+    .form-title span {
+        padding-left: 0 !important;
+        text-align: center !important;
+        display: block !important;
+    }
+    .form-title {
+        font-size: 30px !important;
+        margin-bottom: 28px !important;
+        text-align: center;
     }
     .form-inputs {
         flex-direction: column !important;
@@ -821,130 +1097,160 @@
 }
 
 
-/* ======================================== Steps Section ========================================== */
+/*======================================== Steps Section ==========================================*/
 
-@media (min-width: 427px) {
+@media (max-width: 1024px) {
+    /* Fix step grid for mid-size tablets */
     .steps-row {
-        display: grid !important;
-        /* Три колонки: номер, заголовок, описание */
-        grid-template-columns: 100px 1fr 1.5fr !important; 
-        gap: 20px 40px !important;
-        padding: 40px 20px !important;
-        align-items: center !important;
-        border-bottom: 1px solid #333 !important;
+        grid-template-columns: 150px 1fr 1fr !important;
+        gap: 0 30px !important;
+        padding: 40px 0 !important;
     }
-
     .step-number {
-        color: #2e7d32 !important; /* Ваш зеленый */
-        font-weight: 800 !important;
-        font-size: 18px !important;
-    }
-
-    .step-title {
-        font-weight: 800 !important;
-        font-size: 22px !important;
-        text-transform: uppercase !important;
-        color: #000 !important;
-    }
-
-    .step-details p {
-        font-size: 16px !important;
-        line-height: 1.5 !important;
-        margin-bottom: 5px !important;
-    }
-    
-    .bird-decor {
-        width: 180px !important;
+        margin-left: 0 !important;
     }
 }
 
-/* МОБИЛЬНЫЕ УСТРОЙСТВА (426px и ниже) — ВСЁ В СТОЛБИК */
-@media (max-width: 426px) {
-    .steps-main-title {
+@media (max-width: 468px) {
+    /* Show parrot again — positioned at top-right of the header */
+    .bird-decor {
         display: block !important;
-        font-size: clamp(28px, 8vw, 42px) !important;
+        bottom: auto !important;
+    }
+
+    .bird-decor img {
+        transform: translateX(-40%);
+        height: 100px !important;
+        width: 150px !important;
+    }
+
+    .steps-header {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: flex-end !important;
+        padding: 20px 20px 0 20px !important;
+        min-height: 120px !important;
+    }
+
+    .steps-main-title {
+        font-size: 62px !important;
         text-align: right !important;
-        font-weight: 800 !important;
-        color: #000000 !important;
-        padding: 40px 20px 20px 20px !important;
-        margin-top: 50px !important;
+        padding-bottom: 16px !important;
+        flex: 1 !important;
     }
 
-    .steps-main-title span {
-        color: #2e7d32 !important;
-    }
-
+    /* Steps table rows become flex columns */
     .steps-row {
         display: flex !important;
         flex-direction: column !important;
+        gap: 10px !important;
+        padding: 24px 20px !important;
         align-items: flex-start !important;
-        gap: 15px !important;
-        padding: 30px 20px !important;
-        border-bottom: 1px solid #333 !important;
     }
 
     .step-number {
-        color: #2e7d32 !important; 
-        font-weight: 800 !important;
-        font-size: 18px !important;
+        font-size: 20px !important;
+        margin-left: 0 !important;
+        padding-left: 0 !important;
     }
 
     .step-title {
-        font-weight: 800 !important;
-        font-size: 20px !important;
-        color: #000 !important;
-        text-transform: uppercase !important;
+        font-size: 18px !important;
+        padding-left: 0 !important;
+    }
+
+    .step-details p {
+        font-size: 15px !important;
+        padding-left: 0 !important;
+    }
+}
+
+@media (max-width: 768px) and (min-width: 469px) {
+    /* Show parrot again — positioned at top-right of the header */
+
+    .steps-row {
+        grid-template-columns: 150px 1fr 1fr !important;
+        gap: 0 30px !important;
+        padding: 40px 0 !important;
+    }
+    .step-number {
+        font-size: 28px;
+        margin-left: 0 !important;
+    }
+    .bird-decor {
+        display: block !important;
+        bottom: auto !important;
+    }
+
+    .bird-decor img {
+        transform: translateX(-40%);
+        height: 150px !important;
+        width: 230px !important;
+    }
+
+    .steps-header {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: flex-end !important;
+        padding: 20px 20px 0 20px !important;
+        min-height: 120px !important;
+    }
+
+    .steps-main-title {
+        font-size: 62px !important;
+        text-align: right !important;
+        padding-bottom: 16px !important;
+        flex: 1 !important;
+    }
+
+    /* Steps table rows become flex columns */
+
+    .step-title {
+        font-size: 24px !important;
+        padding-left: 0 !important;
     }
 
     .step-details p {
         font-size: 16px !important;
-        color: #333 !important;
-        line-height: 1.4 !important;
-    }
-
-    .bird-decor {
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 140px !important;
-        z-index: 10 !important;
+        padding-left: 0 !important;
     }
 }
-/* Корректировки для совсем маленьких экранов (480px и ниже) */
+
 @media (max-width: 480px) {
     .bird-decor {
-        width: 110px !important;
+        width: 100px !important;
     }
-    
     .steps-main-title {
-        font-size: 26px !important;
-        margin-top: 30px !important;
-    }
-
-    .step-title {
-        font-size: 18px !important;
+        font-size: clamp(22px, 7vw, 30px) !important;
     }
 }
-/* =======================================Footer Section===================================================== */
 
-@media (max-width: 992px) {
-    .contact-flex { grid-template-columns: 1fr; gap: 40px; }
-    .office { margin-bottom: 30px; }
-    .footer { flex-direction: column; gap: 12px; text-align: center; }
+@media (max-width: 1024px) {
+    .bird-decor {
+        width: 340px; 
+    }
+    .steps-main-title { font-size: 62px; }
+    .step-row {
+        grid-template-columns: 100px 1fr;
+    }
+    .step-details { margin-top: 20px; }
 }
 
 @media (max-width: 768px) {
-    .contact-col-left h2 { font-size: 48px; margin-bottom: 30px; }
-    .contact-col-left h2 span { margin-left: 0; }
-    .contact-form { grid-template-columns: 1fr; }
-    .btn-white { width: 100% !important; }
-}
-
-@media (max-width: 992px) {
-    .contact-flex { grid-template-columns: 1fr; }
-    .contact-info h2, .contact-info p, .contact-form, .footer { grid-column: 1; }
-    .contact-form { grid-template-columns: 1fr; }
-    .footer { flex-direction: column; gap: 15px; }
+    .step-row {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .bird-decor {
+        width: 150px;
+    }
+    .steps-header {
+        min-height: 120px;
+    }
 }
 
 /*===================================???=======================================*/
@@ -1064,7 +1370,7 @@
 
     .team-count, .team-subtitle { font-size: 48px; }
 
-    .achievements-title { font-size: 48px; }
+    .achievements-title { font-size: 52px; }
 
     .bird-decor { display: none; }
     .steps-header {
@@ -1109,14 +1415,12 @@
     }
     .slider-navigation { gap: 100px; }
     .case-arrow-btn { width: 80px; }
-
-    .steps-main-title { font-size: 30px; }
     .step-title { font-size: 18px; }
     .step-details p { font-size: 15px; padding-left: 0; }
 
     .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 20px; }
     .stat-value { font-size: 40px; white-space: normal; }
-    .achievements-title { font-size: 36px; }
+    .achievements-title { font-size: 42px; }
 
     .benefit-card p { font-size: 20px; }
     .benefits-title { font-size: 34px; }
@@ -1125,11 +1429,8 @@
 
     .team-count, .team-subtitle { font-size: 36px; }
 
-    .title-line { font-size: 28px; white-space: normal; }
-
     .contact-info h2 { font-size: 36px; }
     .settings { font-size: 22px; }
-    .office { font-size: 20px; }
 }
 
 
@@ -1195,7 +1496,7 @@
         transform: none !important;
     }
     .cases-main-title {
-        padding-left: 16px !important;
+        padding-left: 36px !important;
         font-size: clamp(26px, 8vw, 36px) !important;
     }
 
@@ -1257,79 +1558,10 @@
 
     .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 24px 12px !important; }
     .stat-value { font-size: clamp(28px, 8vw, 40px) !important; white-space: normal !important; }
-    .achievements-title { font-size: clamp(26px, 8vw, 36px) !important; }
 
     .about-title { font-size: clamp(24px, 8vw, 36px) !important; }
 
     .team-count, .team-subtitle { font-size: clamp(28px, 8.5vw, 40px) !important; }
-}
-
-.case-card-content {
-    width: 100% !important;
-}
-
-.cases-viewport {
-    width: 1009px !important;
-    max-width: 100% !important;
-    margin: 0 auto !important;
-}
-
-.case-card {
-    flex: 0 0 1009px !important;
-    width: 1009px !important;
-    margin-right: 40px !important; 
-}
-
-@media (max-width: 950px) {
-    .cases-viewport {
-        width: calc(100vw - 40px) !important;
-    }
-
-    .case-card {
-        flex: 0 0 calc(100vw - 40px) !important;
-        width: calc(100vw - 40px) !important;
-        margin-right: 20px !important;
-        min-height: auto !important;
-    }
-
-    .case-card-content {
-        flex-direction: column !important;
-    }
-
-    .case-text {
-        width: 100% !important;
-        flex: none !important;
-        padding: 30px 20px 20px !important;
-    }
-
-    .case-image-wrapper {
-        width: 100% !important;
-        flex: none !important;
-        height: 250px !important; /* Высота блока под картинку */
-        padding: 0 20px !important; /* Небольшие отступы по бокам, чтобы не прилипало к краям */
-        justify-content: center !important;
-        align-items: flex-end !important; /* Прижимаем картинку к низу блока */
-    }
-
-    /* Сама картинка */
-    .case-img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: contain !important; /* ВАЖНО: заставляет картинку помещаться целиком */
-        object-position: center bottom !important; /* Центрируем и ставим на "пол" */
-        transform: none !important; /* Убираем все старые сдвиги, которые ломали отображение */
-    }
-
-    .slider-navigation {
-        width: 100% !important;
-        gap: 50vw !important; 
-        padding-top: 30px !important;
-        padding-bottom: 30px !important;
-    }
-    
-    .case-arrow-btn {
-        width: clamp(60px, 15vw, 120px) !important;
-    }
 }
 
 .case-card-content {
@@ -1495,3 +1727,27 @@
         object-position: center bottom !important; 
         transform: none !important; 
     }
+
+    .slider-navigation {
+        width: calc(100vw - 60px) !important;
+        max-width: 960px !important;
+        margin: 0 auto !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 0 !important;
+        padding: 20px 0 !important; 
+        position: relative !important;
+        z-index: 100 !important;
+        pointer-events: auto !important;
+    }
+    
+    .case-arrow-btn {
+        width: 110px !important;
+        height: auto !important;
+        position: relative !important;
+        z-index: 101 !important;
+        cursor: pointer !important;
+        pointer-events: auto !important;
+    }
+}
