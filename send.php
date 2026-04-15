@@ -38,6 +38,27 @@ if ($data) {
         file_get_contents($url);
     }
 
+// --- ОТПРАВКА НА ПОЧТУ ЧЕРЕЗ СКРЫТУЮ ПЕРЕМЕННУЮ ---
+$to = getenv('CONTACT_EMAIL'); // Достаємо вашу пошту з налаштувань хостингу
+
+if ($to) {
+    $subject = "Нова заявка від " . $name;
+    
+    $email_content = "Ви отримали нову заявку через форму:\n\n";
+    $email_content .= "👤 Ім'я: $name\n";
+    $email_content .= "📞 Телефон: $phone\n";
+    $email_content .= "🔗 Посилання: $link\n";
+    $email_content .= "📝 Запит: $comment\n";
+
+    // Формуємо заголовки
+    $headers = "From: no-reply@" . $_SERVER['HTTP_HOST'] . "\r\n";
+    $headers .= "Reply-To: no-reply@" . $_SERVER['HTTP_HOST'] . "\r\n";
+    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+    $headers .= "X-Mailer: PHP/" . phpversion();
+
+    // Намагаємось відправити
+    @mail($to, $subject, $email_content, $headers);
+}
 
     echo json_encode(["status" => "success"]);
 } else {

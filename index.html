@@ -977,11 +977,9 @@
 
 <script>
 document.addEventListener('submit', async (event) => {
-    // Останавливаем стандартную перезагрузку страницы
     event.preventDefault();
 
     const form = event.target;
-    // Проверяем, является ли это одной из наших форм
     if (!form.classList.contains('contact-form') && 
         !form.classList.contains('contact-form-order') && 
         form.id !== 'modalForm') {
@@ -991,7 +989,6 @@ document.addEventListener('submit', async (event) => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    // Укажите здесь URL вашего PHP-скрипта на Railway
     const serverUrl = 'https://hibrotest3-production.up.railway.app/send.php';
 
     try {
@@ -1004,10 +1001,9 @@ document.addEventListener('submit', async (event) => {
         });
 
         if (response.ok) {
-            alert('Світла пані, ваше повідомлення доставлено!');
-            form.reset(); // Очищаем поля
+            alert('Заявку відправлено!');
+            form.reset();
             
-            // Если это модальное окно, закроем его
             if (form.id === 'modalForm') {
                 document.getElementById('fixedModal').style.display = 'none';
             }
