@@ -3,9 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropdown = document.getElementById('goodsDropdown');
     const orderForm = document.getElementById('orderFormSq');
 
-    // --- ФУНКЦІЇ ПІДКАЗОК ---
+    // --- ПЕРШОЧЕРГОВИЙ ЗАПУСК ---
+    // Встановлюємо "ОБЕРІТЬ ТОВАР" відразу при завантаженні
+    updateSelectedSq();
+
+    // --- ФУНКЦІЇ ПІДКАЗОК (КРАСНЕНЬКЕ СВІТІННЯ) ---
     function showErrorSq(inputElement, message) {
-        clearErrorSq(inputElement); // Прибираємо стару, якщо є
+        clearErrorSq(inputElement);
         inputElement.classList.add('input-error-sq');
         
         const tip = document.createElement('div');
@@ -13,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
         tip.innerText = message;
         inputElement.parentNode.appendChild(tip);
 
-        // Прибираємо помилку, коли користувач починає вводити текст знову
         inputElement.addEventListener('input', () => clearErrorSq(inputElement), { once: true });
     }
 
@@ -41,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         orderForm.onsubmit = function(e) {
             e.preventDefault();
             
-            // Скидаємо всі активні помилки перед перевіркою
+            // Скидаємо старі помилки
             document.querySelectorAll('.input-error-sq').forEach(el => clearErrorSq(el));
 
             const selectedGoods = Array.from(document.querySelectorAll('#goodsDropdown input:checked')).map(cb => cb.value);
@@ -52,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let isValid = true;
 
-            // 1. Перевірка товарів (залишаємо алерт, бо це не текстове поле)
+            // 1. Перевірка товарів
             if (selectedGoods.length === 0) {
                 alert('Будь ласка, оберіть хоча б один товар!');
                 dropdown?.classList.add('show');
@@ -73,14 +76,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     showErrorSq(contactDataInput, "НЕВІРНИЙ ФОРМАТ EMAIL");
                     isValid = false;
                 }
-            } else if (!contactDataInput.value.trim() || contactDataInput.value.trim().length < 2) {
-                showErrorSq(contactDataInput, "ЗАПОВНІТЬ ЦЕ ПОЛЕ");
-                isValid = false;
+            } else if (contactType === 'telegram') {
+                const tgVal = contactDataInput.value.trim();
+                if (!tgVal.startsWith('@') || tgVal.length < 2) {
+                    showErrorSq(contactDataInput, "НІК МАЄ ПОЧИНАТИСЯ З @");
+                    isValid = false;
+                }
+            } else {
+                if (!contactDataInput.value.trim() || contactDataInput.value.trim().length < 2) {
+                    showErrorSq(contactDataInput, "ЗАПОВНІТЬ ЦЕ ПОЛЕ");
+                    isValid = false;
+                }
             }
 
             if (!isValid) return;
 
-            // Формуємо пакет даних
+            // Відправка
             const payload = {
                 name: nameInput.value.trim(),
                 phone: phoneInput.value.trim(),
@@ -94,10 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             })
-            .then(res => {
-                if (!res.ok) throw new Error('Помилка мережі');
-                return res.json();
-            })
+            .then(res => res.json())
             .then(data => {
                 if (data.status === 'success') {
                     alert('Дякуємо! Замовлення прийнято.');
@@ -111,21 +119,35 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(err => {
                 console.error('Fetch Error:', err);
-                alert('Сталася помилка при відправці. Спробуйте пізніше.');
+                alert('Сталася помилка при відправці.');
             });
         };
     }
 });
 
+// --- ОНОВЛЕННЯ ТЕКСТУ (ОБРАНО: НАЗВА ТОВАРУ) ---
 function updateSelectedSq() {
     const checkboxes = document.querySelectorAll('#goodsDropdown input:checked');
     const label = document.getElementById("selectedLabelSq");
-    if (label) {
-        label.innerText = checkboxes.length > 0 ? `ОБРАНО: ${checkboxes.length}` : "ОБЕРІТЬ ТОВАР";
-        label.style.color = checkboxes.length > 0 ? "#fff" : "#888";
+    
+    if (!label) return;
+
+    if (checkboxes.length > 0) {
+        const selectedNames = Array.from(checkboxes).map(cb => {
+            const container = cb.closest('.check-item-sq');
+            const textElement = container.querySelector('.check-text-sq');
+            return textElement ? textElement.innerText : cb.value;
+        });
+
+        label.innerText = `ОБРАНО: ${selectedNames.join(', ')}`;
+        label.style.color = "#fff";
+    } else {
+        label.innerText = "ОБЕРІТЬ ТОВАР";
+        label.style.color = "#888";
     }
 }
 
+// --- ЛОГІКА РАДІОКНОПОК (ЯК ЗВ'ЯЗАТИСЯ) ---
 function handleRadioSq(radio) {
     const container = document.getElementById('dynamicInputContainerSq');
     const input = document.getElementById('dynamicInputSq');
@@ -133,8 +155,17 @@ function handleRadioSq(radio) {
     if (container && input) {
         container.classList.remove('hidden');
         input.required = true;
+        
         const val = radio.value.toUpperCase();
         input.type = (radio.value === 'gmail') ? "email" : "text";
+        
+        // Якщо телеграм - автоматично додаємо @ для зручності
+        if (radio.value === 'telegram' && (input.value === '' || !input.value.startsWith('@'))) {
+            input.value = '@';
+        } else if (radio.value !== 'telegram' && input.value === '@') {
+            input.value = '';
+        }
+
         input.placeholder = (radio.value === 'gmail') ? "ВВЕДІТЬ ВАШ EMAIL" : `ВВЕДІТЬ ВАШ НІК/НОМЕР (${val})`;
         input.focus();
     }

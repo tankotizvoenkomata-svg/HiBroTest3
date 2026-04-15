@@ -348,8 +348,9 @@ h2 {
 }
 
 /* Поворот стрелочки при открытии (опционально в JS добавить класс .open) */
+/* Это заставляет окно появиться */
 .dropdown-side-sq.show {
-    display: block;
+    display: block !important;
 }
 
 /* Убираем старые медиа-запросы, которые двигали окно вбок, они больше не нужны */
@@ -434,4 +435,22 @@ h2 {
 @keyframes fadeInError {
     from { opacity: 0; transform: translateY(-3px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+#selectedLabelSq {
+    display: block;
+    color: #888; /* Серый по умолчанию */
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 85%; /* Чтобы не налезало на стрелку */
+    pointer-events: none; /* Чтобы клик пролетал сквозь текст в триггер */
+}
+
+.select-trigger-sq {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;         /* Защита контейнера */
 }
