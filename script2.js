@@ -3,39 +3,89 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropdown = document.getElementById('goodsDropdown');
     const orderForm = document.getElementById('orderFormSq');
 
-    // --- ЛОГІКА ВИПАДАЮЧОГО ВБІК СПИСКУ ---
+    // --- ФУНКЦІЇ ПІДКАЗОК ---
+    function showErrorSq(inputElement, message) {
+        clearErrorSq(inputElement); // Прибираємо стару, якщо є
+        inputElement.classList.add('input-error-sq');
+        
+        const tip = document.createElement('div');
+        tip.className = 'error-tip-sq';
+        tip.innerText = message;
+        inputElement.parentNode.appendChild(tip);
+
+        // Прибираємо помилку, коли користувач починає вводити текст знову
+        inputElement.addEventListener('input', () => clearErrorSq(inputElement), { once: true });
+    }
+
+    function clearErrorSq(inputElement) {
+        inputElement.classList.remove('input-error-sq');
+        const parent = inputElement.parentNode;
+        const oldTip = parent.querySelector('.error-tip-sq');
+        if (oldTip) parent.removeChild(oldTip);
+    }
+
+    // --- ЛОГІКА ВИПАДАЮЧОГО СПИСКУ ---
     trigger?.addEventListener('click', (e) => {
         e.stopPropagation();
         dropdown?.classList.toggle('show');
     });
 
-    // Закриття при кліку поза списком
     document.addEventListener('click', (e) => {
         if (dropdown && !dropdown.contains(e.target) && e.target !== trigger) {
             dropdown.classList.remove('show');
         }
     });
 
-    // --- ВІДПРАВКА НА СЕРВЕР ---
+    // --- ВІДПРАВКА ТА ВАЛІДАЦІЯ ---
     if (orderForm) {
         orderForm.onsubmit = function(e) {
             e.preventDefault();
             
-            const selectedGoods = Array.from(document.querySelectorAll('#goodsDropdown input:checked'))
-                                     .map(cb => cb.value);
-            
+            // Скидаємо всі активні помилки перед перевіркою
+            document.querySelectorAll('.input-error-sq').forEach(el => clearErrorSq(el));
+
+            const selectedGoods = Array.from(document.querySelectorAll('#goodsDropdown input:checked')).map(cb => cb.value);
+            const nameInput = this.querySelector('input[name="name"]');
+            const phoneInput = this.querySelector('input[name="phone"]');
+            const contactType = this.querySelector('input[name="contact_type"]:checked')?.value;
+            const contactDataInput = document.getElementById('dynamicInputSq');
+
+            let isValid = true;
+
+            // 1. Перевірка товарів (залишаємо алерт, бо це не текстове поле)
             if (selectedGoods.length === 0) {
-                alert('Будь ласка, оберіть товари!');
+                alert('Будь ласка, оберіть хоча б один товар!');
                 dropdown?.classList.add('show');
-                return;
+                isValid = false;
             }
 
-            const formData = new FormData(this);
+            // 2. Валідація телефону
+            const phoneRegex = /^[\d\s\+\-\(\)]{10,18}$/;
+            if (!phoneRegex.test(phoneInput.value.trim())) {
+                showErrorSq(phoneInput, "НЕКОРЕКТНИЙ НОМЕР");
+                isValid = false;
+            }
+
+            // 3. Валідація контактних даних
+            if (contactType === 'gmail') {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(contactDataInput.value.trim())) {
+                    showErrorSq(contactDataInput, "НЕВІРНИЙ ФОРМАТ EMAIL");
+                    isValid = false;
+                }
+            } else if (!contactDataInput.value.trim() || contactDataInput.value.trim().length < 2) {
+                showErrorSq(contactDataInput, "ЗАПОВНІТЬ ЦЕ ПОЛЕ");
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Формуємо пакет даних
             const payload = {
-                name: formData.get('name'),
-                phone: formData.get('phone'),
-                contact_type: formData.get('contact_type'),
-                contact_data: formData.get('contact_data'),
+                name: nameInput.value.trim(),
+                phone: phoneInput.value.trim(),
+                contact_type: contactType,
+                contact_data: contactDataInput.value.trim(),
                 goods: selectedGoods
             };
 
@@ -53,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('Дякуємо! Замовлення прийнято.');
                     this.reset();
                     document.getElementById('dynamicInputContainerSq')?.classList.add('hidden');
-                    updateSelectedSq(); // Скидаємо лічильник
+                    updateSelectedSq();
                     dropdown?.classList.remove('show');
                 } else {
                     alert('Помилка: ' + (data.message || 'Сервер відхилив запит'));
@@ -67,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// --- ОНОВЛЕННЯ ТЕКСТУ (ОБРАНО: X) ---
 function updateSelectedSq() {
     const checkboxes = document.querySelectorAll('#goodsDropdown input:checked');
     const label = document.getElementById("selectedLabelSq");
@@ -77,7 +126,6 @@ function updateSelectedSq() {
     }
 }
 
-// --- ЛОГІКА РАДІОКНОПОК ---
 function handleRadioSq(radio) {
     const container = document.getElementById('dynamicInputContainerSq');
     const input = document.getElementById('dynamicInputSq');
@@ -86,7 +134,8 @@ function handleRadioSq(radio) {
         container.classList.remove('hidden');
         input.required = true;
         const val = radio.value.toUpperCase();
+        input.type = (radio.value === 'gmail') ? "email" : "text";
         input.placeholder = (radio.value === 'gmail') ? "ВВЕДІТЬ ВАШ EMAIL" : `ВВЕДІТЬ ВАШ НІК/НОМЕР (${val})`;
-        input.focus(); // Для зручності фокусуємося на полі
+        input.focus();
     }
 }

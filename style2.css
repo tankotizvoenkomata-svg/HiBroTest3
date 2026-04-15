@@ -314,37 +314,48 @@ h2 {
     transition: transform 0.3s;
 }
 
-/* --- ТЕПЕРЬ ОНО ВЫПАДАЕТ ВБОК --- */
-.dropdown-side-sq {
-    overflow-x: hidden;    /* Полностью запрещает горизонтальную прокрутку */
-    display: none; /* Скрыто по умолчанию */
-    position: absolute;
-    /* Позиционируем вровень с верхним краем триггера */
-    top: 0; 
-    /* Выталкиваем вправо на всю ширину + отступ 15px */
-    left: calc(100% + 15px); 
-    width: 100%; /* Ширина как у основного инпута */
-    background-color: #000;
-    border: 1px solid #fff; 
-    z-index: 1000;
-    max-height: 300px;
-    overflow-y: auto;
-    box-sizing: border-box;
-    box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+/* Элегантный заголовок по центру */
+.methods-label-sq {
+    color: #ffffff;          /* Чистый белый цвет */
+    font-size: 16px;         /* Увеличенный размер */
+    font-weight: 600;        /* Полужирное начертание */
+    text-align: center;      /* Выравнивание по центру */
+    margin: 30px 0 20px 0;   /* Больше отступа сверху и снизу */
+    letter-spacing: 2px;     /* Расстояние между буквами для стиля */
+    text-transform: uppercase; /* Все заглавные */
+    display: block;          /* Гарантируем, что займет всю строку */
+    width: 100%;
 }
 
-/* Показываем, когда скрипт добавляет класс .show */
+/* Измененное выпадающее окно */
+.dropdown-side-sq {
+    overflow-x: hidden;
+    display: none;
+    position: absolute;
+    /* Теперь позиционируем под кнопкой */
+    top: 100%; 
+    left: 0;
+    width: 100%; 
+    background-color: #000;
+    border: 1px solid #fff;
+    border-top: none; /* Чтобы сливалось с полем выше */
+    z-index: 1000;
+    max-height: 250px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    margin-top: -1px; /* Стык в стык к рамке */
+}
+
+/* Поворот стрелочки при открытии (опционально в JS добавить класс .open) */
 .dropdown-side-sq.show {
     display: block;
 }
 
-/* Адаптив: если экран слишком узкий для бокового окна (меньше 1100px) */
+/* Убираем старые медиа-запросы, которые двигали окно вбок, они больше не нужны */
 @media (max-width: 1100px) {
     .dropdown-side-sq {
-        left: 0;
-        top: 100%; /* Выпадает вниз, чтобы не уходить за экран */
-        width: 100%;
-        margin-top: 5px;
+        position: absolute; /* Всегда снизу */
     }
 }
 
@@ -399,4 +410,28 @@ h2 {
 .check-item-sq input:checked ~ .check-text-sq {
     color: #fff;
     font-weight: 600;
+}
+
+/* Красная рамка и мягкое свечение */
+.input-error-sq {
+    border-color: #ff4d4d !important;
+    box-shadow: 0 0 8px rgba(255, 77, 77, 0.4);
+}
+
+/* Текст подсказки под полем */
+.error-tip-sq {
+    color: #ff4d4d;
+    font-size: 10px;
+    margin-top: 4px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    display: block;
+    /* Плавное появление */
+    animation: fadeInError 0.3s ease-out;
+}
+
+@keyframes fadeInError {
+    from { opacity: 0; transform: translateY(-3px); }
+    to { opacity: 1; transform: translateY(0); }
 }
