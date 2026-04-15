@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const orderForm = document.getElementById('orderFormSq');
     const phoneInput = document.querySelector('input[name="phone"]');
     
-    // --- 0. КАПЧА ---
+    // --- 0. МАГІЧНИЙ БАР'ЄР (КАПЧА) ---
     let captchaResult;
     function generateCaptchaSq() {
         const n1 = Math.floor(Math.random() * 9) + 1;
@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const qElement = document.getElementById('captchaQuestionSq');
         if (qElement) qElement.innerText = `${n1} + ${n2} =`;
         const iElement = document.getElementById('captchaInputSq');
-        if (iElement) iElement.value = ''; 
+        if (iElement) iElement.value = ''; // Очищуємо поле вводу капчі
     }
     
-    generateCaptchaSq();
+    generateCaptchaSq(); // Створюємо першу задачу при завантаженні
 
-    // --- 1. ТЕЛЕФОН ---
+    // --- 1. ЗАХИСТ ПРЕФІКСА +380 ---
     if (phoneInput) {
         if (phoneInput.value.length < 4) phoneInput.value = '+380';
         phoneInput.addEventListener('input', function() {
@@ -27,11 +27,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const val = this.value.substring(prefix.length);
             this.value = prefix + val.replace(/\D/g, '').substring(0, 9);
         });
+        phoneInput.addEventListener('click', function() {
+            if (this.selectionStart < 4) this.setSelectionRange(this.value.length, this.value.length);
+        });
     }
 
+    // --- 2. ПЕРШОЧЕРГОВИЙ ЗАПУСК ТЕКСТУ ТОВАРІВ ---
     updateSelectedSq();
 
-    // --- 3. ФУНКЦИИ ОШИБОК ---
+    // --- 3. ФУНКЦІЇ ПІДКАЗОК ---
     function showErrorSq(inputElement, message) {
         clearErrorSq(inputElement);
         inputElement.classList.add('input-error-sq');
@@ -45,11 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function clearErrorSq(inputElement) {
         inputElement.classList.remove('input-error-sq');
         const parent = inputElement.parentNode;
-        const oldTip = parent?.querySelector('.error-tip-sq');
+        const oldTip = parent.querySelector('.error-tip-sq');
         if (oldTip) parent.removeChild(oldTip);
     }
 
-    // --- 4. ДРОПДАУН ---
+    // --- 4. ЛОГІКА ВИПАДАЮЧОГО СПИСКУ ---
     trigger?.addEventListener('click', (e) => {
         e.stopPropagation();
         dropdown?.classList.toggle('show');
@@ -61,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 5. ОТПРАВКА ---
+    // --- 5. ВІДПРАВКА ТА ВАЛІДАЦІЯ ---
     if (orderForm) {
         orderForm.onsubmit = function(e) {
             e.preventDefault();
@@ -75,28 +79,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let isValid = true;
 
+            // Перевірка капчі
             if (parseInt(captchaInput.value) !== captchaResult) {
                 alert('ПОМИЛКА: Невірне розв’язання задачі!');
                 generateCaptchaSq();
+                isValid = false;
                 return;
             }
 
+            // Валідація товарів
             if (selectedGoods.length === 0) {
                 alert('Будь ласка, оберіть хоча б один товар!');
                 dropdown?.classList.add('show');
                 isValid = false;
             }
 
+            // Валідація телефону
             const phoneRegex = /^\+380\d{9}$/;
             if (!phoneRegex.test(phoneInput.value)) {
                 showErrorSq(phoneInput, "ВВЕДІТЬ ПОВНИЙ НОМЕР");
                 isValid = false;
             }
 
+            // Валідація контактів
             if (contactType === 'gmail') {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(contactDataInput.value.trim())) {
                     showErrorSq(contactDataInput, "НЕВІРНИЙ ФОРМАТ EMAIL");
+                    isValid = false;
+                }
+            } else if (contactType === 'telegram') {
+                const tgVal = contactDataInput.value.trim();
+                if (!tgVal.startsWith('@') || tgVal.length < 2) {
+                    showErrorSq(contactDataInput, "НІК МАЄ ПОЧИНАТИСЯ З @");
                     isValid = false;
                 }
             } else if (!contactDataInput.value.trim() || contactDataInput.value.trim().length < 2) {
@@ -124,18 +139,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.status === 'success') {
                     alert('Дякуємо! Замовлення прийнято.');
                     this.reset();
+                    if (phoneInput) phoneInput.value = '+380';
                     window.location.href = 'index2.html';
                 } else {
                     alert('Помилка: ' + (data.message || 'Сервер відхилив запит'));
-                    generateCaptchaSq();
+                    if (typeof generateCaptchaSq === 'function') generateCaptchaSq();
                 }
             })
-            .catch(err => alert('Сталася помилка при відправці.'));
-        }; // Закрытие onsubmit
-    } 
-}); // Закрытие DOMContentLoaded
+            .catch(err => {
+                console.error('Fetch Error:', err);
+                alert('Сталася помилка при відправці.');
+            });
+        };
+    }
+}); // <--- ТУТ БЫЛА ОШИБКА (нужно закрыть DOMContentLoaded)
 
-// Функции вынесены наружу для чистоты кода или оставлены внутри (здесь они снаружи)
+// ЭТИ ФУНКЦИИ ДОЛЖНЫ БЫТЬ ВНЕ ОБРАБОТЧИКА ONSUBMIT
 function updateSelectedSq() {
     const checkboxes = document.querySelectorAll('#goodsDropdown input:checked');
     const label = document.getElementById("selectedLabelSq");
@@ -147,7 +166,7 @@ function updateSelectedSq() {
             const textElement = container.querySelector('.check-text-sq');
             return textElement ? textElement.innerText : cb.value;
         });
-        label.innerText = `ОБРАНО: ${selectedNames.length}`;
+        label.innerText = `ОБРАНО: ${selectedNames.join(', ')}`;
         label.style.color = "#fff";
     } else {
         label.innerText = "ОБЕРІТЬ ТОВАР";
@@ -164,8 +183,10 @@ function handleRadioSq(radio) {
         input.type = (radio.value === 'gmail') ? "email" : "text";
         if (radio.value === 'telegram' && (input.value === '' || !input.value.startsWith('@'))) {
             input.value = '@';
+        } else if (radio.value !== 'telegram' && input.value === '@') {
+            input.value = '';
         }
-        input.placeholder = `ВВЕДІТЬ ${radio.value.toUpperCase()}`;
+        input.placeholder = (radio.value === 'gmail') ? "ВВЕДІТЬ ВАШ EMAIL" : `ВВЕДІТЬ ВАШ НІК/НОМЕР (${radio.value.toUpperCase()})`;
         input.focus();
     }
 }
