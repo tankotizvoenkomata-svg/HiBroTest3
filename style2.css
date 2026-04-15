@@ -1,9 +1,10 @@
-/* Общие настройки страницы */
+/* --- БАЗОВЫЕ НАСТРОЙКИ СТРАНИЦЫ --- */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', Arial, sans-serif;
     line-height: 1.6;
+    background-color: #000; /* По умолчанию черный для бесшовности */
 }
 
 /* --- БЕЛАЯ СЕКЦИЯ (ПРЕИМУЩЕСТВА) --- */
@@ -25,13 +26,13 @@ body {
     border: 1px solid #f0f0f0;
     padding: 40px;
     flex: 1;
-    position: relative; /* Для позиционирования фоновых цифр */
+    position: relative;
     min-height: 200px;
     transition: transform 0.3s ease;
 }
 
 .feature-card:hover {
-    transform: translateY(-5px); /* Легкий эффект при наведении */
+    transform: translateY(-5px);
 }
 
 .feature-number {
@@ -40,25 +41,14 @@ body {
     right: 20px;
     font-size: 80px;
     font-weight: 800;
-    color: #f2f2f2; /* Призрачный серый цвет */
+    color: #f2f2f2;
     z-index: 1;
     user-select: none;
 }
 
-.feature-card h3 {
+.feature-card h3, .feature-card p {
     position: relative;
     z-index: 2;
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    letter-spacing: 1px;
-    font-weight: 700;
-}
-
-.feature-card p {
-    position: relative;
-    z-index: 2;
-    color: #666;
-    margin: 0;
 }
 
 /* --- ЧЕРНАЯ СЕКЦИЯ (ХАРАКТЕРИСТИКИ) --- */
@@ -82,10 +72,7 @@ h2 {
     font-weight: 700;
 }
 
-/* Стили таблицы характеристик */
-.specs-column {
-    flex: 1;
-}
+.specs-column { flex: 1; }
 
 .specs-table {
     width: 100%;
@@ -95,22 +82,12 @@ h2 {
 .specs-table td {
     padding: 15px 0;
     border-bottom: 1px solid #333;
-    font-size: 1rem;
 }
 
-.specs-table td:first-child {
-    color: #888;
-}
+.specs-table td:first-child { color: #888; }
+.specs-table td:last-child { text-align: right; font-weight: bold; }
 
-.specs-table td:last-child {
-    text-align: right;
-    font-weight: bold;
-}
-
-/* Стили карточек справа */
-.usage-column {
-    flex: 1.5;
-}
+.usage-column { flex: 1.5; }
 
 .usage-grid {
     display: grid;
@@ -124,25 +101,374 @@ h2 {
     border-radius: 4px;
 }
 
-.usage-card h3 {
-    font-size: 1.1rem;
-    margin-top: 0;
-    letter-spacing: 1px;
+
+/* ========================================= */
+/* --- БРУТАЛЬНАЯ КВАДРАТНАЯ ФОРМА (ЧБ) --- */
+/* ========================================= */
+
+.order-section-sq {
+    background-color: #000;
+    padding: 100px 20px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Inter', Arial, sans-serif; /* Убедитесь, что шрифт подключен */
+    letter-spacing: 0.05em; /* Немного разредим текст для стиля */
+}
+
+.order-container-sq {
+    width: 100%;
+    max-width: 550px;
+    position: relative; /* Для позиционирования панели */
+}
+
+.form-title-sq {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 50px;
     text-transform: uppercase;
 }
 
-.usage-card p {
-    color: #ccc;
-    font-size: 0.95rem;
+.contact-form-sq {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-/* Адаптивность для мобильных устройств */
-@media (max-width: 992px) {
-    .content-wrapper, .features-wrapper {
-        flex-direction: column;
-    }
-    
-    .usage-grid {
-        grid-template-columns: 1fr;
+/* Общие стили для полей ввода и триггера списка */
+.form-group-sq input,
+.select-trigger {
+    width: 100%;
+    padding: 18px 20px;
+    background: transparent;
+    border: 1px solid #333; /* Тонкая серая рамка */
+    border-radius: 0; /* СТРОГО КВАДРАТНЫЕ */
+    color: #fff;
+    box-sizing: border-box;
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: border-color 0.3s ease;
+}
+
+.form-group-sq input::placeholder {
+    color: #555;
+}
+
+.form-group-sq input:focus {
+    outline: none;
+    border-color: #fff; /* Белая рамка при фокусе */
+}
+
+/* Стиль триггера выбора товаров (косит под инпут) */
+.select-trigger {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #888; /* Цвет placeholder по умолчанию */
+}
+
+.select-trigger:hover {
+    border-color: #888;
+}
+
+.arrow-icon {
+    font-weight: bold;
+    color: #fff;
+    transition: transform 0.3s ease;
+}
+
+/* Блок выбора способа связи */
+.contact-methods-sq {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.methods-label {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.method-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #333;
+    background: #000;
+}
+
+.tab-btn {
+    flex: 1 1 auto;
+    min-width: 90px;
+    cursor: pointer;
+    position: relative;
+}
+
+/* ПОЛНОЕ СКРЫТИЕ КРУЖОЧКОВ */
+.tab-btn input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.tab-btn span {
+    display: block;
+    padding: 15px 5px;
+    color: #666; /* Неактивный текст приглушен */
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    transition: all 0.2s ease;
+    border-right: 1px solid #333;
+    border-bottom: 1px solid #333;
+    text-transform: uppercase;
+}
+
+/* Чтобы на мобильных сетка была ровной */
+.tab-btn:nth-child(even) span {
+    border-right: 1px solid #333;
+}
+
+/* СТИЛЬ АКТИВНОЙ КНОПКИ (БЕЗ КРУЖКА) */
+.tab-btn input[type="radio"]:checked + span {
+    background-color: #fff; /* Белый фон всей плитки */
+    color: #000;            /* Черный текст */
+}
+
+/* Убираем лишнюю границу справа у последнего элемента в ряду (опционально) */
+.tab-btn:last-child span {
+    border-right: none;
+}
+
+/* Поле, появляющееся динамически */
+.dynamic-field {
+    transition: all 0.4s ease;
+    max-height: 100px;
+    opacity: 1;
+}
+
+.dynamic-field.hidden {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Кнопка отправки */
+.submit-btn-sq {
+    width: 100%;
+    padding: 20px;
+    background: #fff; /* Инверсия: белый фон */
+    color: #000; /* Черный текст */
+    border: 1px solid #fff;
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    margin-top: 10px;
+}
+
+.submit-btn-sq:hover {
+    background: #000;
+    color: #fff;
+}
+
+
+/* ========================================= */
+/* --- ЭЛЕГАНТНАЯ БОКОВАЯ ПАНЕЛЬ ТОВАРОВ --- */
+/* ========================================= */
+
+.goods-side-panel {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Полностью скрыта справа */
+    width: 400px; /* Ширина панели */
+    height: 100%;
+    background-color: #111; /* Чуть светлее фона страницы */
+    border-left: 1px solid #333;
+    z-index: 2000; /* Поверх всего */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.5s cubic-bezier(0.23, 1, 0.32, 1); /* Плавный выезд */
+}
+
+/* Класс, который добавляет JS для открытия */
+.goods-side-panel.open {
+    right: 0;
+}
+
+/* Шапка панели */
+.panel-header {
+    padding: 30px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-header h3 {
+    color: #fff;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.close-panel {
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 30px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+}
+
+.close-panel:hover {
+    color: #fff;
+}
+
+/* Контент панели (Чекбоксы) */
+.panel-content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto; /* Прокрутка внутри панели, если много товаров */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Стилизация КВАДРАТНЫХ чекбоксов */
+.check-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    padding: 15px;
+    border: 1px solid #222;
+    transition: background 0.2s ease;
+}
+
+.check-item:hover {
+    background-color: #1a1a1a;
+    border-color: #333;
+}
+
+.check-item input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Кастомный квадрат */
+.check-custom {
+    height: 20px;
+    width: 20px;
+    background-color: transparent;
+    border: 1px solid #555;
+    margin-right: 15px;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+/* При наведении */
+.check-item:hover .check-custom {
+    border-color: #888;
+}
+
+/* При выбранном чекбоксе */
+.check-item input[type="checkbox"]:checked ~ .check-custom {
+    background-color: #fff;
+    border-color: #fff;
+}
+
+/* Галочка (белая, внутри выбранного квадрата) */
+.check-custom:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid #000; /* Черная галочка на белом */
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.check-item input[type="checkbox"]:checked ~ .check-custom:after {
+    display: block;
+}
+
+.check-text {
+    color: #ccc;
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+}
+
+.check-item input[type="checkbox"]:checked ~ .check-text {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Подвал панели */
+.panel-footer {
+    padding: 30px;
+    border-top: 1px solid #333;
+}
+
+.apply-btn {
+    width: 100%;
+    padding: 15px;
+    background: #222;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 0;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.apply-btn:hover {
+    background: #333;
+}
+
+/* Затемнение фона страницы */
+.panel-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+}
+
+.panel-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 480px) {
+    .goods-side-panel {
+        width: 100%; /* На весь экран */
     }
 }
