@@ -8,11 +8,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit;
 }
 
-// 2. Подключение PHPMailer (нужно после обновления composer.json)
+require 'PHPMailer/Exception.php';
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
-require 'vendor/autoload.php';
+use PHPMailer\PHPMailer\SMTP;
 
 // 3. Получение данных из формы
 $data = json_decode(file_get_contents('php://input'), true);
