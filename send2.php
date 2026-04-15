@@ -23,11 +23,12 @@ if ($data) {
     $goods_count = count($goods);
     $goods_list  = $goods_count > 0 ? implode(", ", $goods) : 'Товари не обрані';
 
-// --- А) ТЕЛЕГРАМ ---
-    $token = '8780901878:AAGEJL_BctkjFMYY4vODlUmyGrwBs1IS9T0';
-    $chat_ids = ['8154863228', '655901241']; 
+    // --- А) ТЕЛЕГРАМ ---
+    $token = getenv('8780901878:AAGEJL_BctkjFMYY4vODlUmyGrwBs1IS9T0');
+    $chat_id = getenv('8154863228');
+    $chat_id = getenv('655901241');
     
-    if ($token && !empty($chat_ids)) {
+    if ($token && $chat_id) {
         $tg_msg = "<b>🔔 НОВА ЗАЯВКА</b>\n\n";
         $tg_msg .= "👤 <b>Ім'я:</b> $name\n";
         $tg_msg .= "📞 <b>Телефон:</b> $phone\n";
@@ -36,20 +37,17 @@ if ($data) {
 
         $tg_url = "https://api.telegram.org/bot{$token}/sendMessage";
         
-        foreach ($chat_ids as $chat_id) {
-            $post_fields = [
-                'chat_id' => $chat_id,
-                'text' => $tg_msg,
-                'parse_mode' => 'HTML'
-            ];
+        $post_fields = [
+            'chat_id' => $chat_id,
+            'text' => $tg_msg,
+            'parse_mode' => 'HTML'
+        ];
 
-            $ch_tg = curl_init($tg_url);
-            curl_setopt($ch_tg, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch_tg, CURLOPT_POST, true); // Вказуємо, що це POST запит
-            curl_setopt($ch_tg, CURLOPT_POSTFIELDS, $post_fields);
-            curl_exec($ch_tg);
-            curl_close($ch_tg);
-        } // <--- Тепер цикл закривається правильно після кожного відправленого повідомлення
+        $ch_tg = curl_init($tg_url);
+        curl_setopt($ch_tg, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch_tg, CURLOPT_POSTFIELDS, $post_fields);
+        curl_exec($ch_tg);
+        curl_close($ch_tg);
     }
 
     // --- Б) RESEND (Почта) ---
@@ -93,7 +91,7 @@ if ($data) {
     }
 
     echo json_encode(["status" => "success"]);
- else {
+} else {
     http_response_code(400);
     echo json_encode(["status" => "error", "message" => "No data"]);
 }

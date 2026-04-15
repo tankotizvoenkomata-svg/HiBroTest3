@@ -473,3 +473,69 @@ h2 {
     padding: 5px;
     border-radius: 4px;
 }
+
+/* --- МОБИЛЬНАЯ АДАПТАЦИЯ ДЛЯ ФОРМЫ (SECTION-SQ) --- */
+@media (max-width: 600px) {
+    /* Уменьшаем общие отступы секции */
+    .order-section-sq {
+        padding: 40px 15px;
+    }
+
+    /* Делаем заголовок чуть меньше, чтобы не занимал весь экран */
+    .form-title-sq {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+    }
+
+    /* Плитки выбора связи (Telegram, Viber и т.д.) */
+    .method-tabs {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* В две колонки */
+        border: none; /* Убираем общую рамку, будем использовать рамки кнопок */
+    }
+
+    .tab-btn {
+        min-width: 0; /* Снимаем ограничение ширины */
+    }
+
+    .tab-btn span {
+        border: 1px solid #333; /* Рамка вокруг каждой кнопки */
+        margin: -0.5px; /* Чтобы рамки стыковались красиво */
+        padding: 12px 5px;
+        font-size: 10px;
+    }
+
+    /* Последняя кнопка (например, Gmail), если она одна в ряду, растягивается */
+    .tab-btn:last-child:nth-child(odd) {
+        grid-column: span 2;
+    }
+
+    /* Увеличиваем поля ввода до 16px (стандарт для iOS, чтобы не было автозума) */
+    .form-group-sq input,
+    .select-trigger-sq,
+    .check-text-sq {
+        font-size: 16px !important;
+    }
+
+    /* Центрируем капчу на мобилках */
+    .captcha-container-sq {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    #captchaQuestionSq {
+        margin-right: 0;
+    }
+
+    /* Кнопка отправки на весь экран */
+    .submit-btn-sq {
+        padding: 18px;
+        font-size: 14px;
+    }
+
+    /* Выпадающий список товаров */
+    .dropdown-side-sq {
+        max-height: 200px; /* Немного ограничиваем высоту на маленьких экранах */
+    }
+}
