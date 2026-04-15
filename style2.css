@@ -454,3 +454,22 @@ h2 {
     align-items: center;
     overflow: hidden;         /* Защита контейнера */
 }
+
+.captcha-container-sq {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    margin-bottom: 20px;
+}
+
+#captchaInputSq {
+    background: #222;
+    border: 1px solid #555;
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+}

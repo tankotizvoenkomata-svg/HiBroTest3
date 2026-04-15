@@ -89,9 +89,9 @@
                     <input type="text" name="name" placeholder="ІМ'Я" required>
                 </div>
 
-                <div class="form-group-sq">
-                    <input type="tel" name="phone" placeholder="НОМЕР ТЕЛЕФОНУ" required>
-                </div>
+<div class="form-group-sq">
+    <input type="tel" name="phone" id="phoneInputSq" value="+380" maxlength="13" placeholder="НОМЕР ТЕЛЕФОНУ" required>
+</div>
 
                 <p class="methods-label-sq">ЯК ЗВ’ЯЗАТИСЯ?</p>
 
@@ -123,6 +123,14 @@
                 <div id="dynamicInputContainerSq" class="form-group-sq dynamic-field hidden">
                     <input type="text" id="dynamicInputSq" name="contact_data" placeholder="">
                 </div>
+
+<div class="form-group-sq captcha-wrapper-sq">
+    <label class="methods-label-sq">Будь ласка, надайте відповідь:</label>
+    <div class="captcha-container-sq">
+        <span id="captchaQuestionSq" style="color: #fff; font-weight: bold; margin-right: 10px;"></span>
+        <input type="number" id="captchaInputSq" placeholder="?" required style="width: 60px; text-align: center;">
+    </div>
+</div>
 
                 <button type="submit" class="submit-btn-sq">ВІДПРАВИТИ ЗАЯВКУ</button>
             </form>
