@@ -28,59 +28,6 @@
             background: #000;
             color: #fff;
         }
-
-        /* --- МОБІЛЬНА АДАПТАЦІЯ (Вписана прямо в файл) --- */
-        @media (max-width: 992px) {
-            /* Секція переваг */
-            .features-wrapper {
-                flex-direction: column;
-                gap: 20px;
-                padding: 0 10px;
-            }
-            .feature-card {
-                min-height: auto;
-                padding: 30px;
-            }
-
-            /* Основний контент (Характеристики + Застосування) */
-            .content-wrapper {
-                flex-direction: column;
-                gap: 40px;
-                padding: 0 10px;
-            }
-            .specs-column, .usage-column {
-                width: 100%;
-            }
-
-            /* Сітка карток застосування */
-            .usage-grid {
-                grid-template-columns: 1fr; /* В одну колонку на мобільних */
-                gap: 15px;
-            }
-
-            /* Заголовки */
-            h2 {
-                font-size: 1.8rem;
-                text-align: center;
-            }
-
-            /* Кнопка внизу */
-            .cta-button-sq {
-                width: 100%;
-                box-sizing: border-box;
-                padding: 20px;
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .feature-number {
-                font-size: 50px; /* Зменшуємо фонову цифру */
-            }
-            .features-section, .main-container {
-                padding: 40px 15px;
-            }
-        }
     </style>
 </head>
 <body>

@@ -23,22 +23,22 @@ if ($data) {
     $goods_count = count($goods);
     $goods_list  = $goods_count > 0 ? implode(", ", $goods) : 'Товари не обрані';
 
-    // --- А) ТЕЛЕГРАМ ---
-    $token = getenv('8780901878:AAGEJL_BctkjFMYY4vODlUmyGrwBs1IS9T0');
-    $chat_id = getenv('8154863228');
-    $chat_id = getenv('655901241');
-    
-    if ($token && $chat_id) {
-        $tg_msg = "<b>🔔 НОВА ЗАЯВКА</b>\n\n";
-        $tg_msg .= "👤 <b>Ім'я:</b> $name\n";
-        $tg_msg .= "📞 <b>Телефон:</b> $phone\n";
-        $tg_msg .= "💬 <b>Зв'язок:</b> $method ($contact)\n\n";
-        $tg_msg .= "📦 <b>Товари ($goods_count):</b>\n<i>$goods_list</i>";
+// --- А) ТЕЛЕГРАМ ---
+$token = '8780901878:AAGEJL_BctkjFMYY4vODlUmyGrwBs1IS9T0';
+$chat_ids = ['8154863228', '655901241']; // Список всех ID
 
+if ($token && !empty($chat_ids)) {
+    $tg_msg = "<b>🔔 НОВА ЗАЯВКА</b>\n\n";
+    $tg_msg .= "👤 <b>Ім'я:</b> $name\n";
+    $tg_msg .= "📞 <b>Телефон:</b> $phone\n";
+    $tg_msg .= "💬 <b>Зв'язок:</b> $method ($contact)\n\n";
+    $tg_msg .= "📦 <b>Товари ($goods_count):</b>\n<i>$goods_list</i>";
+
+    foreach ($chat_ids as $id) {
         $tg_url = "https://api.telegram.org/bot{$token}/sendMessage";
         
         $post_fields = [
-            'chat_id' => $chat_id,
+            'chat_id' => $id,
             'text' => $tg_msg,
             'parse_mode' => 'HTML'
         ];
@@ -49,6 +49,7 @@ if ($data) {
         curl_exec($ch_tg);
         curl_close($ch_tg);
     }
+}
 
     // --- Б) RESEND (Почта) ---
     $resend_key = getenv('RESEND_API_KEY');

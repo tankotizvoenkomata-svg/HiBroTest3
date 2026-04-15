@@ -474,3 +474,93 @@ h2 {
     border-radius: 4px;
 }
 
+/* ========================================= */
+/* --- МОБІЛЬНА АДАПТАЦІЯ ДЛЯ ФОРМИ --- */
+/* ========================================= */
+
+@media (max-width: 600px) {
+    /* 1. Налаштування контейнера форми */
+    .order-section-sq {
+        padding: 60px 15px !important; /* Менші відступи зверху/знизу */
+    }
+
+    .form-title-sq {
+        font-size: 1.5rem !important; /* Зменшуємо заголовок */
+        margin-bottom: 30px !important;
+    }
+
+    /* 2. Адаптація плиток вибору зв'язку */
+    .method-tabs {
+        display: grid !important; /* Переходимо на сітку для рівних колонок */
+        grid-template-columns: 1fr 1fr; /* По 2 елементи в ряд */
+    }
+
+    .tab-btn {
+        min-width: 0 !important; /* Скидаємо обмеження */
+    }
+
+    .tab-btn span {
+        padding: 12px 5px !important; /* Компактніші кнопки */
+        font-size: 10px !important;
+        border-right: 1px solid #333 !important;
+        border-bottom: 1px solid #333 !important;
+    }
+
+    /* Прибираємо праву межу у парних елементів, щоб сітка була чистою */
+    .tab-btn:nth-child(2n) span {
+        border-right: none !important;
+    }
+
+    /* 3. Адаптація випадаючого списку товарів */
+    .dropdown-side-sq {
+        position: fixed !important; /* На мобільних краще зробити як модальне вікно або на весь екран */
+        top: auto !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        max-height: 70vh !important; /* Не більше 70% висоти екрану */
+        border-top: 2px solid #fff !important;
+        border-left: none !important;
+        border-right: none !important;
+        box-shadow: 0 -10px 40px rgba(0,0,0,0.9) !important;
+    }
+
+    .check-item-sq {
+        padding: 18px 20px !important; /* Збільшуємо зону кліку для пальців */
+    }
+
+    /* 4. Поля вводу та капча */
+    .form-group-sq input, 
+    .select-trigger-sq {
+        padding: 16px 15px !important; /* Трохи компактніше */
+        font-size: 13px !important;
+    }
+
+    .captcha-container-sq {
+        flex-direction: column !important; /* Капча в стовпчик якщо мало місця */
+        gap: 10px;
+        text-align: center;
+    }
+
+    #captchaQuestionSq {
+        font-size: 18px !important;
+        margin-bottom: 5px;
+    }
+
+    /* 5. Кнопка відправки */
+    .submit-btn-sq {
+        padding: 18px !important;
+        font-size: 14px !important;
+    }
+}
+
+/* Специфічне виправлення для зовсім вузьких екранів (iPhone SE і т.д.) */
+@media (max-width: 340px) {
+    .method-tabs {
+        grid-template-columns: 1fr; /* Все в один стовпчик */
+    }
+    
+    .tab-btn span {
+        border-right: none !important;
+    }
+}
