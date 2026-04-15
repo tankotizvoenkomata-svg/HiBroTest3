@@ -283,192 +283,120 @@ h2 {
     color: #fff;
 }
 
-
-/* ========================================= */
-/* --- ЭЛЕГАНТНАЯ БОКОВАЯ ПАНЕЛЬ ТОВАРОВ --- */
-/* ========================================= */
-
-.goods-side-panel {
-    position: fixed;
-    top: 0;
-    right: -100%; /* Полностью скрыта справа */
-    width: 400px; /* Ширина панели */
-    height: 100%;
-    background-color: #111; /* Чуть светлее фона страницы */
-    border-left: 1px solid #333;
-    z-index: 2000; /* Поверх всего */
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    transition: right 0.5s cubic-bezier(0.23, 1, 0.32, 1); /* Плавный выезд */
+/* Основной контейнер, который держит всю конструкцию */
+.multiselect-wrapper-sq {
+    position: relative;
+    border: none !important;
+    padding: 0 !important;
+    width: 100%;
 }
 
-/* Класс, который добавляет JS для открытия */
-.goods-side-panel.open {
-    right: 0;
-}
-
-/* Шапка панели */
-.panel-header {
-    padding: 30px;
-    border-bottom: 1px solid #333;
+/* Поле, на которое нажимает пользователь */
+.select-trigger-sq {
+    padding: 18px 20px;
+    border: 1px solid #333;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+    background: #000;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
 }
 
-.panel-header h3 {
+.select-trigger-sq:hover {
+    border-color: #555;
+}
+
+.arrow-icon {
+    font-size: 10px;
     color: #fff;
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: 700;
-    text-transform: uppercase;
+    transition: transform 0.3s;
 }
 
-.close-panel {
-    background: transparent;
-    border: none;
-    color: #888;
-    font-size: 30px;
-    cursor: pointer;
-    line-height: 1;
-    padding: 0;
-}
-
-.close-panel:hover {
-    color: #fff;
-}
-
-/* Контент панели (Чекбоксы) */
-.panel-content {
-    flex: 1;
-    padding: 30px;
-    overflow-y: auto; /* Прокрутка внутри панели, если много товаров */
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-/* Стилизация КВАДРАТНЫХ чекбоксов */
-.check-item {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    position: relative;
-    padding: 15px;
-    border: 1px solid #222;
-    transition: background 0.2s ease;
-}
-
-.check-item:hover {
-    background-color: #1a1a1a;
-    border-color: #333;
-}
-
-.check-item input[type="checkbox"] {
+/* --- ТЕПЕРЬ ОНО ВЫПАДАЕТ ВБОК --- */
+.dropdown-side-sq {
+    overflow-x: hidden;    /* Полностью запрещает горизонтальную прокрутку */
+    display: none; /* Скрыто по умолчанию */
     position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
+    /* Позиционируем вровень с верхним краем триггера */
+    top: 0; 
+    /* Выталкиваем вправо на всю ширину + отступ 15px */
+    left: calc(100% + 15px); 
+    width: 100%; /* Ширина как у основного инпута */
+    background-color: #000;
+    border: 1px solid #fff; 
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    box-shadow: 10px 0 30px rgba(0,0,0,0.5);
 }
 
-/* Кастомный квадрат */
-.check-custom {
-    height: 20px;
-    width: 20px;
-    background-color: transparent;
-    border: 1px solid #555;
-    margin-right: 15px;
-    position: relative;
-    transition: all 0.2s ease;
-}
-
-/* При наведении */
-.check-item:hover .check-custom {
-    border-color: #888;
-}
-
-/* При выбранном чекбоксе */
-.check-item input[type="checkbox"]:checked ~ .check-custom {
-    background-color: #fff;
-    border-color: #fff;
-}
-
-/* Галочка (белая, внутри выбранного квадрата) */
-.check-custom:after {
-    content: "";
-    position: absolute;
-    display: none;
-    left: 6px;
-    top: 2px;
-    width: 5px;
-    height: 10px;
-    border: solid #000; /* Черная галочка на белом */
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-}
-
-.check-item input[type="checkbox"]:checked ~ .check-custom:after {
+/* Показываем, когда скрипт добавляет класс .show */
+.dropdown-side-sq.show {
     display: block;
 }
 
-.check-text {
-    color: #ccc;
-    font-size: 14px;
-    text-transform: uppercase;
-    transition: color 0.2s ease;
+/* Адаптив: если экран слишком узкий для бокового окна (меньше 1100px) */
+@media (max-width: 1100px) {
+    .dropdown-side-sq {
+        left: 0;
+        top: 100%; /* Выпадает вниз, чтобы не уходить за экран */
+        width: 100%;
+        margin-top: 5px;
+    }
 }
 
-.check-item input[type="checkbox"]:checked ~ .check-text {
+/* --- ВНУТРЕННИЕ ЭЛЕМЕНТЫ СПИСКА --- */
+.check-item-sq {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #111;
+}
+
+.check-item-sq:hover {
+    background: #111;
+}
+
+.check-item-sq input {
+    position: absolute;
+    opacity: 0; /* Прячем стандартный кружок */
+}
+
+/* Стилизованный квадратный чекбокс */
+.check-box-sq {
+    height: 16px;
+    width: 16px;
+    border: 1px solid #555;
+    margin-right: 15px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.check-item-sq input:checked ~ .check-box-sq {
+    background: #fff;
+    border-color: #fff;
+}
+
+.check-item-sq input:checked ~ .check-box-sq:after {
+    content: "✓";
+    position: absolute;
+    color: #000;
+    font-size: 12px;
+    left: 2px;
+    top: -2px;
+}
+
+.check-text-sq {
+    font-size: 13px;
+    color: #ccc;
+    text-transform: uppercase;
+}
+
+.check-item-sq input:checked ~ .check-text-sq {
     color: #fff;
     font-weight: 600;
-}
-
-/* Подвал панели */
-.panel-footer {
-    padding: 30px;
-    border-top: 1px solid #333;
-}
-
-.apply-btn {
-    width: 100%;
-    padding: 15px;
-    background: #222;
-    color: #fff;
-    border: 1px solid #333;
-    border-radius: 0;
-    cursor: pointer;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.apply-btn:hover {
-    background: #333;
-}
-
-/* Затемнение фона страницы */
-.panel-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.5s ease;
-}
-
-.panel-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Адаптив для мобильных */
-@media (max-width: 480px) {
-    .goods-side-panel {
-        width: 100%; /* На весь экран */
-    }
 }

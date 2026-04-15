@@ -1,87 +1,92 @@
-// --- ЛОГІКА ПАНЕЛІ ТОВАРІВ ---
-const trigger = document.getElementById('goodsTrigger');
-const panel = document.getElementById('goodsPanel');
-const overlay = document.getElementById('panelOverlay');
-const closeBtn = document.getElementById('closePanelBtn');
-const applyBtn = document.getElementById('applyGoodsBtn');
+document.addEventListener('DOMContentLoaded', () => {
+    const trigger = document.getElementById('goodsTrigger');
+    const dropdown = document.getElementById('goodsDropdown');
+    const orderForm = document.getElementById('orderFormSq');
 
-const openPanel = () => {
-    panel.classList.add('open');
-    overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-};
+    // --- ЛОГІКА ВИПАДАЮЧОГО ВБІК СПИСКУ ---
+    trigger?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown?.classList.toggle('show');
+    });
 
-const closePanel = () => {
-    panel.classList.remove('open');
-    overlay.classList.remove('active');
-    document.body.style.overflow = '';
-};
+    // Закриття при кліку поза списком
+    document.addEventListener('click', (e) => {
+        if (dropdown && !dropdown.contains(e.target) && e.target !== trigger) {
+            dropdown.classList.remove('show');
+        }
+    });
 
-trigger?.addEventListener('click', openPanel);
-closeBtn?.addEventListener('click', closePanel);
-overlay?.addEventListener('click', closePanel);
-applyBtn?.addEventListener('click', closePanel);
+    // --- ВІДПРАВКА НА СЕРВЕР ---
+    if (orderForm) {
+        orderForm.onsubmit = function(e) {
+            e.preventDefault();
+            
+            const selectedGoods = Array.from(document.querySelectorAll('#goodsDropdown input:checked'))
+                                     .map(cb => cb.value);
+            
+            if (selectedGoods.length === 0) {
+                alert('Будь ласка, оберіть товари!');
+                dropdown?.classList.add('show');
+                return;
+            }
 
-// --- ОНОВЛЕННЯ ТЕКСТУ ВИБОРУ ---
+            const formData = new FormData(this);
+            const payload = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                contact_type: formData.get('contact_type'),
+                contact_data: formData.get('contact_data'),
+                goods: selectedGoods
+            };
+
+            fetch('send2.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(res => {
+                if (!res.ok) throw new Error('Помилка мережі');
+                return res.json();
+            })
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Дякуємо! Замовлення прийнято.');
+                    this.reset();
+                    document.getElementById('dynamicInputContainerSq')?.classList.add('hidden');
+                    updateSelectedSq(); // Скидаємо лічильник
+                    dropdown?.classList.remove('show');
+                } else {
+                    alert('Помилка: ' + (data.message || 'Сервер відхилив запит'));
+                }
+            })
+            .catch(err => {
+                console.error('Fetch Error:', err);
+                alert('Сталася помилка при відправці. Спробуйте пізніше.');
+            });
+        };
+    }
+});
+
+// --- ОНОВЛЕННЯ ТЕКСТУ (ОБРАНО: X) ---
 function updateSelectedSq() {
-    const checkboxes = document.querySelectorAll('#checkboxesSq input:checked');
+    const checkboxes = document.querySelectorAll('#goodsDropdown input:checked');
     const label = document.getElementById("selectedLabelSq");
-    label.innerText = checkboxes.length > 0 ? `ОБРАНО: ${checkboxes.length}` : "ВИБІР ТОВАРІВ";
+    if (label) {
+        label.innerText = checkboxes.length > 0 ? `ОБРАНО: ${checkboxes.length}` : "ОБЕРІТЬ ТОВАР";
+        label.style.color = checkboxes.length > 0 ? "#fff" : "#888";
+    }
 }
 
-// --- ЛОГІКА МЕСЕНДЖЕРІВ ---
+// --- ЛОГІКА РАДІОКНОПОК ---
 function handleRadioSq(radio) {
     const container = document.getElementById('dynamicInputContainerSq');
     const input = document.getElementById('dynamicInputSq');
-    container.classList.remove('hidden');
-    input.required = true;
     
-    const val = radio.value;
-    const label = val.toUpperCase();
-    
-    if (val === 'gmail') {
-        input.placeholder = "ВВЕДІТЬ ВАШ GMAIL (EMAIL)";
-    } else if (val === 'viber' || val === 'whatsapp') {
-        input.placeholder = `ВВЕДІТЬ НОМЕР ДЛЯ ${label}`;
-    } else {
-        input.placeholder = `ВВЕДІТЬ ВАШ НІК (${label})`;
+    if (container && input) {
+        container.classList.remove('hidden');
+        input.required = true;
+        const val = radio.value.toUpperCase();
+        input.placeholder = (radio.value === 'gmail') ? "ВВЕДІТЬ ВАШ EMAIL" : `ВВЕДІТЬ ВАШ НІК/НОМЕР (${val})`;
+        input.focus(); // Для зручності фокусуємося на полі
     }
 }
-
-// --- ВІДПРАВКА НА СЕРВЕР ---
-document.getElementById('orderFormSq').onsubmit = function(e) {
-    e.preventDefault();
-    
-    const selectedGoods = Array.from(document.querySelectorAll('#checkboxesSq input:checked')).map(cb => cb.value);
-    
-    if(selectedGoods.length === 0) {
-        alert('Будь ласка, оберіть товари!');
-        openPanel();
-        return;
-    }
-
-    const formData = new FormData(this);
-    const payload = {
-        name: formData.get('name'),
-        phone: formData.get('phone'),
-        contact_type: formData.get('contact_type'),
-        contact_data: formData.get('contact_data'),
-        goods: selectedGoods
-    };
-
-    fetch('send2.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-    })
-    .then(res => res.json())
-    .then(data => {
-        if(data.status === 'success') {
-            alert('Дякуємо! Замовлення прийнято.');
-            this.reset();
-            document.getElementById('dynamicInputContainerSq').classList.add('hidden');
-            updateSelectedSq();
-        }
-    })
-    .catch(() => alert('Помилка сервера.'));
-};

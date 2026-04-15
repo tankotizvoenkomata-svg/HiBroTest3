@@ -64,17 +64,26 @@
 </section>
 
 <section class="order-section-sq">
-    <div class="order-container-sq">
-        
+    <div class="order-container-sq" id="multiselectContainer">
         <div class="form-core">
             <h2 class="form-title-sq">ОФОРМИТИ ЗАМОВЛЕННЯ</h2>
             
             <form id="orderFormSq" class="contact-form-sq">
                 
-                <div class="form-group-sq select-trigger" id="goodsTrigger">
-                    <span id="selectedLabelSq">ВИБІР ТОВАРІВ</span>
-                    <span class="arrow-icon">→</span>
-                </div>
+<div class="form-group-sq multiselect-wrapper-sq">
+    <div class="select-trigger-sq" id="goodsTrigger">
+        <span id="selectedLabelSq">ОБЕРІТЬ ТОВАР</span>
+        <span class="arrow-icon">→</span>
+    </div>
+    
+    <div class="dropdown-side-sq" id="goodsDropdown">
+        <label class="check-item-sq">
+            <input type="checkbox" value="Avrobit Detector тридіапазонний" onchange="updateSelectedSq()">
+            <span class="check-box-sq"></span>
+            <span class="check-text-sq">Avrobit Detector тридіапазонний</span>
+        </label>
+        </div>
+</div>
 
                 <div class="form-group-sq">
                     <input type="text" name="name" placeholder="ІМ'Я" required>
@@ -84,28 +93,29 @@
                     <input type="tel" name="phone" placeholder="НОМЕР ТЕЛЕФОНУ" required>
                 </div>
 
-                <div class="method-tabs">
-    <label class="tab-btn">
-        <input type="radio" name="contact_type" value="telegram" required onclick="handleRadioSq(this)">
-        <span>TELEGRAM</span>
-    </label>
-    <label class="tab-btn">
-        <input type="radio" name="contact_type" value="viber" onclick="handleRadioSq(this)">
-        <span>VIBER</span>
-    </label>
-    <label class="tab-btn">
-        <input type="radio" name="contact_type" value="whatsapp" onclick="handleRadioSq(this)">
-        <span>WHATSAPP</span>
-    </label>
-    <label class="tab-btn">
-        <input type="radio" name="contact_type" value="signal" onclick="handleRadioSq(this)">
-        <span>SIGNAL</span>
-    </label>
-    <label class="tab-btn">
-        <input type="radio" name="contact_type" value="gmail" onclick="handleRadioSq(this)">
-        <span>GMAIL</span>
-    </label>
-</div>
+                <div class="contact-methods-sq">
+                    <div class="method-tabs">
+                        <label class="tab-btn">
+                            <input type="radio" name="contact_type" value="telegram" required onclick="handleRadioSq(this)">
+                            <span>TELEGRAM</span>
+                        </label>
+                        <label class="tab-btn">
+                            <input type="radio" name="contact_type" value="viber" onclick="handleRadioSq(this)">
+                            <span>VIBER</span>
+                        </label>
+                        <label class="tab-btn">
+                            <input type="radio" name="contact_type" value="whatsapp" onclick="handleRadioSq(this)">
+                            <span>WHATSAPP</span>
+                        </label>
+                        <label class="tab-btn">
+                            <input type="radio" name="contact_type" value="signal" onclick="handleRadioSq(this)">
+                            <span>SIGNAL</span>
+                        </label>
+                        <label class="tab-btn">
+                            <input type="radio" name="contact_type" value="gmail" onclick="handleRadioSq(this)">
+                            <span>GMAIL</span>
+                        </label>
+                    </div>
                 </div>
 
                 <div id="dynamicInputContainerSq" class="form-group-sq dynamic-field hidden">
@@ -115,35 +125,6 @@
                 <button type="submit" class="submit-btn-sq">ВІДПРАВИТИ ЗАЯВКУ</button>
             </form>
         </div>
-
-        <div class="goods-side-panel" id="goodsPanel">
-            <div class="panel-header">
-                <h3>ОБЕРІТЬ ТОВАР</h3>
-                <button class="close-panel" id="closePanelBtn">×</button>
-            </div>
-            <div class="panel-content" id="checkboxesSq">
-                <label class="check-item">
-                    <input type="checkbox" value="Avrobit Detector тридіапазонний" onchange="updateSelectedSq()">
-                    <span class="check-custom"></span>
-                    <span class="check-text">Avrobit Detector тридіапазонний</span>
-                </label>
-                <label class="check-item">
-                    <input type="checkbox" value="Avrobit Detector чотирьохдіапазонний" onchange="updateSelectedSq()">
-                    <span class="check-custom"></span>
-                    <span class="check-text">Avrobit Detector чотирьохдіапазонний</span>
-                </label>
-                <label class="check-item">
-                    <input type="checkbox" value="В розробці..." onchange="updateSelectedSq()">
-                    <span class="check-custom"></span>
-                    <span class="check-text">В розробці...</span>
-                </label>
-            </div>
-            <div class="panel-footer">
-                <button class="apply-btn" id="applyGoodsBtn">ЗАСТОСУВАТИ</button>
-            </div>
-        </div>
-        <div class="panel-overlay" id="panelOverlay"></div>
-
     </div>
 </section>
 
