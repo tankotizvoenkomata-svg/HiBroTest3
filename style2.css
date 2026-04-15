@@ -1,10 +1,71 @@
-/* Общие настройки */
+/* Общие настройки страницы */
 body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* --- БЕЛАЯ СЕКЦИЯ (ПРЕИМУЩЕСТВА) --- */
+.features-section {
+    background-color: #ffffff;
+    padding: 80px 50px;
+    color: #000000;
+}
+
+.features-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 30px;
+}
+
+.feature-card {
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    padding: 40px;
+    flex: 1;
+    position: relative; /* Для позиционирования фоновых цифр */
+    min-height: 200px;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px); /* Легкий эффект при наведении */
+}
+
+.feature-number {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 80px;
+    font-weight: 800;
+    color: #f2f2f2; /* Призрачный серый цвет */
+    z-index: 1;
+    user-select: none;
+}
+
+.feature-card h3 {
+    position: relative;
+    z-index: 2;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.feature-card p {
+    position: relative;
+    z-index: 2;
+    color: #666;
+    margin: 0;
+}
+
+/* --- ЧЕРНАЯ СЕКЦИЯ (ХАРАКТЕРИСТИКИ) --- */
+.main-container {
     background-color: #000000;
     color: #ffffff;
-    font-family: 'Inter', Arial, sans-serif; /* Подойдет любой чистый гротеск */
-    margin: 0;
-    padding: 50px;
+    padding: 80px 50px;
 }
 
 .content-wrapper {
@@ -33,12 +94,12 @@ h2 {
 
 .specs-table td {
     padding: 15px 0;
-    border-bottom: 1px solid #333; /* Тонкая линия разделения */
+    border-bottom: 1px solid #333;
     font-size: 1rem;
 }
 
 .specs-table td:first-child {
-    color: #888; /* Серый цвет для названий */
+    color: #888;
 }
 
 .specs-table td:last-child {
@@ -58,7 +119,7 @@ h2 {
 }
 
 .usage-card {
-    background-color: #1a1a1a; /* Темно-серый фон карточки */
+    background-color: #1a1a1a;
     padding: 30px;
     border-radius: 4px;
 }
@@ -72,6 +133,16 @@ h2 {
 
 .usage-card p {
     color: #ccc;
-    line-height: 1.6;
     font-size: 0.95rem;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 992px) {
+    .content-wrapper, .features-wrapper {
+        flex-direction: column;
+    }
+    
+    .usage-grid {
+        grid-template-columns: 1fr;
+    }
 }
